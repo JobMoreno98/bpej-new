@@ -1,5 +1,22 @@
 @extends('adminlte::page')
-@section('title', 'Préstamos edit')
+@section('title', 'Roles')
+@section('preloader')
+    <i class="fas fa-4x fa-spin fa-spinner text-secondary"></i>
+    <h4 class="mt-4 text-dark">Loading</h4>
+@stop
+
+@section('css')
+    @include('layouts.head')
+    <style>
+        td {
+            padding: 10px;
+        }
+
+        .content-wrapper {
+            background: #fff;
+        }
+    </style>
+@endsection
 
 @section('content')
     <div class="container">
@@ -24,37 +41,51 @@
                     </a>
                 </div>
             </div>
-            <div class="row align-items-center justify-content-center">
-                <div class="col-sm-12">
-                    <table id="usersTable" class=" display table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Rol</th>
-                                <th>Descripción</th>
-                                <th>Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($roles as $role)
-                                <tr>
-                                    <td>{{ $role->name }}</td>
-                                    <td>{{ $role->description }}</td>
-                                    <td>
-                                        <form method="GET" action="{{ route('roles.edit', $role->id) }}">
-                                            <button type="submit" class="btn btn-info">
-                                                {{ __('Editar') }}
-                                            </button>
-                                            <a href="{{ route('asignar_permisos', $role->id) }}"><button type="button"
-                                                    class="btn btn-success">Relacionar Permisos</button> </a>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+            <section class="intro col-md-9 col-sm-12">
+                <div class="gradient-custom-1 h-100">
+                    <div class="mask d-flex align-items-center h-100">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0 w-100 roundede" id="myTable">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Rol</th>
+                                                    <th scope="col">Descripción</th>
+                                                    <th scope="col">Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($roles as $role)
+                                                <tr>
+                                                    <td scope="row" style="color: #666666;">{{ $role->name }}</td>
+                                                    <td>{{ $role->description }}</td>
+                                                    <td>
+                                                        <form method="GET" action="{{ route('roles.edit', $role->id) }}">
+                                                            <button type="submit" class="border-0 text-green text-red rounded"
+                                                            style="background: transparent;">
+                                                                <span class="material-symbols-outlined">
+                                                                    edit
+                                                                </span>
+                                                            </button>
+                                                            <a href="{{ route('asignar_permisos', $role->id) }}"><button type="button"
+                                                                class="border-0 text-info text-red rounded"
+                                                                style="background: transparent;">Relacionar Permisos</button> </a>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
 
-            </div>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         @else
             El periodo de Registro de Proyectos a terminado
         @endif

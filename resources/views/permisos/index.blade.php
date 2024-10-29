@@ -12,6 +12,10 @@
         td {
             padding: 10px;
         }
+
+        .content-wrapper {
+            background: #fff;
+        }
     </style>
 @endsection
 
@@ -53,37 +57,57 @@
                         </form>
                     </div>
                 @endcan
+                <section class="intro col-md-9 col-sm-12">
+                    <div class="gradient-custom-1 h-100">
+                        <div class="mask d-flex align-items-center h-100">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table mb-0 w-100 roundede" id="myTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Modulo</th>
+                                                        <th scope="col">Permiso</th>
+                                                        <th scope="col">Guard</th>
+                                                        <th scope="col">Acción</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($permisos as $permiso)
+                                                        <tr>
+                                                            <th scope="row" style="color: #666666;">
+                                                                {{ $permiso['modulo'] }}</th>
+                                                            <td>{{ $permiso['permiso'] }}</td>
+                                                            <td>{{ $permiso['guard'] }}</td>
+                                                            <td>
+                                                                <form method="POST"
+                                                                    action="{{ route('permisos.destroy', $permiso['id']) }}">
+                                                                    @method('Delete')
+                                                                    @csrf
+                                                                    <button type="submit"
+                                                                        class="border-0 text-red text-red rounded"
+                                                                        style="background: transparent;">
+                                                                        <span class="material-symbols-rounded">
+                                                                            delete
+                                                                        </span>
+                                                                    </button>
+                                                                </form>
+                                                            </td>
 
-                <div class="col-sm-12 col-md-9">
-                    <table id="myTable" class=" display table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Modulo</th>
-                                <th>Permiso</th>
-                                <th>Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($permisos as $permiso)
-                                <tr>
-                                    <td>{{ $permiso['modulo'] }}</td>
-                                    <td>{{ $permiso['permiso'] }}</td>
-                                    <td>
-                                        <form method="POST" action="{{ route('permisos.destroy', $permiso['id']) }}">
-                                            @method('Delete')
-                                            @csrf
-                                            <button type="submit" class="text-red">
-                                                <span class="material-symbols-outlined">
-                                                    delete
-                                                </span>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                                        </tr>
+                                                    @endforeach
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
             </div>
         @else

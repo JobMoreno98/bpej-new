@@ -27,6 +27,7 @@ class PermisosController extends Controller
             $push['modulo'] = Str::title($push['modulo']);
             $push['permiso'] = str_replace("_", " ", $tmp[1]);
             $push['permiso'] = Str::ucfirst($tmp[1]);
+            $push['guard'] = $permiso->guard_name;
             $dataReturn[] = $push;
         }
         return view('permisos.index')->with('permisos', $dataReturn);
@@ -54,7 +55,7 @@ class PermisosController extends Controller
             'permiso' => 'required',
             'guard' => 'required'
         ]);
-        
+
         $permisos = Permission::create(['guard_name' => $request->guard, 'name' => $request['permiso']]);
         $permisos = Permission::all();
         $dataReturn = [];

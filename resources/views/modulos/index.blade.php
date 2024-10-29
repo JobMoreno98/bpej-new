@@ -8,6 +8,7 @@
 @section('css')
     @include('layouts.head')
 @endsection
+
 @section('content')
     <div class="container">
         @if (Auth::check())
@@ -67,10 +68,16 @@
                                     <td>{{ $value->icono }}</td>
                                     <td>{{ $value->orden }}</td>
                                     <td><a href="{{ route('modulos.edit', $value->id) }}"
-                                            class="btn btn-sm btn-primary">editar</a>
+                                            class="btn btn-sm btn-primary">
+                                            <span class="material-symbols-outlined">
+                                                edit
+                                            </span></a>
 
-                                        <a href="{{ route('modulos.destroy', $value) }}"
-                                            class="btn btn-sm btn-primary">eliminar</a>
+                                        <a href="{{ route('modulos.destroy', $value) }}" class="btn btn-sm btn-danger">
+                                            <span class="material-symbols-outlined">
+                                                delete
+                                            </span>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

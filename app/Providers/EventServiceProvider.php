@@ -45,17 +45,16 @@ class EventServiceProvider extends ServiceProvider
                     $parametros = str_replace('user_id', strval($this->user_id), $page->enlace_parametro);
                     return [
                         'text' => $page->enlace_titulo,
-                        'route' => [$page->enlace_enlace, ['enlace', $parametros]],
+                        'route' => [$page->enlace_enlace, isset( $parametros)?['enlace', $parametros]:''],
                         'classes' => 'text-yellow',
                     ];
                 });
-                //dd($submenu->toArray());
-
                 $menu = [
                     'text' => $page[0]->modulo_nombre,
                     'icon' => $page[0]->modulo_icono,
                     'submenu' => $submenu->toArray(),
                     'classes' => 'd-flex text-end',
+                    'active' => [$page[0]->modulo_nombre]
                 ];
                 return $menu;
             });
