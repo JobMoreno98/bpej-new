@@ -52,23 +52,13 @@ class PermisosController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'permiso' => 'required',
+            'permiso' => 'required|unique:roles,name',
             'guard' => 'required'
         ]);
 
-        $permisos = Permission::create(['guard_name' => $request->guard, 'name' => $request['permiso']]);
-        $permisos = Permission::all();
-        $dataReturn = [];
-        foreach ($permisos as $permiso) {
-            $tmp = explode("#", strtolower($permiso->name));
-            $push['id'] = $permiso->id;
-            $push['modulo'] = str_replace("_", " ", $tmp[0]);
-            $push['modulo'] = Str::title($tmp[0]);
-            $push['permiso'] = str_replace("_", " ", $tmp[1]);
-            $push['permiso'] = Str::ucfirst($tmp[1]);
-            $dataReturn[] = $push;
-        }
-        return view('permisos.index')->with('permisos', $dataReturn);
+        Permission::create(['guard_name' => $request->guard, 'name' => $request['permiso']]);
+
+        return redirect()->route('permisos.index');
     }
 
     /**

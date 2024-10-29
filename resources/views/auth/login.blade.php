@@ -49,7 +49,7 @@
                                                     <div class="form-floating mb-3">
                                                         <input type="email" class="form-control" name="email"
                                                             id="email" placeholder="name@example.com" required>
-                                                        <label for="email" class="form-label">Email</label>
+                                                        <label for="email" class="form-label">{{__('Email')}}</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -57,13 +57,14 @@
                                                         <input type="password" class="form-control" name="password"
                                                             id="password" value="" placeholder="Password"
                                                             required>
-                                                        <label for="password" class="form-label">Password</label>
+                                                        <label for="password"
+                                                            class="form-label">{{ __('Password') }}</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="d-grid">
-                                                        <button class="btn btn-dark btn-lg" type="submit">Log in
-                                                            now</button>
+                                                        <button class="btn btn-dark btn-lg"
+                                                            type="submit">{{ __('Login') }}</button>
                                                     </div>
                                                 </div>
                                             </div>

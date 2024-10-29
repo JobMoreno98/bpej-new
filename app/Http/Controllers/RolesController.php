@@ -41,19 +41,15 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'rol' => 'unique:roles,name'
-        ];
+
         $message = [
             'rol.unique' => 'El rol ya existe'
         ];
+        $request->validate([
+            'name' => 'required|unique:roles,name',
 
-        $validator = Validator::make($request->all(), $rules, $message);
-        if ($validator->fails()) {
-            return view('roles.create')->withErrors($validator);
-        }
+        ],$message);
 
-        DB::beginTransaction();
         try {
             $rol = Role::create($request->all());
             $roles = Role::all();

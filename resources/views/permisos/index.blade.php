@@ -8,15 +8,6 @@
 
 @section('css')
     @include('layouts.head')
-    <style>
-        td {
-            padding: 10px;
-        }
-
-        .content-wrapper {
-            background: #fff;
-        }
-    </style>
 @endsection
 
 @section('content')
@@ -30,7 +21,7 @@
             <div class="row mt-2">
                 <h2>Administración de Permisos</h2>
             </div>
-            <div class="d-flex justify-content-betteewn">
+            <div class="d-flex justify-content-betteewn flex-column flex-md-row ">
                 @can('PERMISOS#crear')
                     <div class="col-sm-12 col-md-3">
                         <form method="POST" action="{{ route('permisos.store') }}">
@@ -57,14 +48,14 @@
                         </form>
                     </div>
                 @endcan
-                <section class="intro col-md-9 col-sm-12">
+                <section class="intro col-md-8 col-sm-12">
                     <div class="gradient-custom-1 h-100">
                         <div class="mask d-flex align-items-center h-100">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <div class="col-12">
                                         <div class="table-responsive">
-                                            <table class="table mb-0 w-100 roundede" id="myTable">
+                                            <table class="table mb-0 w-100 roundede mdl-data-table" id="myTable">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Modulo</th>
@@ -86,11 +77,12 @@
                                                                     @method('Delete')
                                                                     @csrf
                                                                     <button type="submit"
-                                                                        class="border-0 text-red text-red rounded"
+                                                                        class="border-0 text-red d-flex aling-items-center mx-1"
                                                                         style="background: transparent;">
                                                                         <span class="material-symbols-rounded">
                                                                             delete
                                                                         </span>
+                                                                        Eliminar
                                                                     </button>
                                                                 </form>
                                                             </td>

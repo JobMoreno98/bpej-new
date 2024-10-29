@@ -6,6 +6,7 @@
 @stop
 @section('css')
     @include('layouts.head')
+
 @endsection
 
 @section('content_header')
@@ -21,11 +22,11 @@
             @endif
             <form action="{{ route('guardar_relacion_permisos', $rol->id) }}" method="post">
                 @csrf
-                <div class="d-flex flex-wrap justify-content-around">
-                    
+                <div class="d-flex flex-wrap align-items-center">
+
                     @foreach ($permisos as $key => $value)
-                        <div class="card m-1 col-sm-12 col-md-3 h-100">
-                            <div class="card-body">
+                        <div class="card m-1 col-sm-12 col-md-2 h-100">
+                            <div class="card-body h-100">
                                 <h5 class=" w-100 border-bottom mb-1 pb-1">{{ $key }}</h5>
                                 <div>
                                     @foreach ($value as $item)
@@ -44,7 +45,7 @@
                         </div>
                     @endforeach
                     <div class="col-sm-12 text-center my-2">
-                        <button type="submit" class="btn- btn-sm btn-success">Enviar</button>
+                        <button type="submit" class="btn btn-sm btn-success">Enviar</button>
                     </div>
                 </div>
 

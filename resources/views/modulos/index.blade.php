@@ -7,6 +7,11 @@
 
 @section('css')
     @include('layouts.head')
+
+@endsection
+
+@section('content_header')
+    <h2 class="text-center">Modulos</h2>
 @endsection
 
 @section('content')
@@ -17,11 +22,8 @@
                     <h2>{{ session('message') }}</h2>
                 </div>
             @endif
-            <div class="row mt-3">
-                <h2 class="text-center">Modulos</h2>
-            </div>
             @can('MODULOS#crear')
-                <div class=" my-2">
+                <div class=" col-sm-12 my-2">
                     <form action="{{ route('modulos.store') }}" class="d-flex align-items-center" method="post">
                         @csrf
                         <div class="mx-1">
@@ -48,48 +50,60 @@
                     </form>
                 </div>
             @endcan
-            <div class="row align-items-center justify-content-center">
-                <div class="col-sm-12">
-                    <table id="myTable" class="display table-striped table-bordered" width="100%">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Color</th>
-                                <th>Icon</th>
-                                <th>Orden</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($modulos as $item => $value)
-                                <tr>
-                                    <td>{{ $value->nombre }}</td>
-                                    <td>{{ $value->color }}</td>
-                                    <td>{{ $value->icono }}</td>
-                                    <td>{{ $value->orden }}</td>
-                                    <td><a href="{{ route('modulos.edit', $value->id) }}"
-                                            class="btn btn-sm btn-primary">
-                                            <span class="material-symbols-outlined">
-                                                edit
-                                            </span></a>
+            <section class="intro col-sm-12">
+                <div class="gradient-custom-1 h-100">
+                    <div class="mask d-flex align-items-center h-100">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table id="myTable" class="table mb-0 w-100 roundede mdl-data-table"
+                                            width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Color</th>
+                                                    <th>Icon</th>
+                                                    <th>Orden</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($modulos as $item => $value)
+                                                    <tr>
+                                                        <td>{{ $value->nombre }}</td>
+                                                        <td>{{ $value->color }}</td>
+                                                        <td>{{ $value->icono }}</td>
+                                                        <td>{{ $value->orden }}</td>
+                                                        <td><a href="{{ route('modulos.edit', $value->id) }}"
+                                                                class="btn btn-sm btn-primary">
+                                                                <span class="material-symbols-outlined">
+                                                                    edit
+                                                                </span></a>
 
-                                        <a href="{{ route('modulos.destroy', $value) }}" class="btn btn-sm btn-danger">
-                                            <span class="material-symbols-outlined">
-                                                delete
-                                            </span>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                                            <a href="{{ route('modulos.destroy', $value) }}"
+                                                                class="btn btn-sm btn-danger">
+                                                                <span class="material-symbols-outlined">
+                                                                    delete
+                                                                </span>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
-            </div>
-        @else
-            No tienes permisos para acceder a este apartado
-        @endif
     </div>
+@else
+    No tienes permisos para acceder a este apartado
+    @endif
 @endsection
 
 @section('js')

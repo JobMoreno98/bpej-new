@@ -23,6 +23,7 @@ class RoleSeeder extends Seeder
         Permission::create(['guard_name' => 'admin','name' => 'USUARIOS#ver']);
         Permission::create(['guard_name' => 'admin','name' => 'ROLES#ver']);
         Permission::create(['guard_name' => 'admin','name' => 'PERMISOS#ver']);
+        Permission::create(['guard_name' => 'admin','name' => 'PERMISOS#crear']);
         Permission::create(['guard_name' => 'admin','name' => 'ESTADISTICAS#ver']);
         Permission::create(['guard_name' => 'admin','name' => 'CATEGORIAS#ver']);
         Permission::create(['guard_name' => 'admin','name' => 'SERVICIOS#ver']);

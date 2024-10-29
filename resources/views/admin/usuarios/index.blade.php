@@ -10,10 +10,11 @@
 @endsection
 
 @section('content_header')
-    <h2>Usuarios</h2>
+    <h2 class="text-center">Usuarios</h2>
 @endsection
+
 @section('content')
-    <div class="container">
+    <div class="container justify-content-center">
         @if (Auth::check())
             @can('USUARIOS#crear')
                 <div class="row">
@@ -29,36 +30,46 @@
                     </div>
                 </div>
             @endcan
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="myTable" class=" display table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Activo</th>
-                                <th>Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($users as $usuario)
-                                <tr>
-                                    <td>{{ $usuario->name }}</td>
-                                    <td>{{ $usuario->email }}</td>
-                                    <td>Activo</td>
-                                    <td class="d-flex flex-row">
-                                        <a href="{{ route('usuarios.edit', $usuario->id) }}"
-                                            class="btn-sm btn m-1 btn-primary">
-                                            Editar
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+            <section class="intro col-md-10 col-sm-12">
+                <div class="gradient-custom-1 h-100">
+                    <div class="mask d-flex align-items-center h-100">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table id="myTable" class="table mb-0 w-100 roundede mdl-data-table"
+                                            style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Email</th>
+                                                    <th>Activo</th>
+                                                    <th>Accion</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($users as $usuario)
+                                                    <tr>
+                                                        <td>{{ $usuario->name }}</td>
+                                                        <td>{{ $usuario->email }}</td>
+                                                        <td>Activo</td>
+                                                        <td class="d-flex flex-row">
+                                                            <a href="{{ route('usuarios.edit', $usuario->id) }}"
+                                                                class="btn-sm btn m-1 btn-primary">
+                                                                Editar
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-            </div>
+            </section>
         @else
             El periodo de Registro de Proyectos a terminado
         @endif
