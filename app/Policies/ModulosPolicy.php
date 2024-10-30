@@ -18,7 +18,7 @@ class ModulosPolicy
     {
         return auth()->user()->can('MODULOS#ver')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -31,7 +31,7 @@ class ModulosPolicy
         }
         return auth()->user()->can('MODULOS#ver')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -45,7 +45,7 @@ class ModulosPolicy
         }
         return auth()->user()->can('MODULOS#crear')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -58,7 +58,7 @@ class ModulosPolicy
         }
         return auth()->user()->can('MODULOS#update')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -71,7 +71,7 @@ class ModulosPolicy
         }
         return auth()->user()->can('MODULOS#delete')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -84,7 +84,7 @@ class ModulosPolicy
         }
         return auth()->user()->can('MODULOS#restore')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -97,6 +97,6 @@ class ModulosPolicy
         }
         return auth()->user()->can('MODULOS#forceDelete')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 }

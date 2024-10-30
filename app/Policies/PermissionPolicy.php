@@ -17,7 +17,7 @@ class PermissionPolicy
           }
           return auth()->user()->can('PERMISOS#ver')
                ? Response::allow()
-               : Response::deny( "You don't can view this page.");
+               : Response::deny(__("You don't can view this page"));
      }
 
      /**
@@ -30,7 +30,7 @@ class PermissionPolicy
           }
           return auth()->user()->can('PERMISOS#ver')
                ? Response::allow()
-               : Response::deny("You don't can view this page.");
+               : Response::deny(__("You don't can view this page"));
      }
 
      /**
@@ -43,7 +43,7 @@ class PermissionPolicy
           }
           return auth()->user()->can('PERMISOS#crear')
                ? Response::allow()
-               : Response::deny('You don´t can view this page.');
+               : Response::deny(__("You don't can view this page"));
      }
 
      /**
@@ -56,7 +56,7 @@ class PermissionPolicy
           }
           return auth()->user()->can('PERMISOS#update')
                ? Response::allow()
-               : Response::deny('You don´t can view this page.');
+               : Response::deny(__("You don't can view this page"));
      }
 
      /**
@@ -69,7 +69,7 @@ class PermissionPolicy
           }
           return auth()->user()->can('PERMISOS#delete')
                ? Response::allow()
-               : Response::deny('You don´t can view this page.');
+               : Response::deny(__("You don't can view this page"));
      }
 
      /**
@@ -82,7 +82,7 @@ class PermissionPolicy
           }
           return auth()->user()->can('PERMISOS#restore')
                ? Response::allow()
-               : Response::deny('You don´t can view this page.');
+               : Response::deny(__("You don't can view this page"));
      }
 
      /**
@@ -95,6 +95,6 @@ class PermissionPolicy
           }
           return auth()->user()->can('PERMISOS#forceDelete')
                ? Response::allow()
-               : Response::deny('You don´t can view this page.');
+               : Response::deny(__("You don't can view this page"));
      }
 }

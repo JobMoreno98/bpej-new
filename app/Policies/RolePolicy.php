@@ -17,7 +17,7 @@ class RolePolicy
         }
         return auth()->user()->can('ROLES#ver')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -30,7 +30,7 @@ class RolePolicy
         }
         return auth()->user()->can('ROLES#ver')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -43,7 +43,7 @@ class RolePolicy
         }
         return auth()->user()->can('ROLES#crear')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -56,7 +56,7 @@ class RolePolicy
         }
         return auth()->user()->can('ROLES#update')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -69,7 +69,7 @@ class RolePolicy
         }
         return auth()->user()->can('ROLES#delete')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -82,7 +82,7 @@ class RolePolicy
         }
         return auth()->user()->can('ROLES#restore')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 
     /**
@@ -95,6 +95,6 @@ class RolePolicy
         }
         return auth()->user()->can('ROLES#forceDelete')
             ? Response::allow()
-            : Response::deny('You don´t can view this page.');
+            : Response::deny(__("You don't can view this page"));
     }
 }
