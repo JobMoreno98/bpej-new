@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('documento')->nullable();
             $table->string('identificacion')->nullable();
             $table->boolean('terminos')->default(true);
-            $table->string('clave_bpej');
+            $table->string('clave_bpej')->nullable();
             $table->timestamps();
         });
     }

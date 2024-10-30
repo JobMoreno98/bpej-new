@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Modulos;
+use App\Policies\ModulosPolicy;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {

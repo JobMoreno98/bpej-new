@@ -8,11 +8,18 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ModulosController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Modulos::class, 'modulos');
+    }
+
     public function index()
     {
+
         $modulos = Modulos::all();
         return view('modulos.index', compact('modulos'));
     }
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -23,7 +30,7 @@ class ModulosController extends Controller
             'nombre' => \Str::upper($request->nombre),
             'icono' => isset($request->icono) ? $request->icono : 'info',
             'color' => isset($request->color) ? $request->color : '#e2e2e2',
-            'nombre_permiso' => $request->permiso,
+            'permiso' => $request->permiso,
             'orden' => $request->orden
         ]);
         alert()->success('Exito', 'Se ha registrado el modulo de manera exitosa')->persistent(true, false);
@@ -41,9 +48,12 @@ class ModulosController extends Controller
             'nombre' => $request->nombre,
             'icono' => $request->icono,
             'color' => $request->color,
-            'nombre_permiso' => $request->permiso,
+            'permiso' => $request->permiso,
             'orden' => $request->orden,
         ]);
+
+
+
         if (isset($request->enlaces) && isset($request->titulo)) {
             $enlaces = array_combine($request->enlaces, $request->titulo);
             $parametros = $request->parametros;

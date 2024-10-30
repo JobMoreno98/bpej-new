@@ -43,10 +43,12 @@ class EventServiceProvider extends ServiceProvider
             $items = $modulos->map(function ($page) {
                 $submenu = $page->map(function ($page) {
                     $parametros = str_replace('user_id', strval($this->user_id), $page->enlace_parametro);
+                    $sub = isset($parametros) ?  '' : ['enlace', $parametros];
                     return [
                         'text' => $page->enlace_titulo,
-                        'route' => [$page->enlace_enlace, isset( $parametros)?['enlace', $parametros]:''],
-                        'classes' => 'text-yellow',
+                        'route' => [$page->enlace_enlace, $sub],
+                        'classes' => 'text-purple',
+                        'active' => [route($page->enlace_enlace)]
                     ];
                 });
                 $menu = [
@@ -54,7 +56,7 @@ class EventServiceProvider extends ServiceProvider
                     'icon' => $page[0]->modulo_icono,
                     'submenu' => $submenu->toArray(),
                     'classes' => 'd-flex text-end',
-                    'active' => [$page[0]->modulo_nombre]
+
                 ];
                 return $menu;
             });

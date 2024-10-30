@@ -52,21 +52,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            @if (Auth::user()->hasRole('admin'))
-                                <div class="form-group row">
-                                    <label for="rol"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
-
-                                    <div class="col-md-6">
-                                        <select class="form-control" id="rol" name="rol">
-                                            @foreach ($roles as $rol)
-                                                <option {{ $rol['selected'] }}>{{ $rol['name'] }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            @endif
-
                             <div class="form-group row">
                                 <label for="password"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

@@ -17,6 +17,12 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(Role::class, 'roles');
+    }
+
     public function index()
     {
         $roles = Role::all();
@@ -30,6 +36,7 @@ class RolesController extends Controller
      */
     public function create()
     {
+        $this->authorize('create');
         return view('roles.create');
     }
 
@@ -48,7 +55,7 @@ class RolesController extends Controller
         $request->validate([
             'name' => 'required|unique:roles,name',
 
-        ],$message);
+        ], $message);
 
         try {
             $rol = Role::create($request->all());
@@ -166,7 +173,7 @@ class RolesController extends Controller
     public function relacionar($id)
     {
         $permisosID = DB::table('roles_permisos')->select('permiso_id', 'nombre_permiso', 'modulo_nombre')->where('role_id', $id);
-        
+
         $permisosSi = with($permisosID)->get()->groupBy('modulo_nombre');
         $permisos_id = with($permisosID)->get()->toArray();
         $permisos_id = Arr::pluck($permisos_id, 'permiso_id');
@@ -198,8 +205,8 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         //$role->givePermissionTo($permisos);
         //dd($request->permisos_seleccionados);
-    
-        $role->syncPermissions(collect($request->permisos_seleccionados)->map(fn($val)=>(int)$val));
+
+        $role->syncPermissions(collect($request->permisos_seleccionados)->map(fn($val) => (int)$val));
         Alert::success('exito', 'exito');
         return redirect()->route('roles.index');
     }

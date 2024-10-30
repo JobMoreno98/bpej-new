@@ -16,6 +16,12 @@ class PermisosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+         $this->authorizeResource(Permission::class, 'permisos');
+     }
+
     public function index()
     {
         $permisos = Permission::all();

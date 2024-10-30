@@ -13,6 +13,6 @@ class Categorias extends Model
 
     public function usaurio(): BelongsToMany
     {
-        return $this->belongsToMany(UsuariosGeneral::class);
+        return $this->belongsToMany(User::class);
     }
 }

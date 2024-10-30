@@ -31,3 +31,5 @@
         background: #fff;
     }
 </style>
+
+@livewireStyles
