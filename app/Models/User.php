@@ -68,4 +68,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Categorias::class, 'categorias_to_usuarios' ,'users_id', 'categorias_id');
     }
+
+    public function adminlte_profile_url()
+    {
+        return route('user.data');
+    }
+    
+    public function adminlte_image(){
+        return asset('storage/fotos_perfil/' . $this->foto);
+    }
 }

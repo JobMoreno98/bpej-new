@@ -47,31 +47,32 @@
                                 @method('POST')
                                 @csrf
                                 <div>
-                                    <x-label for="name" value="{{ __('Name') }}" />
+                                    <label for="name" value="{{ __('Name') }}" />
                                     <input class="form-control" id="name" class="block mt-1 w-full" type="text"
-                                        name="name" :value="old('name')" required autofocus autocomplete="name" />
+                                        name="name" required autofocus autocomplete="name" />
                                 </div>
 
                                 <div class="mt-4">
                                     <x-label for="email" value="{{ __('Email') }}" />
                                     <input class="form-control" id="email" class="block mt-1 w-full" type="email"
-                                        name="email" :value="old('email')" required autocomplete="username" />
+                                        name="email" required autocomplete="username" />
                                 </div>
 
                                 <div class="mt-4">
-                                    <x-label for="password" value="{{ __('Password') }}" />
+                                    <label for="password"> {{ __('Password') }}</label>
                                     <input class="form-control" id="password" class="block mt-1 w-full" type="password"
-                                        name="password" required autocomplete="new-password" />
+                                        name="password" required />
                                 </div>
 
                                 <div class="mt-4">
                                     <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                                     <input class="form-control" id="password_confirmation" class="block mt-1 w-full"
-                                        type="password" name="password_confirmation" required autocomplete="new-password" />
+                                        type="password" name="password_confirmation" required />
                                 </div>
                                 @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                                     <div class="form-check my-3">
-                                        <input class="form-check-input" type="checkbox" value="" name="terms" id="terms" required>
+                                        <input class="form-check-input" type="checkbox" value="" name="terms"
+                                            id="terms" required>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             {!! __('I agree to the :terms_of_service and :privacy_policy', [
                                                 'terms_of_service' =>
@@ -88,7 +89,7 @@
                                                     '</a>',
                                             ]) !!}
                                         </label>
-                                      </div>
+                                    </div>
                                 @endif
 
                                 <div class="col-12">

@@ -4,21 +4,27 @@
 
 
 @section('content')
-    <section class="bg-primary py-3 py-md-5 py-xl-8 w-100">
+    <section class=" py-3 py-md-5 py-xl-8 w-100" data-bs-theme="secondary">
         <div class="container d-flex h-100 align-items-center">
-            <div class="row gy-4 align-items-center">
-                <div class="col-12 col-md-6 col-xl-7">
-                    <div class="d-flex justify-content-center text-bg-primary">
-                        <div class="col-12 col-xl-9">
-                            <img class="img-fluid rounded mb-4" loading="lazy"
+            <div class="row gy-4 align-items-center  m-1 p-2 p-md-5 rounded " style="border:#7c2422 solid 2px;">
+                <div class="col-12 col-md-6 col-xl-7 m-0">
+                    <div class="d-flex flex-column justify-content-center text-bg-primary rounded">
+                        <div>
+                            <img class="img-fluid rounded " loading="lazy"
                                 src="https://bpej.udg.mx/sites/default/files/2021-09/portada-web-final-light.jpg"
-                                width="100%" height="150" alt="BootstrapBrain Logo">
-                            <hr class="border-primary-subtle mb-4">
-                            <h2 class="h1 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
-                            <p class="lead mb-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet, aut
+                                width="100%" height="250" alt="BootstrapBrain Logo"
+                                style="aspect-ratio: 16 / 5;
+    object-fit: cover;">
+                        </div>
+
+                        <div class="p-2 d-none d-md-block mt-2">
+
+                            <hr class="border-primary-subtle mb-2">
+                            <h5 class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
+                            <p class="mb-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet, aut
                                 natus eligendi ex sunt vitae laboriosam, fugit, beatae reiciendis ab inventore delectus
                                 molestiae reprehenderit ducimus obcaecati repellendus tenetur repudiandae ad.</p>
-                            <div class="text-endx">
+                            <div class="text-end">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
                                     class="bi bi-grip-horizontal" viewBox="0 0 16 16">
                                     <path
@@ -28,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-xl-5">
+                <div class="col-12 col-md-6 col-xl-5 m-0">
                     <div class="card border-0 rounded-4">
                         <div class="card-body p-3 p-md-4 p-xl-5">
                             <div class="row">
@@ -61,8 +67,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary btn-lg"
-                                                type="submit">{{ __('Login') }}</button>
+                                            <button class="btn btn-primary " type="submit">{{ __('Login') }}</button>
                                         </div>
                                     </div>
                                 </div>

@@ -10,7 +10,7 @@
     @include('layouts.head')
 @endsection
 @section('content_header')
-    <h2 class="text-center">Mi información</h2>
+    <h2 class="text-center text-uppercase">Mi Perfil</h2>
 @endsection
 
 @section('content')
@@ -65,6 +65,10 @@
             <div class="form-check form-check-inline my-1 d-flex justify-content-center">
                 <input class="form-check-input" type="radio" name="terminos" id="inlineRadio2" required value="true">
                 <label class="form-check-label" for="inlineRadio2">Acepto terminos y condiciones *</label>
+            </div>
+            <div class="text-center">
+
+                <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
             </div>
 
 

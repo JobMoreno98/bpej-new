@@ -32,6 +32,16 @@ class UserDataController extends Controller
     public function datos()
     {
         $user = User::find(Auth::user()->id);
-        return view('users.datos',compact('user'));
+        return view('users.datos', compact('user'));
+    }
+
+    public function edit($id)
+    {
+        $usuario = User::where('id', $id)->first();
+
+        return view('admin.usuarios.edit')->with('usuario', $usuario);
+    }
+    public function update_user(){
+        
     }
 }

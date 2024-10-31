@@ -17,6 +17,12 @@
             justify-content: center;
 
         }
+
+        .btn-primary {
+            --bs-btn-bg: #7c2422 !important;
+            --bs-btn-border-color: #7c2422 !important;
+            transition: ease-in-out 2ms;
+        }
     </style>
 </head>
 

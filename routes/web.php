@@ -77,6 +77,13 @@ Route::middleware([
     Route::get('/mis-categorias', [UserDataController::class, 'categorias'])->name('mis-categorias');
     Route::post('/usuario-categorias', [UserDataController::class, 'saveCategorias'])->name('user.caterogiras-store');
     Route::get('/mis-datos', [UserDataController::class, 'datos'])->name('user.data');
+    Route::get('/usuario/{id}/edit', [UserDataController::class, 'edit'])
+    ->name('usuario.edit')
+    ->middleware('auth');
+
+    Route::PUT('/user-update/{id}', [UserDataController::class, 'update_user'])
+    ->name('update-user')
+    ->middleware(['auth']);
 });
 
 
