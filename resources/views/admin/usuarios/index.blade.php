@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @section('title', 'Usuarios')
+
 @section('preloader')
     <i class="fas fa-4x fa-spin fa-spinner text-secondary"></i>
     <h4 class="mt-4 text-dark">{{ __('Loading') }}</h4>
@@ -7,6 +8,12 @@
 
 @section('css')
     @include('layouts.head')
+    <style>
+        .mdc-text-field__input {
+            border: 1px grey solid;
+            border-radius: 10px;
+        }
+    </style>
 @endsection
 
 @section('content_header')
@@ -14,28 +21,23 @@
 @endsection
 
 @section('content')
-    <div class="container justify-content-center">
+    <div class="container d-flex flex-column align-itens-center justify-content-center">
         @if (Auth::check())
             @can('USUARIOS#crear')
-                <div class="row">
-                    <div class="col-auto mb-1">
-                        <br>
-                        <form method="POST" action="{{ route('usuarios.create') }}">
-                            @method('GET')
-                            @csrf
-                            <button type="submit" class="btn btn-primary">
-                                {{ __('Nuevo Usuario') }}
-                            </button>
-                        </form>
+                <div class="row justify-content-end">
+                    <div class="col-auto mb-1 ">
+                        <a type="submit" href="{{ route('usuarios.create') }}" class="btn btn-sm btn-primary">
+                            {{ __('Nuevo Usuario') }}
+                        </a>
                     </div>
                 </div>
             @endcan
-            <section class="intro col-md-10 col-sm-12">
+            <section class="p-0 intro col-sm-12">
                 <div class="gradient-custom-1 h-100">
                     <div class="mask d-flex align-items-center h-100">
                         <div class="container">
                             <div class="row justify-content-center">
-                                <div class="col-12">
+                                <div class="col-12 p-0">
                                     <div class="table-responsive">
                                         <table id="myTable" class="table mb-0 w-100 roundede mdl-data-table"
                                             style="width:100%">

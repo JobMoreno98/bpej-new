@@ -9,14 +9,15 @@
 @section('css')
     @include('layouts.head')
     <link rel="stylesheet" href="{{ asset('css/cards.css') }}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 @endsection
 
 @section('content')
-<a href="{{ route('admin.logout')}}"><span><i class="fas fa-unlock-alt"></i></span> Logout</a>
-
-    <div class="container d-flex flex-wrap align-items-center justify-content-center">
+    <div class="container d-flex flex-wrap align-items-center justify-content-start">
         @foreach ($modulos as $key => $value)
-            <div class="col-lg-4 col-sm-12  col-md-6  my-3">
+            <div class="col-lg-4 col-sm-12  col-md-6  my-3" 
+            data-aos="zoom-in" 
+            data-aos-duration="500">
                 <div class="card card-margin h-100">
                     <div class="card-body pt-2">
                         <div class="">
@@ -63,4 +64,8 @@
 
 @section('js')
     @include('layouts.scripts')
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 @endsection

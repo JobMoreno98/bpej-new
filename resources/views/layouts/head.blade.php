@@ -30,8 +30,7 @@
     .content-wrapper {
         background: #fff;
     }
-
-
 </style>
 
-@livewireStyles
+
+

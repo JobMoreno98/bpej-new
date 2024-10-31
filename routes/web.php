@@ -81,7 +81,7 @@ Route::middleware([
     ->name('usuario.edit')
     ->middleware('auth');
 
-    Route::PUT('/user-update/{id}', [UserDataController::class, 'update_user'])
+    Route::put('/user-update/{id}', [UserDataController::class, 'update_user'])
     ->name('update-user')
     ->middleware(['auth']);
 });
