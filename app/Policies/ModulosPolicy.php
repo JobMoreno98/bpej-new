@@ -48,6 +48,19 @@ class ModulosPolicy
             : Response::deny(__("You don't can view this page"));
     }
 
+
+
+    public function edit($user): Response
+    {
+
+        if ($user === null) {
+            return false;
+        }
+        return auth()->user()->can('MODULOS#edit')
+            ? Response::allow()
+            : Response::deny(__("You don't can view this page"));
+    }
+
     /**
      * Determine whether the user can update the model.
      */
