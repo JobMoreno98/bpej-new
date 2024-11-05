@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
 class UserPolicy
@@ -51,9 +51,14 @@ class UserPolicy
      */
     public function update($user, User $model): Response
     {
+
         if ($user === null) {
             return false;
         }
+        if($user->id == $model->id){
+            return Response::allow();
+        }
+
         return auth()->user()->can('USUARIOS#update')
             ? Response::allow()
             : Response::deny(__("You don't can view this page"));

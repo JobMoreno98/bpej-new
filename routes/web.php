@@ -78,19 +78,20 @@ Route::middleware([
     Route::post('/usuario-categorias', [UserDataController::class, 'saveCategorias'])->name('user.caterogiras-store');
     Route::get('/mis-datos', [UserDataController::class, 'datos'])->name('user.data');
     Route::get('/usuario/{id}/edit', [UserDataController::class, 'edit'])
-    ->name('usuario.edit')
-    ->middleware('auth');
+        ->name('usuario.edit')
+        ->middleware('auth');
 
     Route::put('/user-update/{id}', [UserDataController::class, 'update_user'])
-    ->name('update-user')
-    ->middleware(['auth']);
+        ->name('update-user')
+        ->middleware(['auth']);
+        
 });
 
 
 
-Route::get('/admin/logout',[AdminController::class, 'destroy'])->name('admin.logout');
+Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 
-Route::get('/user/logout', function(){
+Route::get('/user/logout', function () {
     Auth::logout();
     return Redirect()->route('login');
 })->name('user.logout');

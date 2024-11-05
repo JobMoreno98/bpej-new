@@ -170,6 +170,4 @@
 
         }
     </script>
-
-    <script></script>
 @endsection
