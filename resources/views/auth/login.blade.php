@@ -16,7 +16,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="mb-4 text-center">
-                                        <h3 >{{ __('Sign in') }}</h3>
+                                        <h3>{{ __('Sign in') }}</h3>
                                         <p>{{ __('Do not have an account?') }} <a
                                                 href="{{ route('register') }}">{{ __('Sign up') }}</a>
                                         </p>
@@ -34,6 +34,11 @@
                                             <label for="email" class="form-label">{{ __('Email') }}</label>
                                         </div>
                                     </div>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="password" class="form-control" name="password" id="password"
@@ -41,6 +46,11 @@
                                             <label for="password" class="form-label">{{ __('Password') }}</label>
                                         </div>
                                     </div>
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                     <div class="col-12">
                                         <div class="d-grid">
                                             <button class="btn btn-primary " type="submit">{{ __('Login') }}</button>
