@@ -8,11 +8,11 @@
 
 @section('css')
     @include('layouts.head')
-    {{--
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
---}}
+
 @endsection
 @section('content_header')
     <h2 class="text-center text-uppercase">Mi Perfil</h2>
@@ -50,7 +50,8 @@
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="tipo" id="" id="yes"
                         onclick="option(1)" id="inlineRadio1" value="adulto" checked>
-                    <label class="form-check-label" for="inlineRadio1">Adulto</label>
+    
+                <label class="form-check-label" for="inlineRadio1">Adulto</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="tipo" id="not" onclick="option(0)"
