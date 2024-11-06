@@ -93,7 +93,7 @@ Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.lo
 
 Route::get('/user/logout', function () {
     Auth::logout();
-    return Redirect()->route('login');
+    return redirect()->route('login');
 })->name('user.logout');
 
 

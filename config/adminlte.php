@@ -133,7 +133,7 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
+    'usermenu_enabled' => false,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
@@ -265,6 +265,7 @@ return [
     'password_email_url' => 'password/email',
     'profile_url' => true,
     'disable_darkmode_routes' => false,
+    
 
     /*
     |--------------------------------------------------------------------------

@@ -20,7 +20,8 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/dashboard';
 
     public static function redirectTo($guard){
-        
+        config('adminlte.dashboard_url', $guard.'/dashboard');
+        dd($guard);
         return $guard.'/dashboard';
     }
 
