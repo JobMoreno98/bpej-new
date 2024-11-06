@@ -3,7 +3,7 @@
 @section('title', __('Sign in'))
 
 @section('content')
-    <section class=" py-3 py-md-5 py-xl-8 w-100" data-bs-theme="secondary">
+    <section class="py-md-5 py-xl-8 w-100" data-bs-theme="secondary">
         <div class="container d-flex h-100 align-items-center">
             <div class="row gy-4 align-items-center justify-content-center m-1 p-2 p-md-5 rounded ">
                 <div class="col-12 col-md-8 col-xl-5 m-0 border rounded-4 border-dark p-3">

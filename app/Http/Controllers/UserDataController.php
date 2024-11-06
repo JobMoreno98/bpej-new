@@ -51,7 +51,6 @@ class UserDataController extends Controller
         $this->authorize('update', Auth::user());
         $usuario = User::find($user);
         $anio = date('Y-m-d');
-        return $anio-5;
         $validator = Validator::make($request->all(), [
             'fecha_nacimiento' => 'required|date|before:'.date('Y-m-d'),
             'tutor' => 'exclude_if:tipo,adulto',
