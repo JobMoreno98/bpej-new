@@ -10,6 +10,11 @@ class ModulosController extends Controller
 {
 
 
+    public function __construct()
+    {
+        $this->authorizeResource(Modulos::class, 'modulos');
+    }
+    
     public function index()
     {
 

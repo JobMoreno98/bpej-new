@@ -29,7 +29,7 @@
 
                 <div class="col-md-6 d-flex justify-content-center flex-column align-items-center">
 
-                    <div id="my_camera"></div>
+                    <div id="my_camera" class="w-100"></div>
 
                     <input type=button value="Tomar foto" class="d-none d-md-block my-2 col-sm-12 col-md-3 btn btn-outline-dark btn-sm"
                         onClick="take_snapshot()">
@@ -41,7 +41,7 @@
                     <input type="hidden" name="w" value="" />
                     <input type="hidden" name="h" value="" />
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 d-none d-md-block">
                     <div id="results"></div>
                 </div>
             </div>
@@ -105,12 +105,12 @@
                 <label for="">Identificación</label>
                 <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_ine" id="">
             </div>
-            <div class="form-check form-check-inline my-1 d-flex justify-content-center">
+            <div class="col-sm-12 my-1 form-check form-check-inline my-1 d-flex flex-wrap justify-content-center">
                 <input class="form-check-input" type="radio" name="terminos" id="terminos" required
                     value="true">
                 <label class="form-check-label" for="terminos">Acepto terminos y condiciones *</label>
             </div>
-            <div class="text-center">
+            <div class="text-center col-sm-12 col-md-3">
                 <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
             </div>
 

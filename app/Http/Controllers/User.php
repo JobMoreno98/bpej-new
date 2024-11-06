@@ -29,7 +29,7 @@ class User extends Controller
 
     public function __construct()
     {
-        $this->authorizeResource(ModelsUser::class, 'modulos');
+        $this->authorizeResource(ModelsUser::class, 'user');
     }
 
     public function index()
