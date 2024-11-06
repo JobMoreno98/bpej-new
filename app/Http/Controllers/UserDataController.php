@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -48,18 +49,45 @@ class UserDataController extends Controller
     {
 
         $this->authorize('update', Auth::user());
-
+        $usuario = User::find($user);
+        $anio = date('Y-m-d');
+        return $anio-5;
         $validator = Validator::make($request->all(), [
-            'comprobante_domicilio' => ['required', File::types(['pdf'])->max(1024)],
-            'comprobante_ine' => ['required', File::types(['pdf'])->max(1024)]
+            'fecha_nacimiento' => 'required|date|before:'.date('Y-m-d'),
+            'tutor' => 'exclude_if:tipo,adulto',
+            'comprobante_domicilio' => ['mimes:jpg,pdf'],
+            'comprobante_ine' => ['mimes:jpg,pdf'],
+            'email' => ['required', Rule::unique('users')->ignore($usuario->id)],
+            'terminos' => 'required|boolean'
         ]);
-        
+
         if ($validator->fails()) {
-            toast(implode("<br/>",$validator->messages()->all()),'error')->timerProgressBar()->persistent(true,false);
+            toast(implode("<br/>", $validator->messages()->all()), 'error')->timerProgressBar()->persistent(true, false);
             return redirect()->back();
         }
 
-        $usuario = User::find($user);
+        $archivo = $request->file('comprobante_domicilio');
+        $extencion = $request->file('comprobante_domicilio')->getClientOriginalExtension();
+        $comprobante =  'comprobante_' . $usuario->name . $extencion;
+        $comprobante = str_replace('/', '_', $comprobante);
+        $comprobante = str_replace(' ', '_', $comprobante);
+        Storage::disk('private')->put($comprobante, \File::get($archivo));
+
+        $usuario->documento = $comprobante;
+
+
+        $archivo = $request->file('comprobante_ine');
+        $extencion = $request->file('comprobante_domicilio')->getClientOriginalExtension();
+        $nombre_identificacion =  'ine_' . $usuario->name . $extencion;
+        $nombre_identificacion = str_replace('/', '_', $nombre_identificacion);
+        $nombre_identificacion = str_replace(' ', '_', $nombre_identificacion);
+        Storage::disk('private')->put($nombre_identificacion, \File::get($archivo));
+
+        $usuario->identificacion = $nombre_identificacion;
+        if ($request->email != $usuario->email) {
+            $usuario->email_verified_at = null;
+            $usuario->update();
+        }
         $usuario->update([
             "tipo" => "adulto",
             "fecha_nacimiento" => $request->fecha_nacimiento,
@@ -68,24 +96,9 @@ class UserDataController extends Controller
             "codigo_postal" => $request->codigo_postal,
             "estado" => $request->estado,
             "terminos" => 1,
+            'identificacion' => $nombre_identificacion,
+            'documento' =>  $nombre_identificacion,
         ]);
-
-        $archivo = $request->file('comprobante_domicilio');
-        $nombre =  'comprobante_' . Auth::user()->name . '.pdf';
-        $nombre = str_replace('/', '_', $nombre);
-        $nombre = str_replace(' ', '_', $nombre);
-        Storage::disk('extenso')->put($nombre, \File::get($archivo));
-
-        $usuario->documento = $nombre;
-
-
-        $archivo = $request->file('comprobante_ine');
-        $nombre =  'ine_' . Auth::user()->name . '.pdf';
-        $nombre = str_replace('/', '_', $nombre);
-        $nombre = str_replace(' ', '_', $nombre);
-        Storage::disk('extenso')->put($nombre, \File::get($archivo));
-
-        $usuario->identificacion = $nombre;
 
 
         return $request;

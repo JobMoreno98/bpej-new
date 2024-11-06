@@ -67,7 +67,6 @@ class ModulosSeeder extends Seeder
         ]);
 
 
-
         $modulo = Modulos::create([
             'nombre' => 'MI INFORMACIÓN',
             'permiso' => 'USER_DATA',
@@ -80,6 +79,21 @@ class ModulosSeeder extends Seeder
             'enlace' => 'user.data',
             'modulo_id' => $modulo->id,
             'permiso' => 'DATOS#ver'
+        ]);
+
+
+        $modulo = Modulos::create([
+            'nombre' => 'MIS CATEGORIAS',
+            'permiso' => 'USER_CATEGORIAS',
+            'icono' => 'category',
+            'color' => '#ae8fdb'
+        ]);
+
+        EnlaceModulo::create([
+            'titulo' => 'Mis categorias',
+            'enlace' => 'mis-categorias',
+            'modulo_id' => $modulo->id,
+            'permiso' => 'uCATEGORIAS#ver'
         ]);
     }
 }

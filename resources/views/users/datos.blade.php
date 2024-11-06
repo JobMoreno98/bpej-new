@@ -21,7 +21,7 @@
 @section('content')
     <div class="container justify-content-center d-flex">
         <form action="{{ route('update-user', Auth::user()->id) }}"
-            class="d-flex flex-wrap flex-column  col-sm-12 my-1 col-md-8" method="post">
+            class="d-flex flex-wrap flex-column  col-sm-12 my-1 col-md-8" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -31,20 +31,30 @@
 
                     <div id="my_camera"></div>
 
-                    <input type=button value="Tomar foto" class="my-2 col-sm-12 col-md-3 btn btn-outline-dark btn-sm"
+                    <input type=button value="Tomar foto" class="d-none d-md-block my-2 col-sm-12 col-md-3 btn btn-outline-dark btn-sm"
                         onClick="take_snapshot()">
 
                     <input type="hidden" name="image" class="image-tag">
 
+                    <input type="hidden" name="x1" value="" />
+                    <input type="hidden" name="y1" value="" />
+                    <input type="hidden" name="w" value="" />
+                    <input type="hidden" name="h" value="" />
                 </div>
-
                 <div class="col-md-6">
-
                     <div id="results"></div>
-
                 </div>
-
             </div>
+
+            <div class="col-sm-12 my-1  " id="nombre">
+                <label for="">Nombre</label>
+                <input class="form-control" type="text" name="nombre" value="{{ $user->name }}">
+            </div>
+            <div class="col-sm-12 my-1 " id="email">
+                <label for="">Correo</label>
+                <input class="form-control" type="email" name="email" value="{{ $user->email }}">
+            </div>
+
             <div class="d-flex align-items-center col-sm-12 my-1 justify-content-evenly">
                 <label for="">Eres *</label>
                 <div class="form-check form-check-inline">
@@ -66,37 +76,39 @@
 
             <div class=" col-sm-12 my-1 my-1 ">
                 <label for="">Fecha de Nacimiento</label>
-                <input class="form-control" type="date" name="fecha_nacimiento" id="">
+                <input class="form-control" type="date" name="fecha_nacimiento" value="{{ $user->fecha_nacimiento }}"
+                    id="">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Calle</label>
-                <input class="form-control" type="text" name="calle" id="">
+                <input class="form-control" type="text" name="calle" value="{{ $user->calle }}" id="">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Municipio</label>
-                <input class="form-control" type="text" name="municipio" id="">
+                <input class="form-control" type="text" name="municipio" value="{{ $user->municipio }}" id="">
             </div>
             <div class=" col-sm-12 my-1 ">
                 <label for="">Codigo Postal</label>
-                <input class="form-control" type="text" name="codigo_postal" id="">
+                <input class="form-control" type="text" name="codigo_postal" value="{{ $user->codigo_postal }}"
+                    id="">
             </div>
             <div class=" col-sm-12 my-1 ">
                 <label for="">Estado</label>
-                <input class="form-control" type="text" name="estado" id="">
+                <input class="form-control" type="text" name="estado" value="{{ $user->estado }}" id="">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Comporbante de Domicilio</label>
-                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_domicilio"
-                    id="">
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file"
+                    name="comprobante_domicilio" id="">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Identificación</label>
-                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_ine"
-                    id="">
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_ine" id="">
             </div>
             <div class="form-check form-check-inline my-1 d-flex justify-content-center">
-                <input class="form-check-input" type="radio" name="terminos" id="inlineRadio2" required value="true">
-                <label class="form-check-label" for="inlineRadio2">Acepto terminos y condiciones *</label>
+                <input class="form-check-input" type="radio" name="terminos" id="terminos" required
+                    value="true">
+                <label class="form-check-label" for="terminos">Acepto terminos y condiciones *</label>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
@@ -118,9 +130,9 @@
     <script src="{{ asset('js/jquery.imgareaselect.js') }}"></script>
     <script>
         Webcam.set({
-            width: 300,
-            height: 300,
-            image_format: 'jpeg',
+            width: 350,
+            height: 250,
+            image_format: 'jpg',
             jpeg_quality: 90,
             flip_horiz: true
         });
@@ -154,7 +166,6 @@
                             $('input[name="y1"]').val(selection.y1);
                             $('input[name="w"]').val(selection.width);
                             $('input[name="h"]').val(selection.height);
-                            console.log(selection);
                         }
 
                     });
