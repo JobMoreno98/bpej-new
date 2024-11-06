@@ -21,16 +21,21 @@
             @csrf
             @method('POST')
 
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center d-none d-md-block">
 
                 <div class="col-md-6 d-flex justify-content-center flex-column align-items-center">
 
-                    <div id="my_camera"></div>
+                    <div id="my_camera" class="w-100"></div>
 
-                    <input type=button value="Tomar foto" class="my-2 col-sm-12 col-md-3 btn btn-outline-dark btn-sm"
+                    <input type="button" value="Tomar foto" class="my-2 col-sm-12 col-md-3 btn btn-outline-dark btn-sm"
                         onClick="take_snapshot()">
 
                     <input type="hidden" name="image" class="image-tag">
+
+                    <input type="hidden" name="x1" value="" />
+                    <input type="hidden" name="y1" value="" />
+                    <input type="hidden" name="w" value="" />
+                    <input type="hidden" name="h" value="" />
 
                 </div>
 
@@ -41,29 +46,9 @@
                 </div>
 
             </div>
-            {{--
-            <div class="d-flex flex-column align-items-center">
-                <p>Image: <input accept="image/*" type="file" name="profile_image" class="image" required /></p>
-                <input type="hidden" name="x1" value="" />
-                <input type="hidden" name="y1" value="" />
-                <input type="hidden" name="w" value="" />
-                <input type="hidden" name="h" value="" />
-
-                <p><img id="previewimage" style="display:none;" /></p>
-                @if ($path = Session::get('path'))
-                    <img src="{{ $path }}" />
-                @endif
-                
-                <img src="{{ asset('img/user-img.jpg') }}" class="rounded-circle"
-                    style="max-width: 200px;aspect-ratio: 1 / 1;object-fit: cover;
-                    " alt=""
-                    id="img-preview">
-
-
-                <input type="file" class="form-control col-sm-12 col-md-5 my-2" id="img-file" accept="image/*">
-                
+            <div>
+                <input type="file" accept="image/*" name="profile_image">
             </div>
-            --}}
             <div class="d-flex align-items-center col-sm-12 my-1 justify-content-evenly">
                 <label for="">Es *</label>
                 <div class="form-check form-check-inline">
@@ -82,34 +67,38 @@
                 <input class="form-control" type="text" name="tutor">
             </div>
 
+
             <div class=" col-sm-12 my-1 my-1 ">
                 <label for="">Fecha de Nacimiento</label>
                 <input class="form-control" type="date" name="fecha_nacimiento" id="">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Calle</label>
-                <input class="form-control" type="text" name="" id="">
+                <input class="form-control" type="text" name="calle" id="">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Municipio</label>
-                <input class="form-control" type="text" name="" id="">
+                <input class="form-control" type="text" name="municipio" id="">
             </div>
             <div class=" col-sm-12 my-1 ">
                 <label for="">Codigo Postal</label>
-                <input class="form-control" type="text" name="" id="">
+                <input class="form-control" type="text" name="codigo_postal" id="">
             </div>
             <div class=" col-sm-12 my-1 ">
                 <label for="">Estado</label>
-                <input class="form-control" type="text" name="" id="">
+                <input class="form-control" type="text" name="estado" id="">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Comporbante de Domicilio</label>
-                <input class="form-control" type="file" name="" id="">
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file"
+                    name="comprobante_domicilio" id="">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Identificación</label>
-                <input class="form-control" type="file" name="" id="">
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_ine"
+                    id="">
             </div>
+            <P></P>
             <div class="text-center">
                 <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
             </div>
@@ -120,13 +109,13 @@
 @endsection
 
 @section('js')
-
+    @include('sweetalert::alert')
     <script src="{{ asset('js/jquery.imgareaselect.js') }}"></script>
     <script>
         Webcam.set({
-            width: 490,
-            height: 350,
-            image_format: 'jpeg',
+            width: 350,
+            height: 250,
+            image_format: 'jpg',
             jpeg_quality: 90,
             flip_horiz: true
         });
@@ -160,7 +149,6 @@
                             $('input[name="y1"]').val(selection.y1);
                             $('input[name="w"]').val(selection.width);
                             $('input[name="h"]').val(selection.height);
-                            console.log(selection);
                         }
 
                     });

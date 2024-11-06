@@ -33,7 +33,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin', config('jetst
     Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
 });
 
-Route::name('admin')->middleware([
+Route::name('admin.')->middleware([
     'auth:sanctum,admin',
     config('jetstream.auth_session'),
     'verified'

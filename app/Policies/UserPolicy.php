@@ -41,6 +41,7 @@ class UserPolicy
         if ($user === null) {
             return false;
         }
+
         return auth()->user()->can('USUARIOS#crear')
             ? Response::allow()
             : Response::deny(__("You don't can view this page"));
@@ -55,6 +56,7 @@ class UserPolicy
         if ($user === null) {
             return false;
         }
+
         if($user->id == $model->id){
             return Response::allow();
         }

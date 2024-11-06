@@ -8,7 +8,7 @@
 
 @section('css')
     @include('layouts.head')
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
@@ -50,8 +50,8 @@
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="tipo" id="" id="yes"
                         onclick="option(1)" id="inlineRadio1" value="adulto" checked>
-    
-                <label class="form-check-label" for="inlineRadio1">Adulto</label>
+
+                    <label class="form-check-label" for="inlineRadio1">Adulto</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="tipo" id="not" onclick="option(0)"
@@ -86,7 +86,8 @@
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Comporbante de Domicilio</label>
-                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_domicilio" id="">
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_domicilio"
+                    id="">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Identificación</label>
@@ -98,7 +99,6 @@
                 <label class="form-check-label" for="inlineRadio2">Acepto terminos y condiciones *</label>
             </div>
             <div class="text-center">
-
                 <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
             </div>
 

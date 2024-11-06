@@ -42,14 +42,20 @@ class User extends Controller
     }
     public function store(Request $request)
     {
-        if ($request->hasFile('profile_image')) {
 
-            $filenametostore = date('Y') . "_" . Auth::user()->name . ".jpg";
+        if (isset($request->image)) {
+            $data = $request->image;
 
-            Storage::put('public/profile_images/' . $filenametostore, fopen($request->file('profile_image'), 'r+'));
-            //            Storage::put('public/profile_images/crop/' . $filenametostore, fopen($request->file('profile_image'), 'r+'));
-            $imgOriginal = Image::read($request->file('profile_image'));
+            list($type, $data) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
+
+            $data = base64_decode($data);
+            $url = "/profile_images/temp/" . time() . '.jpg';
+            Storage::disk('local')->put($url, $data);
+            $imgOriginal = Image::read(Storage::disk('local')->get($url));
             $img = $imgOriginal->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'))->toPng();
+            $filenametostore = date('Y') . "_" . Auth::user()->name . ".jpg";
+            Storage::disk('local')->delete($url);
             return Storage::disk('local')->put("/profile_images/crop/" . $filenametostore, $img);
         }
         return $request;
