@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('identificacion')->nullable();
             $table->boolean('terminos')->default(true);
             $table->string('clave_bpej')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

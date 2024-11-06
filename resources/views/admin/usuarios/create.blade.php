@@ -21,7 +21,7 @@
             @csrf
             @method('POST')
 
-            <div class="d-flex justify-content-center d-none d-md-block">
+            <div class="justify-content-center d-none d-md-flex">
 
                 <div class="col-md-6 d-flex justify-content-center flex-column align-items-center">
 
@@ -36,18 +36,21 @@
                     <input type="hidden" name="y1" value="" />
                     <input type="hidden" name="w" value="" />
                     <input type="hidden" name="h" value="" />
-
                 </div>
-
                 <div class="col-md-6">
-
                     <div id="results"></div>
-
                 </div>
-
             </div>
-            <div>
+            <div class="d-md-none d-block">
                 <input type="file" accept="image/*" name="profile_image">
+            </div>
+            <div class="col-sm-12 my-1  " id="tutor">
+                <label for="">Nombre</label>
+                <input class="form-control" type="text" name="nombre">
+            </div>
+            <div class="col-sm-12 my-1 " id="tutor">
+                <label for="">Correo</label>
+                <input class="form-control" type="text" name="email">
             </div>
             <div class="d-flex align-items-center col-sm-12 my-1 justify-content-evenly">
                 <label for="">Es *</label>
@@ -66,8 +69,6 @@
                 <label for="">Tutor</label>
                 <input class="form-control" type="text" name="tutor">
             </div>
-
-
             <div class=" col-sm-12 my-1 my-1 ">
                 <label for="">Fecha de Nacimiento</label>
                 <input class="form-control" type="date" name="fecha_nacimiento" id="">
@@ -95,10 +96,13 @@
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Identificación</label>
-                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_ine"
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_ine" id="">
+            </div>
+            <div class="col-sm-12 my-1 ">
+                <label for="">Clave BPEJ</label>
+                <input class="form-control" type="text" name="clave_bpej"
                     id="">
             </div>
-            <P></P>
             <div class="text-center">
                 <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
             </div>

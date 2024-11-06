@@ -43,6 +43,7 @@ class User extends Controller
     public function store(Request $request)
     {
 
+        
         if (isset($request->image)) {
             $data = $request->image;
 
@@ -51,13 +52,28 @@ class User extends Controller
 
             $data = base64_decode($data);
             $url = "/profile_images/temp/" . time() . '.jpg';
-            Storage::disk('local')->put($url, $data);
-            $imgOriginal = Image::read(Storage::disk('local')->get($url));
+            Storage::disk('files')->put($url, $data);
+            $imgOriginal = Image::read(Storage::disk('files')->get($url));
             $img = $imgOriginal->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'))->toPng();
             $filenametostore = date('Y') . "_" . Auth::user()->name . ".jpg";
-            Storage::disk('local')->delete($url);
-            return Storage::disk('local')->put("/profile_images/crop/" . $filenametostore, $img);
+            Storage::disk('files')->put("/profile_images/crop/" . $filenametostore, $img);
+            Storage::disk('files')->delete($url);
         }
+        $user = ModelsUser::create([
+            'name' => $request->nombre,
+            'email' => $request->email,
+            'tipo' => $request->tipo,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'calle' => $request->calle,
+            'municipio' => $request->municipio,
+            'codigo_postal' => $request->codigo_postal,
+            'estado' => $request->estado,
+            'clave_bpej' => $request->clave_bpej,
+            'profile_photo_path' => "/profile_images/crop/" . $filenametostore
+        ]);
+        $user->assignRole('general');
+
+
         return $request;
     }
 }
