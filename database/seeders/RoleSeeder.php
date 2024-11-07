@@ -20,14 +20,33 @@ class RoleSeeder extends Seeder
     public function run()
     {
         Permission::create(['guard_name' => 'admin', 'name' => 'MODULOS#ver']);
+        
+        //USUARIOS
         Permission::create(['guard_name' => 'admin', 'name' => 'USUARIOS#ver']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'USUARIOS#create']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'USUARIOS#editar']);
+        //ROLES
         Permission::create(['guard_name' => 'admin', 'name' => 'ROLES#ver']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'ROLES#crear']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'ROLES#edit']);
+        //PERMISOS
         Permission::create(['guard_name' => 'admin', 'name' => 'PERMISOS#ver']);
         Permission::create(['guard_name' => 'admin', 'name' => 'PERMISOS#crear']);
-        Permission::create(['guard_name' => 'admin', 'name' => 'ESTADISTICAS#ver']);
-        Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#ver']);
-        Permission::create(['guard_name' => 'admin', 'name' => 'SERVICIOS#ver']);
 
+        Permission::create(['guard_name' => 'admin', 'name' => 'ESTADISTICAS#ver']);
+        
+        Permission::create(['guard_name' => 'admin', 'name' => 'SERVICIOS#ver']);
+        
+        // Categorias
+        Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#ver']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#crear']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#delete']);
+
+        //Empleados
+        Permission::create(['guard_name' => 'admin', 'name' => 'EMPLEADOS#ver']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'EMPLEADOS#crear']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'EMPLEADOS#editar']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'EMPLEADOS#update']);
         
         Permission::create(['guard_name' => 'web', 'name' => 'DATOS#ver']);
         Permission::create(['guard_name' => 'web', 'name' => 'uCATEGORIAS#ver']);

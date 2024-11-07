@@ -1,5 +1,11 @@
 @extends('adminlte::page')
 @section('title', 'Editar Rol')
+
+
+@section('css')
+    @include('layouts.head')
+@endsection
+
 @section('content')
     <div class="container">
         @if (Auth::check() )

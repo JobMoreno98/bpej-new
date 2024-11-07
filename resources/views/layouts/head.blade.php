@@ -45,7 +45,16 @@
     .wrapper {
         background: #7c2422 !important;
     }
-    .border-redondo{
+
+    .border-redondo {
         border-radius: 0px 10px 10px 0px;
+    }
+
+    .menu-header.active {
+        background-color: #034c9b !important;
+    }
+
+    .submenu-active .active {
+        color: #000 !important;
     }
 </style>

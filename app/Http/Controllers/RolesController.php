@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Intervention\Image\Colors\Rgb\Channels\Red;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RolesController extends Controller
@@ -58,7 +60,7 @@ class RolesController extends Controller
             Role::create($request->all());
             $roles = Role::all();
             DB::commit();
-            toast('Se creo el Rol','success');
+            toast('Se creo el Rol', 'success');
             return redirect()->route('roles.index');
         } catch (Exception $e) {
             Log::error($e);
@@ -112,31 +114,28 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'rol' => 'unique:roles,name'
+            'name' => ['required', Rule::unique('roles')->ignore($id), 'exists:roles,name']
         ];
         $message = [
             'rol.unique' => 'El rol ya existe'
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);
+
         if ($validator->fails()) {
-            return view('roles.create')->withErrors($validator);
+            toast(implode("<br/>", $validator->messages()->all()), 'error')->timerProgressBar()->persistent(true, false);
+            return redirect()->back();
         }
 
-        DB::beginTransaction();
         try {
-            $role = new Role();
-            $role->fill($request->all());
-            $role->save();
-            $roles = Role::all();
-            DB::commit();
-            return view('roles.index')
-                ->withSuccess("Rol guardado con éxito.")
-                ->with('roles', $roles);
+            $role = Role::find($id);
+            $role->name = $request->name;
+            $role->update();
+            toast('Se actualizo el rol de manera correta', 'success');
+            return redirect()->route('roles.index');
         } catch (Exception $e) {
-            Log::error($e);
-            DB::rollBack();
-            return view('roles.create')->withErrors("Error al guardar el Rol.");
+            toast('Error al actualizar el Rol', 'danger');
+            return redirect()->route('roles.index');
         }
     }
 

@@ -35,6 +35,7 @@ class ModulosSeeder extends Seeder
             'nombre' => 'USUARIOS',
             'permiso' => 'USUARIOS'
         ]);
+
         EnlaceModulo::create([
             'titulo' => 'Ver usuarios',
             'enlace' => 'usuarios.index',
@@ -45,8 +46,11 @@ class ModulosSeeder extends Seeder
 
         $modulo = Modulos::create([
             'nombre' => 'PERMISOS',
-            'permiso' => 'PERMISOS'
+            'permiso' => 'PERMISOS',
+            'icono' => 'folder_managed',
+            'color' => '#ae8fdb'
         ]);
+
         EnlaceModulo::create([
             'titulo' => 'Ver permisos',
             'enlace' => 'permisos.index',
@@ -56,7 +60,9 @@ class ModulosSeeder extends Seeder
 
         $modulo = Modulos::create([
             'nombre' => 'ROLES',
-            'permiso' => 'ROLES'
+            'permiso' => 'ROLES',
+            'icono' => 'folder_supervised',
+            'color' => '#ae8fdb'
         ]);
 
         EnlaceModulo::create([
@@ -64,6 +70,13 @@ class ModulosSeeder extends Seeder
             'enlace' => 'roles.index',
             'modulo_id' => $modulo->id,
             'permiso' => 'ROLES#ver'
+        ]);
+
+        EnlaceModulo::create([
+            'titulo' => 'Crear roles',
+            'enlace' => 'roles.create',
+            'modulo_id' => $modulo->id,
+            'permiso' => 'ROLES#crear'
         ]);
 
 
@@ -94,6 +107,36 @@ class ModulosSeeder extends Seeder
             'enlace' => 'mis-categorias',
             'modulo_id' => $modulo->id,
             'permiso' => 'uCATEGORIAS#ver'
+        ]);
+
+
+        $modulo = Modulos::create([
+            'nombre' => 'EMPLEADOS',
+            'permiso' => 'EMPLEADOS',
+            'icono' => 'person',
+            'color' => '#ae8fdb'
+        ]);
+
+        EnlaceModulo::create([
+            'titulo' => 'Ver Empleados',
+            'enlace' => 'empleados.index',
+            'modulo_id' => $modulo->id,
+            'permiso' => 'EMPLEADOS#ver'
+        ]);
+
+
+        $modulo = Modulos::create([
+            'nombre' => 'CATEGORIAS',
+            'permiso' => 'CATEGORIAS',
+            'icono' => 'category',
+            'color' => '#ae8fdb'
+        ]);
+
+        EnlaceModulo::create([
+            'titulo' => 'Ver Empleados',
+            'enlace' => 'categorias.index',
+            'modulo_id' => $modulo->id,
+            'permiso' => 'CATEGORIAS#ver'
         ]);
     }
 }

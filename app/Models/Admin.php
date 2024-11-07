@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
@@ -69,5 +71,9 @@ class Admin extends Authenticatable
     
     public function adminlte_image(){
         return asset('storage/fotos_perfil/' . $this->foto);
+    }
+    public function role(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'model_has_roles' ,'model_id', 'role_id');
     }
 }

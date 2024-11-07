@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModulosController;
 use App\Http\Controllers\PermisosController;
@@ -50,6 +51,7 @@ Route::prefix('admin')->middleware([
     Route::resource('permisos', PermisosController::class)->names('permisos');
     Route::resource('categorias', CategoriasController::class);
     Route::resource('usuarios', User::class)->names('usuarios');
+    Route::resource('empleados',EmpleadosController::class)->names('empleados');
 
     Route::post('/eliminar-enlace', [ModulosController::class, 'eliminar_enlace'])->name('eliminar.enlace');
 

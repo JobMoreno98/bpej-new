@@ -49,7 +49,7 @@ class EventServiceProvider extends ServiceProvider
                 'url' => 'account/edit/notifications',
             ]);
 
-            $modulos = DB::table('modulos_enlace')->whereIn('enlace_permiso', $permissionNames->pluck('name')->toArray())->get()->groupBy('modulo_nombre');
+            $modulos = DB::table('modulos_enlace')->whereIn('enlace_permiso', $permissionNames->pluck('name')->toArray())->orderBy('modulo_orden')->get()->groupBy('modulo_nombre');
 
             $items = $modulos->map(function ($page) {
                 $submenu = $page->map(function ($page) {
@@ -58,7 +58,7 @@ class EventServiceProvider extends ServiceProvider
                     return [
                         'text' => $page->enlace_titulo,
                         'route' => [$page->enlace_enlace, $sub],
-                        'classes' => 'text-purple',
+                        'classes' => 'submenu-active',
                         'active' => [route($page->enlace_enlace)]
                     ];
                 });
@@ -66,7 +66,7 @@ class EventServiceProvider extends ServiceProvider
                     'text' => $page[0]->modulo_nombre,
                     'icon' => $page[0]->modulo_icono,
                     'submenu' => $submenu->toArray(),
-                    'classes' => 'd-flex text-end',
+                    'classes' => 'd-flex text-end menu-header',
 
                 ];
                 return $menu;
