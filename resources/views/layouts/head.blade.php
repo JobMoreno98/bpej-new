@@ -29,8 +29,23 @@
 
     .content-wrapper {
         background: #fff;
+        border-radius: 40px 0px 0px;
+        ;
+    }
+
+    .color-bpej {
+        background: #7c2422;
+    }
+
+    .brand-link {
+        border-bottom: none !important;
+        text-decoration: none !important;
+    }
+
+    .wrapper {
+        background: #7c2422 !important;
+    }
+    .border-redondo{
+        border-radius: 0px 10px 10px 0px;
     }
 </style>
-
-
-

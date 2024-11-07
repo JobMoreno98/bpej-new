@@ -2,7 +2,7 @@
 
 <nav class="main-header navbar
     {{ config('adminlte.classes_topnav_nav', 'navbar-expand-md') }}
-    {{ config('adminlte.classes_topnav', 'navbar-white navbar-light') }}">
+    {{ config('adminlte.classes_topnav', 'navbar-white navbar-dark') }}">
 
     <div class="{{ config('adminlte.classes_topnav_container', 'container') }}">
 

@@ -18,7 +18,11 @@
                             @endif
 
                             <x-validation-errors class="mb-4" />
-
+                            <div class="my-2">
+                                <img class="img-fluid rounded " loading="lazy" src="{{ asset('img/portada-web.jpg') }}"
+                                    width="100%" height="250" alt="BootstrapBrain Logo"
+                                    style="aspect-ratio: 16 / 5;object-fit: cover;">
+                            </div>
                             <form method="POST" action="{{ route('password.update') }}">
                                 @csrf
 
