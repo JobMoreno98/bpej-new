@@ -13,7 +13,7 @@ class RolePolicy
     public function viewAny($user): Response
     {
         if ($user === null) {
-            return false;
+            return  Response::deny(__("You don't can view this page"));
         }
         return auth()->user()->can('ROLES#ver')
             ? Response::allow()
@@ -26,7 +26,7 @@ class RolePolicy
     public function view($user, ModelsRole $role): Response
     {
         if ($user === null) {
-            return false;
+            return  Response::deny(__("You don't can view this page"));
         }
         return auth()->user()->can('ROLES#ver')
             ? Response::allow()
@@ -39,7 +39,18 @@ class RolePolicy
     public function create($user): Response
     {
         if ($user === null) {
-            return false;
+            return Response::deny(__("You don't can view this page"));
+        }
+        return auth()->user()->can('ROLES#crear')
+            ? Response::allow()
+            : Response::deny(__("You don't can view this page"));
+    }
+
+
+    public function store($user): Response
+    {
+        if ($user === null) {
+            return  Response::deny(__("You don't can view this page"));
         }
         return auth()->user()->can('ROLES#crear')
             ? Response::allow()
@@ -52,7 +63,7 @@ class RolePolicy
     public function update($user, ModelsRole $role): Response
     {
         if ($user === null) {
-            return false;
+            return  Response::deny(__("You don't can view this page"));
         }
         return auth()->user()->can('ROLES#update')
             ? Response::allow()
@@ -65,7 +76,7 @@ class RolePolicy
     public function delete($user, ModelsRole $role): Response
     {
         if ($user === null) {
-            return false;
+            return  Response::deny(__("You don't can view this page"));
         }
         return auth()->user()->can('ROLES#delete')
             ? Response::allow()
@@ -78,7 +89,7 @@ class RolePolicy
     public function restore($user, ModelsRole $role): Response
     {
         if ($user === null) {
-            return false;
+            return  Response::deny(__("You don't can view this page"));
         }
         return auth()->user()->can('ROLES#restore')
             ? Response::allow()
@@ -91,7 +102,7 @@ class RolePolicy
     public function forceDelete($user, ModelsRole $role): Response
     {
         if ($user === null) {
-            return false;
+            return  Response::deny(__("You don't can view this page"));
         }
         return auth()->user()->can('ROLES#forceDelete')
             ? Response::allow()

@@ -17,13 +17,10 @@ class PermisosController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function __construct()
-     {
-         $this->authorizeResource(Permission::class, 'permission');
-     }
 
     public function index()
     {
+        $this->authorize('viewAny', Permission::class);
         $permisos = Permission::all();
         $dataReturn = [];
         foreach ($permisos as $permiso) {
@@ -57,6 +54,7 @@ class PermisosController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'permiso' => 'required|unique:roles,name',
             'guard' => 'required'

@@ -103,10 +103,10 @@
 @endsection
 
 @section('js')
+    @include('sweetalert::alert')
     @include('layouts.scripts')
     <script>
         function desactivate(element) {
-            console.log(element)
             send = {
                 "categoria": element,
             };
@@ -121,10 +121,19 @@
                 method: 'POST',
                 data: send
             }).done(function(data) {
-                //console.log(data);
-                alert(data);
+                if (data.success === true) {
+                    Toast.fire({
+                        type: 'success',
+                        title:  data.message,
+                        icon: "success"
+                    });
+                } else {
+                    Toast.fire({
+                        type: 'danger',
+                        title:  data.message
+                    });
+                }
             });
-
         }
     </script>
 @endsection

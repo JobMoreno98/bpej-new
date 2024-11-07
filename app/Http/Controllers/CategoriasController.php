@@ -4,17 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorias;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoriasController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->authorizeResource(Categorias::class, 'categorias');
-    }
-
     public function index()
     {
+        $this->authorize('viewAny', Categorias::class);
         $categorias = Categorias::get();
         return view('admin.categorias.index', compact('categorias'));
     }
@@ -35,10 +32,19 @@ class CategoriasController extends Controller
 
     public function desactivar(Request $request)
     {
+        if(!auth()->user()->can('CATEGORIAS#delete')){
+            return response()->json([
+                'success' => false,
+                'message' => 'No tienes permisos',
+            ]);
+        }
         $categoria = Categorias::find($request->categoria);
         $categoria->active = ($categoria->active) ? false : true;
         $categoria->update();
-        return "Se actualizo la catgoria";
+        return response()->json([
+            'success' => true,
+            'message' => 'Se actualizo con exito',
+        ]);;
         //return redirect()->route('categorias.index');
     }
 }

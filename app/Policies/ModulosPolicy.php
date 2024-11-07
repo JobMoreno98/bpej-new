@@ -10,12 +10,14 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class ModulosPolicy
 {
 
-    use HandlesAuthorization;
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(): Response
+    public function viewAny($user): Response
     {
+        if ($user === null) {
+            return Response::deny(__("You don't can view this page"));
+        }
         return auth()->user()->can('MODULOS#ver')
             ? Response::allow()
             : Response::deny(__("You don't can view this page"));
@@ -26,6 +28,7 @@ class ModulosPolicy
      */
     public function view($user, ?Modulos $modulos): Response
     {
+
         if ($user === null) {
             return false;
         }
@@ -48,13 +51,10 @@ class ModulosPolicy
             : Response::deny(__("You don't can view this page"));
     }
 
-
-
     public function edit($user): Response
     {
-
         if ($user === null) {
-            return false;
+            return Response::deny(__("You don't can view this page"));
         }
         return auth()->user()->can('MODULOS#edit')
             ? Response::allow()

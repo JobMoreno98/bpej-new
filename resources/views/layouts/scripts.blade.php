@@ -8,6 +8,16 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        showCloseButton: true
+    });
+</script>
+<script>
     $(document).ready(function() {
         $('#myTable').DataTable({
             "order": [
@@ -16,7 +26,7 @@
             layout: {
                 topStart: {
                     pageLength: {
-                        menu: [5,10, 25]
+                        menu: [5, 10, 25]
                     }
                 },
                 topEnd: {
@@ -67,4 +77,3 @@
         });
     });
 </script>
-

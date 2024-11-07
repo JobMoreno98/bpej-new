@@ -21,7 +21,9 @@
         .btn-primary {
             --bs-btn-bg: #7c2422 !important;
             --bs-btn-border-color: #7c2422 !important;
-            transition: ease-in-out 2ms;
+            transition: ease-in-out .3s;
+            --bs-btn-hover-bg: #990604 !important;
+            --bs-btn-hover-border-color: #990604 !important;
         }
     </style>
 </head>

@@ -2,38 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ciclos;
-use App\Models\datosGenerales;
-use App\Models\proyectos;
 use App\Models\User as ModelsUser;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Mail;
-use App\Mail\Password_reset;
-use DragonCode\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
-use Spatie\Permission\Models\Role;
-use RealRashid\SweetAlert\Facades\Alert;
 use Intervention\Image\Laravel\Facades\Image;
-
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Imagick\Driver;
 
 
 class User extends Controller
 {
 
-    public function __construct()
-    {
-        $this->authorizeResource(ModelsUser::class, 'user');
-    }
-
     public function index()
     {
+        $this->authorize('viewAny', ModelsUser::class);
         $users = ModelsUser::all();
         return view('admin.usuarios.index', compact('users'));
     }
@@ -47,8 +30,8 @@ class User extends Controller
         $validator = Validator::make($request->all(), [
             'fecha_nacimiento' => 'required|date',
             'tutor' => 'exclude_if:tipo,adulto',
-            'comprobante_domicilio' => ['required', File::types(['jpg','pdf'])->max(1024)],
-            'comprobante_ine' => ['required', File::types(['jpg','pdf'])->max(1024)]
+            'comprobante_domicilio' => ['required', File::types(['jpg', 'pdf'])->max(1024)],
+            'comprobante_ine' => ['required', File::types(['jpg', 'pdf'])->max(1024)]
         ]);
 
         if ($validator->fails()) {
@@ -92,5 +75,11 @@ class User extends Controller
 
         $user->assignRole('general');
         return $request;
+    }
+    public function edit($id)
+    {
+        $this->authorize('edit', ModelsUser::class, Auth::user());
+        $user = ModelsUser::find($id);
+        return view('admin.usuarios.edit', compact('user'));
     }
 }

@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Editar Perfil')
+@section('title', 'Editar usuario')
 @section('preloader')
     <i class="fas fa-4x fa-spin fa-spinner text-secondary"></i>
     <h4 class="mt-4 text-dark">{{ __('Loading') }}</h4>
@@ -7,107 +7,163 @@
 
 @section('css')
     @include('layouts.head')
-    <style>
-        #foto-perfil {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/imgareaselect.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+
 @endsection
+
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">{{ __('Actualizar') }}</div>
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('update-user', $usuario->id) }}" enctype="multipart/form-data">
-                            @method('PUT')
-                            @csrf
-                            <div class="d-flex justify-content-center my-2">
-                                @php
-                                    if (isset($usuario->foto) && strcmp('', $usuario->foto) != 0) {
-                                        $url = asset('storage/fotos_perfil/' . $usuario->foto);
-                                    } else {
-                                        $url = asset('images/user-logo.png');
-                                    }
-                                @endphp
-                                <img id="foto-perfil" src="{{ $url }}" alt="">
-                            </div>
-                            <div class="form-group row">
-                                <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+    <div class="container justify-content-center d-flex">
+        <form action="{{ route('update-user', $user->id) }}"
+            class="d-flex flex-wrap flex-column  col-sm-12 my-1 col-md-8" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
-                                <div class="col-md-6">
-                                    <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ $usuario->name }}" required autocomplete="name" autofocus>
-                                </div>
-                            </div>
+            <div class="d-flex justify-content-center">
 
-                            <div class="form-group row">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Correo Electrónico') }}</label>
+                <div class="col-md-6 d-flex justify-content-center flex-column align-items-center">
 
-                                <div class="col-md-6">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ $usuario->email }}" required autocomplete="email">
-                                </div>
-                            </div>
+                    <div id="my_camera" class="w-100"></div>
 
-                            <div class="form-group row">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+                    <input type=button value="Tomar foto"
+                        class="d-none d-md-block my-2 col-sm-12 col-md-3 btn btn-outline-dark btn-sm"
+                        onClick="take_snapshot()">
 
-                                <div class="col-md-6">
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        autocomplete="new-password">
+                    <input type="hidden" name="image" class="image-tag">
 
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" autocomplete="new-password">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4 col-form-label text-md-right" for="">Foto de perfil</label>
-                                <div class="col-md-6">
-                                    <input class="form-control" type="file" name="foto" accept=".jpg,.jpeg,.png"
-                                        id="">
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Actualizar') }}
-                                    </button>
-                                </div>
-                            </div>
-
-
-                        </form>
-                    </div>
+                    <input type="hidden" name="x1" value="" />
+                    <input type="hidden" name="y1" value="" />
+                    <input type="hidden" name="w" value="" />
+                    <input type="hidden" name="h" value="" />
+                </div>
+                <div class="col-md-6 d-none d-md-block">
+                    <div id="results"></div>
                 </div>
             </div>
-        </div>
+
+            <div class="col-sm-12 my-1  " id="nombre">
+                <label for="">Nombre</label>
+                <input class="form-control" type="text" name="nombre" value="{{ $user->name }}">
+            </div>
+            <div class="col-sm-12 my-1 " id="email">
+                <label for="">Correo</label>
+                <input class="form-control" type="email" name="email" value="{{ $user->email }}">
+            </div>
+
+            <div class="d-flex align-items-center col-sm-12 my-1 justify-content-evenly">
+                <label for="">Eres *</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tipo" id="" id="yes"
+                        onclick="option(1)" id="inlineRadio1" value="adulto" checked>
+
+                    <label class="form-check-label" for="inlineRadio1">Adulto</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="tipo" id="not" onclick="option(0)"
+                        id="inlineRadio2" value="menor">
+                    <label class="form-check-label" for="inlineRadio2">Menor</label>
+                </div>
+            </div>
+            <div class="col-sm-12 my-1  d-none" id="tutor">
+                <label for="">Tutor</label>
+                <input class="form-control" type="text" name="tutor">
+            </div>
+
+            <div class=" col-sm-12 my-1 my-1 ">
+                <label for="">Fecha de Nacimiento</label>
+                <input class="form-control" type="date" name="fecha_nacimiento" value="{{ $user->fecha_nacimiento }}"
+                    id="">
+            </div>
+            <div class="col-sm-12 my-1 ">
+                <label for="">Calle</label>
+                <input class="form-control" type="text" name="calle" value="{{ $user->calle }}" id="">
+            </div>
+            <div class="col-sm-12 my-1 ">
+                <label for="">Municipio</label>
+                <input class="form-control" type="text" name="municipio" value="{{ $user->municipio }}" id="">
+            </div>
+            <div class=" col-sm-12 my-1 ">
+                <label for="">Codigo Postal</label>
+                <input class="form-control" type="text" name="codigo_postal" value="{{ $user->codigo_postal }}"
+                    id="">
+            </div>
+            <div class=" col-sm-12 my-1 ">
+                <label for="">Estado</label>
+                <input class="form-control" type="text" name="estado" value="{{ $user->estado }}" id="">
+            </div>
+            <div class="col-sm-12 my-1 ">
+                <label for="">Comporbante de Domicilio</label>
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file"
+                    name="comprobante_domicilio" id="">
+            </div>
+            <div class="col-sm-12 my-1 ">
+                <label for="">Identificación</label>
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_ine"
+                    id="">
+            </div>
+            <div class="col-sm-12 my-1 form-check form-check-inline my-1 d-flex flex-wrap justify-content-center">
+                <input class="form-check-input" type="radio" name="terminos" id="terminos" required value="true">
+                <label class="form-check-label" for="terminos">Acepto terminos y condiciones *</label>
+            </div>
+            <div class="text-center col-sm-12 col-md-3">
+                <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
+            </div>
+
+
+        </form>
     </div>
 @endsection
 @section('js')
-    @include('layouts.scripts')
+    @include('sweetalert::alert')
+    <script src="{{ asset('js/jquery.imgareaselect.js') }}"></script>
+    <script>
+        Webcam.set({
+            width: 350,
+            height: 250,
+            image_format: 'jpg',
+            jpeg_quality: 90,
+            flip_horiz: true
+        });
+
+        Webcam.attach('#my_camera');
+
+        function take_snapshot() {
+
+            Webcam.snap(function(data_uri) {
+
+                $(".image-tag").val(data_uri);
+
+                document.getElementById('results').innerHTML = '<img src="' + data_uri + '" id="previewimage"/>';
+                jQuery(function($) {
+                    var p = $("#previewimage");
+
+                    $("body").on("change", ".image", function() {
+                        var imageReader = new FileReader();
+                        imageReader.readAsDataURL(document.querySelector(".image").files[0]);
+
+                        imageReader.onload = function(oFREvent) {
+                            p.attr('src', oFREvent.target.result).fadeIn();
+                        };
+                    });
+
+                    $('#previewimage').imgAreaSelect({
+                        aspectRatio: '1:1',
+                        maxWidth: "250",
+                        onSelectEnd: function(img, selection) {
+                            $('input[name="x1"]').val(selection.x1);
+                            $('input[name="y1"]').val(selection.y1);
+                            $('input[name="w"]').val(selection.width);
+                            $('input[name="h"]').val(selection.height);
+                        }
+
+                    });
+
+                });
+            });
+
+        }
+    </script>
 @endsection

@@ -12,6 +12,7 @@ class Modulos extends Model
     protected $guard_name = 'admin';
     
     protected $fillable = ['nombre', 'permiso', 'color', 'icono', 'orden'];
+    
     public function enlaces(): HasMany
     {
         return $this->hasMany(EnlaceModulo::class, 'modulo_id', 'id');

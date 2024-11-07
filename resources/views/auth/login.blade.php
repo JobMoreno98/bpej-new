@@ -29,21 +29,27 @@
                                 <div class="row gy-3 overflow-hidden">
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
-                                            <input type="email" class="form-control" name="email" id="email"
-                                                placeholder="name@example.com" required>
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                                name="email" id="email" placeholder="name@example.com" required>
                                             <label for="email" class="form-label">{{ __('Email') }}</label>
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
-                                            <input type="password" class="form-control" name="password" id="password"
+                                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password"
                                                 value="" placeholder="Password" required>
                                             <label for="password" class="form-label">{{ __('Password') }}</label>
+                                            @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ dd($message) }}</strong>
+                                            </span>
+                                        @enderror
                                         </div>
                                     </div>
                                     @error('password')

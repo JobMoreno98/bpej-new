@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RolesController extends Controller
@@ -17,13 +18,9 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->authorizeResource(Role::class, 'role');
-    }
-
     public function index()
     {
+        $this->authorize('viewAny', Role::class);
         $roles = Role::all();
         return view('roles.index')->with('roles', $roles);
     }
@@ -35,7 +32,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        $this->authorize('create');
+        $this->authorize('create', Role::class);
         return view('roles.create');
     }
 
@@ -47,6 +44,7 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('store', Role::class, Auth::user());
 
         $message = [
             'rol.unique' => 'El rol ya existe'
@@ -57,12 +55,11 @@ class RolesController extends Controller
         ], $message);
 
         try {
-            $rol = Role::create($request->all());
+            Role::create($request->all());
             $roles = Role::all();
             DB::commit();
-            return view('roles.index')
-                ->withSuccess("Rol guardado con éxito.")
-                ->with('roles', $roles);
+            toast('Se creo el Rol','success');
+            return redirect()->route('roles.index');
         } catch (Exception $e) {
             Log::error($e);
             DB::rollBack();

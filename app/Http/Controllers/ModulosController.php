@@ -1,34 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Modulos;
 use App\Models\EnlaceModulo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ModulosController extends Controller
 {
-
-
-    public function __construct()
-    {
-        $this->authorizeResource(Modulos::class, 'modulos');
-    }
-    
     public function index()
     {
-
+        $this->authorize('viewAny', Modulos::class);
         $modulos = Modulos::all();
         return view('modulos.index', compact('modulos'));
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required',
             'permiso' => 'required',
         ]);
-        $modulo = Modulos::create([
+        Modulos::create([
             'nombre' => \Str::upper($request->nombre),
             'icono' => isset($request->icono) ? $request->icono : 'info',
             'color' => isset($request->color) ? $request->color : '#e2e2e2',
@@ -40,6 +35,8 @@ class ModulosController extends Controller
     }
     public function edit(Modulos $modulo)
     {
+        $this->authorize('edit', Modulos::class, Auth::user());
+
         $enlaces = EnlaceModulo::where('modulo_id', $modulo->id)
             ->get();
         return view('modulos.edit', compact('modulo', 'enlaces'));
