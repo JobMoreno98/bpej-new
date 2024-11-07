@@ -56,7 +56,7 @@ class ModulosPolicy
         if ($user === null) {
             return Response::deny(__("You don't can view this page"));
         }
-        return auth()->user()->can('MODULOS#edit')
+        return auth()->user()->can('MODULOS#editar')
             ? Response::allow()
             : Response::deny(__("You don't can view this page"));
     }

@@ -22,8 +22,11 @@ class ModulosSeeder extends Seeder
 
         $modulo = Modulos::create([
             'nombre' => 'MODULOS',
-            'permiso' => 'MODULOS'
+            'permiso' => 'MODULOS',
+            'icono' => 'settings',
+            'color' => '#ae8fdb'
         ]);
+
         EnlaceModulo::create([
             'titulo' => 'Ver modulos',
             'enlace' => 'modulos.index',
@@ -33,7 +36,9 @@ class ModulosSeeder extends Seeder
 
         $modulo = Modulos::create([
             'nombre' => 'USUARIOS',
-            'permiso' => 'USUARIOS'
+            'permiso' => 'USUARIOS',
+            'icono' => 'person',
+            'color' => '#ae8fdb'
         ]);
 
         EnlaceModulo::create([
@@ -72,13 +77,6 @@ class ModulosSeeder extends Seeder
             'permiso' => 'ROLES#ver'
         ]);
 
-        EnlaceModulo::create([
-            'titulo' => 'Crear roles',
-            'enlace' => 'roles.create',
-            'modulo_id' => $modulo->id,
-            'permiso' => 'ROLES#crear'
-        ]);
-
 
         $modulo = Modulos::create([
             'nombre' => 'MI INFORMACIÓN',
@@ -113,7 +111,7 @@ class ModulosSeeder extends Seeder
         $modulo = Modulos::create([
             'nombre' => 'EMPLEADOS',
             'permiso' => 'EMPLEADOS',
-            'icono' => 'person',
+            'icono' => 'badge',
             'color' => '#ae8fdb'
         ]);
 

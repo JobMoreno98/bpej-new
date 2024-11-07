@@ -31,15 +31,14 @@
                                 </div>
                             </div>
                         @endif
-                        <form method="POST" class="d-flex" action="{{ route('categorias.store') }}">
-
+                        <form method="POST" class="align-items-center d-flex flex-column flex-md-row justify-content-center" action="{{ route('categorias.store') }}">
                             @csrf
                             @method('POST')
-                            <input class="form-control mx-1 col-sm-12 col-md-3" placeholder="Nombre" type="text"
+                            <input class="form-control mx-1 col-sm-12 col-md-3 col-lg-3" placeholder="Nombre" type="text"
                                 name="name">
-                            <input class="form-control mx-1 col-sm-12 col-md-8" placeholder="Descripción" type="text"
+                            <input class="form-control mx-1 col-sm-12 col-md-4 col-lg-5 m-1" placeholder="Descripción" type="text"
                                 name="descripcion">
-                            <button class="btn btn-sm btn-success" type="submit">Guardar</button>
+                            <button class="btn btn-sm btn-success col-sm-4 col-md-2 m-1" type="submit">Guardar</button>
                         </form>
                     </div>
                 </div>

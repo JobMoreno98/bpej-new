@@ -13,7 +13,7 @@
     <h2 class="text-center mt-2 w-100"><span class=" border-bottom">Asignar permisos a rol - {{ $rol->name }} </span> </h2>
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         @if (Auth::check())
             @if (session('message'))
                 <div class="alert alert-success">
@@ -22,10 +22,10 @@
             @endif
             <form action="{{ route('guardar_relacion_permisos', $rol->id) }}" method="post">
                 @csrf
-                <div class="d-flex flex-wrap align-items-center">
+                <div class="d-flex flex-wrap align-items-center w-100 justify-content-evenly">
 
                     @foreach ($permisos as $key => $value)
-                        <div class="card m-1 col-sm-12 col-md-2 h-100">
+                        <div class="card m-1 col-sm-12 col-lg-3 col-md-5 h-100">
                             <div class="card-body h-100">
                                 <h5 class=" w-100 border-bottom mb-1 pb-1">{{ $key }}</h5>
                                 <div>

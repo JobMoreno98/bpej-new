@@ -19,11 +19,15 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['guard_name' => 'admin', 'name' => 'MODULOS#ver']);
         
+        Permission::create(['guard_name' => 'admin', 'name' => 'MODULOS#ver']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'MODULOS#crear']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'MODULOS#editar']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'MODULOS#update']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'MODULOS#delete']);
         //USUARIOS
         Permission::create(['guard_name' => 'admin', 'name' => 'USUARIOS#ver']);
-        Permission::create(['guard_name' => 'admin', 'name' => 'USUARIOS#create']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'USUARIOS#crear']);
         Permission::create(['guard_name' => 'admin', 'name' => 'USUARIOS#editar']);
         //ROLES
         Permission::create(['guard_name' => 'admin', 'name' => 'ROLES#ver']);
@@ -52,20 +56,38 @@ class RoleSeeder extends Seeder
         Permission::create(['guard_name' => 'web', 'name' => 'uCATEGORIAS#ver']);
 
 
-        $role = Role::create(['guard_name' => 'admin', 'name' => 'Admin']);
+        //super admin
+        $role = Role::create(['guard_name' => 'admin', 'name' => 'Super Admin']);
 
         $role->givePermissionTo(Permission::where('guard_name', 'admin')->get());
+
+
+        //usuario admin
+
+        $role = Role::create(['guard_name' => 'admin', 'name' => 'admin']);
+
+        $role->givePermissionTo(Permission::where('guard_name', 'admin')->whereNot('name','like','MODULOS%')->get());
+
+        //usuario general
 
         $rol = Role::create(['guard_name' => 'web', 'name' => 'general']);
 
         $rol->givePermissionTo(Permission::where('guard_name', 'web')->get());
 
         $user = Admin::create([
-            'name' => 'admin',
+            'name' => 'super admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('password')
         ]);
 
-        $user->assignRole('Admin');
+        $user->assignRole('Super Admin');
+
+        $user = Admin::create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password')
+        ]);
+
+        $user->assignRole('admin');
     }
 }

@@ -35,13 +35,13 @@
                     </div>
                 @endif
                 @csrf
-                <div class="justify-content-center d-flex align-items-center my-2">
+                <div class="justify-content-center d-flex flex-column flex-md-row align-items-center my-2">
                     <label class="font-weight-bold mx-1" for="name" @required(true)>Rol</label>
 
-                    <input type="text" class="form-control col-sm-12 col-md-2 mx-1" id="name" name="name"
+                    <input type="text" class="form-control col-sm-12 col-md-3 mx-1" id="name" name="name"
                         value="{{ old('name') }}" placeholder="Nombre del rol">
 
-                    <button type="submit" class="btn btn-success btn-sm mx-1">
+                    <button type="submit" class="col-sm-12 col-md-2 btn btn-success btn-sm m-1">
                         <i class="ml-1 fas fa-save"></i> Guardar
                     </button>
                 </div>
@@ -57,15 +57,14 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Rol</th>
-                                                    <th scope="col">Descripción</th>
-                                                    <th scope="col">Acción</th>
+                                                    
+                                                    <th scope="col text-center">Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($roles as $role)
                                                     <tr>
                                                         <td scope="row" style="color: #666666;">{{ $role->name }}</td>
-                                                        <td>{{ $role->description }}</td>
                                                         <td class="d-flex">
                                                             <a href="{{ route('roles.edit', $role->id) }}"
                                                                 class=" text-decoration-none border-0 text-green  d-flex aling-items-center mx-1"
