@@ -7,7 +7,7 @@
 @stop
 
 @section('css')
-    @include('layouts.head')
+    
 @endsection
 
 @section('content')
@@ -96,7 +96,7 @@
 @endsection
 
 @section('js')
-    @include('sweetalert::alert')
+    
     <script>
         var cont = 0;
         $('.clonar').click(function() {

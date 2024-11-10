@@ -1,13 +1,10 @@
 @extends('adminlte::page')
 @section('title', 'Mis categorias')
 
-@section('preloader')
-    <i class="fas fa-4x fa-spin fa-spinner text-secondary"></i>
-    <h4 class="mt-4 text-dark">{{ __('Loading') }}</h4>
-@stop
+
 
 @section('css')
-    @include('layouts.head')
+    
     <link rel="stylesheet" href="{{ asset('css/cards.css') }}">
 
 @endsection
@@ -66,5 +63,5 @@
 @endsection
 
 @section('js')
-    @include('sweetalert::alert')
+    
 @endsection

@@ -1,13 +1,10 @@
 @extends('adminlte::page')
 @section('title', 'Mi información')
 
-@section('preloader')
-    <i class="fas fa-4x fa-spin fa-spinner text-secondary"></i>
-    <h4 class="mt-4 text-dark">{{ __('Loading') }}</h4>
-@stop
+
 
 @section('css')
-    @include('layouts.head')
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -24,28 +21,20 @@
             class="d-flex flex-wrap flex-column  col-sm-12 my-1 col-md-8" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-
-            <div class="d-flex justify-content-center">
-
-                <div class="col-md-6 d-flex justify-content-center flex-column align-items-center">
-
-                    <div id="my_camera" class="w-100"></div>
-
-                    <input type=button value="Tomar foto" class="d-none d-md-block my-2 col-sm-12 col-md-3 btn btn-outline-dark btn-sm"
-                        onClick="take_snapshot()">
-
-                    <input type="hidden" name="image" class="image-tag">
-
-                    <input type="hidden" name="x1" value="" />
-                    <input type="hidden" name="y1" value="" />
-                    <input type="hidden" name="w" value="" />
-                    <input type="hidden" name="h" value="" />
-                </div>
-                <div class="col-md-6 d-none d-md-block">
-                    <div id="results"></div>
-                </div>
+            <div class="text-center">
+                @php
+                    if (isset($user->profile_photo_path)) {
+                        $img = route('get-photo', $user->id);
+                    }
+                @endphp
+                <img id="output" src="{{ isset($img) ? $img : '' }}" class="rounded-circle"
+                    style="max-height: 150px;aspect-ratio: 1 / 1  ;object-fit: cover; " />
             </div>
-
+            <div class="col-sm-12 my-1 ">
+                <label for="">Mi foto</label>
+                <input accept="image/jpeg" class="form-control" type="file" name="profile_photo_path"
+                    onchange="loadFile(event)">
+            </div>
             <div class="col-sm-12 my-1  " id="nombre">
                 <label for="">Nombre</label>
                 <input class="form-control" type="text" name="nombre" value="{{ $user->name }}">
@@ -81,7 +70,8 @@
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Calle</label>
-                <input class="form-control" type="text" name="calle" value="{{ $user->calle }}" id="">
+                <input class="form-control" type="text" name="calle" value="{{ $user->calle }} " id="">
+
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Municipio</label>
@@ -98,16 +88,16 @@
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Comporbante de Domicilio</label>
-                <input accept="image/jpeg,application/pdf" class="form-control" type="file"
-                    name="comprobante_domicilio" id="">
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="documento"
+                    id="">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Identificación</label>
-                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_ine" id="">
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="identificacion"
+                    id="">
             </div>
             <div class="col-sm-12 my-1 form-check form-check-inline my-1 d-flex flex-wrap justify-content-center">
-                <input class="form-check-input" type="radio" name="terminos" id="terminos" required
-                    value="true">
+                <input class="form-check-input" type="radio" name="terminos" id="terminos" required value="1">
                 <label class="form-check-label" for="terminos">Acepto terminos y condiciones *</label>
             </div>
             <div class="text-center col-sm-12 col-md-3">
@@ -120,59 +110,18 @@
 @endsection
 
 @section('js')
-    @include('sweetalert::alert')
+    
     <script>
         function option(x) {
             var element = document.getElementById("tutor");
             element.classList.toggle("d-none");
         }
-    </script>
-    <script src="{{ asset('js/jquery.imgareaselect.js') }}"></script>
-    <script>
-        Webcam.set({
-            width: 350,
-            height: 250,
-            image_format: 'jpg',
-            jpeg_quality: 90,
-            flip_horiz: true
-        });
-
-        Webcam.attach('#my_camera');
-
-        function take_snapshot() {
-
-            Webcam.snap(function(data_uri) {
-
-                $(".image-tag").val(data_uri);
-
-                document.getElementById('results').innerHTML = '<img src="' + data_uri + '" id="previewimage"/>';
-                jQuery(function($) {
-                    var p = $("#previewimage");
-
-                    $("body").on("change", ".image", function() {
-                        var imageReader = new FileReader();
-                        imageReader.readAsDataURL(document.querySelector(".image").files[0]);
-
-                        imageReader.onload = function(oFREvent) {
-                            p.attr('src', oFREvent.target.result).fadeIn();
-                        };
-                    });
-
-                    $('#previewimage').imgAreaSelect({
-                        aspectRatio: '1:1',
-                        maxWidth: "250",
-                        onSelectEnd: function(img, selection) {
-                            $('input[name="x1"]').val(selection.x1);
-                            $('input[name="y1"]').val(selection.y1);
-                            $('input[name="w"]').val(selection.width);
-                            $('input[name="h"]').val(selection.height);
-                        }
-
-                    });
-
-                });
-            });
-
-        }
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src)
+            }
+        };
     </script>
 @endsection

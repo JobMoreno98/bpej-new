@@ -38,17 +38,6 @@ class EventServiceProvider extends ServiceProvider
             $user = Auth::user();
             $permissionNames = $user->getPermissionsViaRoles();
 
-            $event->menu->addAfter('pages', [
-                'key' => 'account_settings',
-                'header' => 'Account Settings',
-            ]);
-
-            $event->menu->addIn('account_settings', [
-                'key' => 'account_settings_notifications',
-                'text' => 'Notifications',
-                'url' => 'account/edit/notifications',
-            ]);
-
             $modulos = DB::table('modulos_enlace')->whereIn('enlace_permiso', $permissionNames->pluck('name')->toArray())->orderBy('modulo_orden')->get()->groupBy('modulo_nombre');
 
             $items = $modulos->map(function ($page) {
@@ -66,7 +55,7 @@ class EventServiceProvider extends ServiceProvider
                     'text' => $page[0]->modulo_nombre,
                     'icon' => $page[0]->modulo_icono,
                     'submenu' => $submenu->toArray(),
-                    'classes' => 'd-flex text-end menu-header',
+                    'classes' => 'd-flex align-items-center menu-header',
 
                 ];
                 return $menu;

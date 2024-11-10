@@ -7,7 +7,7 @@
 @stop
 
 @section('css')
-    @include('layouts.head')
+    
 @endsection
 
 @section('content')

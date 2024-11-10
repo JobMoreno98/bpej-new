@@ -17,9 +17,12 @@
                                 <div class="col-12">
                                     <div class="mb-4 text-center">
                                         <h3>{{ __('Sign in') }}</h3>
-                                        <p>{{ __('Do not have an account?') }} <a
-                                                href="{{ route('register') }}">{{ __('Sign up') }}</a>
-                                        </p>
+                                        @if (Route::is('login'))
+                                            <p>{{ __('Do not have an account?') }} <a
+                                                    href="{{ route('register') }}">{{ __('Sign up') }}</a>
+                                            </p>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -42,21 +45,17 @@
 
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
-                                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password"
-                                                value="" placeholder="Password" required>
+                                            <input type="password"
+                                                class="form-control @error('password') is-invalid @enderror" name="password"
+                                                id="password" value="" placeholder="Password" required>
                                             <label for="password" class="form-label">{{ __('Password') }}</label>
                                             @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ dd($message) }}</strong>
-                                            </span>
-                                        @enderror
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                     <div class="col-12">
                                         <div class="d-grid">
                                             <button class="btn btn-primary " type="submit">{{ __('Login') }}</button>
@@ -64,13 +63,18 @@
                                     </div>
                                 </div>
                             </form>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end mt-4">
-                                        <a href="{{ route('password.request') }}">{{ __('Forgot your password?') }}</a>
+                            @if (Route::is('login'))
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div
+                                            class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end mt-4">
+                                            <a
+                                                href="{{ route('password.request') }}">{{ __('Forgot your password?') }}</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>

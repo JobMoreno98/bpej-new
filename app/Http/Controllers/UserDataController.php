@@ -41,6 +41,7 @@ class UserDataController extends Controller
 
     public function edit($id)
     {
+        $this->authorize('update', Auth::user());
         $usuario = User::where('id', $id)->first();
 
         return view('admin.usuarios.edit')->with('usuario', $usuario);
@@ -48,41 +49,80 @@ class UserDataController extends Controller
     public function update_user(Request $request, $user)
     {
 
-        $this->authorize('update', Auth::user());
         $usuario = User::find($user);
-        $anio = date('Y-m-d');
+        
+        $this->authorize('update', $usuario);
+
+       
+
         $validator = Validator::make($request->all(), [
-            'fecha_nacimiento' => 'required|date|before:'.date('Y-m-d'),
+            'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
             'tutor' => 'exclude_if:tipo,adulto',
-            'comprobante_domicilio' => ['mimes:jpg,pdf'],
-            'comprobante_ine' => ['mimes:jpg,pdf'],
             'email' => ['required', Rule::unique('users')->ignore($usuario->id)],
-            'terminos' => 'required|boolean'
+            'terminos' => 'required|in:1',
+            'calle' => 'required',
+            'municipio' => 'required',
+            'estado' => 'required',
+            'codigo_postal' => 'required',
         ]);
 
+        if (!isset($usuario->documento) || !isset($usuario->identificacion)) {
+            $validator = Validator::make($request->all(), [
+                'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
+                'tutor' => 'exclude_if:tipo,adulto',
+                'email' => ['required', Rule::unique('users')->ignore($usuario->id)],
+                'terminos' => 'required|in:1',
+                'calle' => 'required',
+                'municipio' => 'required',
+                'estado' => 'required',
+                'codigo_postal' => 'required',
+                'documento' => ['required', 'mimes:jpg,pdf'],
+                'identificacion' => ['required', 'mimes:jpg,pdf'],
+            ]);
+        }
         if ($validator->fails()) {
             toast(implode("<br/>", $validator->messages()->all()), 'error')->timerProgressBar()->persistent(true, false);
             return redirect()->back();
         }
 
-        $archivo = $request->file('comprobante_domicilio');
-        $extencion = $request->file('comprobante_domicilio')->getClientOriginalExtension();
-        $comprobante =  'comprobante_' . $usuario->name . $extencion;
-        $comprobante = str_replace('/', '_', $comprobante);
-        $comprobante = str_replace(' ', '_', $comprobante);
-        Storage::disk('private')->put($comprobante, \File::get($archivo));
 
-        $usuario->documento = $comprobante;
+        if ($request->hasFile('documento')) {
+            $archivo = $request->file('documento');
+            $extencion = $request->file('documento')->getClientOriginalExtension();
+            $comprobante =  'documento_' . $usuario->name . "." . $extencion;
+            $comprobante = str_replace('/', '_', $comprobante);
+            $comprobante = str_replace(' ', '_', $comprobante);
+            Storage::disk('files')->put("comprobante/" . $comprobante, \File::get($archivo));
+
+            $usuario->documento = $comprobante;
+        }
+
+        if ($request->hasFile('identificacion')) {
+            $archivo = $request->file('identificacion');
+            $extencion = $request->file('identificacion')->getClientOriginalExtension();
+
+            $nombre_identificacion =  'identificacion_' .  $usuario->name . "." . $extencion;
+            $nombre_identificacion = str_replace('/', '_', $nombre_identificacion);
+            $nombre_identificacion = str_replace(' ', '_', $nombre_identificacion);
+            Storage::disk('files')->put("identificacion/" . $nombre_identificacion, \File::get($archivo));
+
+            $usuario->identificacion = $nombre_identificacion;
+        }
+        
+        if ($request->hasFile('profile_photo_path')) {
+            $archivo = $request->file('profile_photo_path');
+            $extencion = $request->file('profile_photo_path')->getClientOriginalExtension();
+
+            $nombre_photo =  date('Y') . '_photo_' .  $usuario->name . "." . $extencion;
+            $nombre_photo = str_replace('/', '_', $nombre_photo);
+            $nombre_photo = str_replace(' ', '_', $nombre_photo);
+            Storage::disk('files')->put("/profile_images/crop/" . $nombre_photo, \File::get($archivo));
+
+            $usuario->profile_photo_path = "/profile_images/crop/" .$nombre_photo;
+        }
 
 
-        $archivo = $request->file('comprobante_ine');
-        $extencion = $request->file('comprobante_domicilio')->getClientOriginalExtension();
-        $nombre_identificacion =  'ine_' . $usuario->name . $extencion;
-        $nombre_identificacion = str_replace('/', '_', $nombre_identificacion);
-        $nombre_identificacion = str_replace(' ', '_', $nombre_identificacion);
-        Storage::disk('private')->put($nombre_identificacion, \File::get($archivo));
 
-        $usuario->identificacion = $nombre_identificacion;
         if ($request->email != $usuario->email) {
             $usuario->email_verified_at = null;
             $usuario->update();
@@ -95,11 +135,20 @@ class UserDataController extends Controller
             "codigo_postal" => $request->codigo_postal,
             "estado" => $request->estado,
             "terminos" => 1,
-            'identificacion' => $nombre_identificacion,
-            'documento' =>  $nombre_identificacion,
+            'identificacion' => $usuario->identificacion,
+            'documento' =>  $usuario->documento,
         ]);
 
+        toast('Exito, se actualizarón tus datos de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
+        return redirect()->route('user.data', Auth::user()->id);
+    }
+    public function getPhoto($id)
+    {
 
-        return $request;
+        $user = User::findOrFail($id);
+
+        $this->authorize('photo',  $user);
+
+        return Storage::disk('files')->get( $user->profile_photo_path);
     }
 }

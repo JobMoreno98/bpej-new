@@ -8,7 +8,7 @@ use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
-    
+
     /*
      * Determine whether the user can view any models.
      */
@@ -64,14 +64,12 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update($user, User $model): Response
+    public function update($user, $model): Response
     {
-
         if ($user === null) {
             return  Response::deny(__("You don't can view this page"));
         }
-
-        if($user->id == $model->id){
+        if ($user->id == $model->id) {
             return Response::allow();
         }
 
@@ -115,6 +113,22 @@ class UserPolicy
             return  Response::deny(__("You don't can view this page"));
         }
         return auth()->user()->can('USUARIOS#forceDelete')
+            ? Response::allow()
+            : Response::deny(__("You don't can view this page"));
+    }
+
+    public function photo($user, $model)
+    {
+
+        if ($user === null) {
+            return  Response::deny(__("You don't can view this page"));
+        }
+
+        if ($user->id == $model->id) {
+            return Response::allow();
+        }
+
+        return auth()->user()->can('USUARIOS#update')
             ? Response::allow()
             : Response::deny(__("You don't can view this page"));
     }

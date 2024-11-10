@@ -1,12 +1,10 @@
 @extends('adminlte::page')
 @section('title', 'Editar usuario')
-@section('preloader')
-    <i class="fas fa-4x fa-spin fa-spinner text-secondary"></i>
-    <h4 class="mt-4 text-dark">{{ __('Loading') }}</h4>
-@stop
+
+
 
 @section('css')
-    @include('layouts.head')
+
     <link rel="stylesheet" href="{{ asset('css/imgareaselect.css') }}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -17,32 +15,56 @@
 
 @section('content')
     <div class="container justify-content-center d-flex">
-        <form action="{{ route('update-user', $user->id) }}"
-            class="d-flex flex-wrap flex-column  col-sm-12 my-1 col-md-8" method="post" enctype="multipart/form-data">
+        <form action="{{ route('usuarios.update', $user->id) }}" class="d-flex flex-wrap flex-column  col-sm-12 my-1 col-md-8"
+            method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            <div class="text-center">
+                @php
+                    if (isset($user->profile_photo_path)) {
+                        $img = route('get-photo-admin', $user->id);
+                    }
+                @endphp
+                <img id="output" src="{{ isset($img) ? $img : '' }}" class="rounded-circle"
+                    style="max-height: 150px;aspect-ratio: 1 / 1  ;object-fit: cover; " />
+            </div>
 
-            <div class="d-flex justify-content-center">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Fotografia
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="d-flex justify-content-center">
 
-                <div class="col-md-6 d-flex justify-content-center flex-column align-items-center">
+                                <div class="col-md-6 d-flex justify-content-center flex-column align-items-center">
 
-                    <div id="my_camera" class="w-100"></div>
+                                    <div id="my_camera" class="w-100"></div>
 
-                    <input type=button value="Tomar foto"
-                        class="d-none d-md-block my-2 col-sm-12 col-md-3 btn btn-outline-dark btn-sm"
-                        onClick="take_snapshot()">
+                                    <input type=button value="Tomar foto"
+                                        class="d-none d-md-block my-2 col-sm-12 col-md-3 btn btn-outline-dark btn-sm"
+                                        onClick="take_snapshot()">
 
-                    <input type="hidden" name="image" class="image-tag">
+                                    <input type="hidden" name="image" class="image-tag">
 
-                    <input type="hidden" name="x1" value="" />
-                    <input type="hidden" name="y1" value="" />
-                    <input type="hidden" name="w" value="" />
-                    <input type="hidden" name="h" value="" />
-                </div>
-                <div class="col-md-6 d-none d-md-block">
-                    <div id="results"></div>
+                                    <input type="hidden" name="x1" value="" />
+                                    <input type="hidden" name="y1" value="" />
+                                    <input type="hidden" name="w" value="" />
+                                    <input type="hidden" name="h" value="" />
+                                </div>
+                                <div class="col-md-6 d-none d-md-block">
+                                    <div id="results"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
 
             <div class="col-sm-12 my-1  " id="nombre">
                 <label for="">Nombre</label>
@@ -83,7 +105,8 @@
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Municipio</label>
-                <input class="form-control" type="text" name="municipio" value="{{ $user->municipio }}" id="">
+                <input class="form-control" type="text" name="municipio" value="{{ $user->municipio }}"
+                    id="">
             </div>
             <div class=" col-sm-12 my-1 ">
                 <label for="">Codigo Postal</label>
@@ -104,10 +127,6 @@
                 <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_ine"
                     id="">
             </div>
-            <div class="col-sm-12 my-1 form-check form-check-inline my-1 d-flex flex-wrap justify-content-center">
-                <input class="form-check-input" type="radio" name="terminos" id="terminos" required value="true">
-                <label class="form-check-label" for="terminos">Acepto terminos y condiciones *</label>
-            </div>
             <div class="text-center col-sm-12 col-md-3">
                 <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
             </div>
@@ -117,7 +136,7 @@
     </div>
 @endsection
 @section('js')
-    @include('sweetalert::alert')
+
     <script src="{{ asset('js/jquery.imgareaselect.js') }}"></script>
     <script>
         Webcam.set({
@@ -125,7 +144,7 @@
             height: 250,
             image_format: 'jpg',
             jpeg_quality: 90,
-            flip_horiz: true
+            flip_horiz: false
         });
 
         Webcam.attach('#my_camera');

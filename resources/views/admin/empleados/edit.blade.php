@@ -2,7 +2,7 @@
 @section('title', 'Empleados')
 
 @section('css')
-    @include('layouts.head')
+    
     <style>
         .mdc-text-field__input class="form-control" {
             border: 1px grey solid;

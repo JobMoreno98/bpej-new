@@ -51,7 +51,7 @@ Route::prefix('admin')->middleware([
     Route::resource('permisos', PermisosController::class)->names('permisos');
     Route::resource('categorias', CategoriasController::class);
     Route::resource('usuarios', User::class)->names('usuarios');
-    Route::resource('empleados',EmpleadosController::class)->names('empleados');
+    Route::resource('empleados', EmpleadosController::class)->names('empleados');
 
     Route::post('/eliminar-enlace', [ModulosController::class, 'eliminar_enlace'])->name('eliminar.enlace');
 
@@ -65,6 +65,8 @@ Route::prefix('admin')->middleware([
     ]);
 
     Route::post('/desactivar-categoria', [CategoriasController::class, 'desactivar'])->name('desactivar-categoria');
+    
+    Route::get('/user-photo/{id}', [UserDataController::class, 'getPhoto'])->name('get-photo-admin');
 });
 
 
@@ -83,10 +85,9 @@ Route::middleware([
         ->name('usuario.edit')
         ->middleware('auth');
 
-    Route::put('/user-update/{id}', [UserDataController::class, 'update_user'])
-        ->name('update-user')
-        ->middleware(['auth']);
-        
+    Route::put('/user-update/{id}', [UserDataController::class, 'update_user'])->name('update-user')->middleware(['auth']);
+
+    Route::get('/user-photo/{id}', [UserDataController::class, 'getPhoto'])->name('get-photo');
 });
 
 
