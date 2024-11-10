@@ -124,17 +124,32 @@ class ModulosSeeder extends Seeder
 
 
         $modulo = Modulos::create([
-            'nombre' => 'CATEGORIAS',
+            'nombre' => 'CATEGORIAS LITERARIAS',
             'permiso' => 'CATEGORIAS',
             'icono' => 'category',
             'color' => '#ae8fdb'
         ]);
 
         EnlaceModulo::create([
-            'titulo' => 'Ver Empleados',
+            'titulo' => 'Ver categorias',
             'enlace' => 'categorias.index',
             'modulo_id' => $modulo->id,
             'permiso' => 'CATEGORIAS#ver'
+        ]);
+
+
+        $modulo = Modulos::create([
+            'nombre' => 'SERVICIOS BPEJ',
+            'permiso' => 'SERVICIOS',
+            'icono' => 'linked_services',
+            'color' => '#ae8fdb'
+        ]);
+
+        EnlaceModulo::create([
+            'titulo' => 'Ver servicios',
+            'enlace' => 'servicios.index',
+            'modulo_id' => $modulo->id,
+            'permiso' => 'SERVICIOS#ver'
         ]);
     }
 }

@@ -84,7 +84,3 @@
 @section('footer')
     <h5 class="text-end">En caso de inconsistencias, favor de reportarlas.</h5>
 @endsection
-
-@section('js')
-    @include('layouts.scripts')
-@endsection

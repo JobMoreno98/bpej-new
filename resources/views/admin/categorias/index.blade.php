@@ -99,8 +99,6 @@
 @endsection
 
 @section('js')
-    
-    @include('layouts.scripts')
     <script>
         function desactivate(element) {
             send = {

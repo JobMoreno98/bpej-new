@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModulosController;
 use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\User;
 use App\Http\Controllers\UserDataController;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin', config('jetstream.auth_session')]], function () {
-    Route::get('/login', [AdminController::class, 'loginForm']);
+    Route::get('/login', [AdminController::class, 'loginForm'])->name('admin.inicio');
     Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
 });
 
@@ -43,8 +44,7 @@ Route::name('admin.')->middleware([
 
 Route::prefix('admin')->middleware([
     'auth:sanctum,admin',
-    config('jetstream.auth_session'),
-    'verified'
+    config('jetstream.auth_session')
 ])->group(function () {
     Route::resource('modulos', ModulosController::class);
     Route::resource('roles', RolesController::class)->names('roles');
@@ -52,20 +52,14 @@ Route::prefix('admin')->middleware([
     Route::resource('categorias', CategoriasController::class);
     Route::resource('usuarios', User::class)->names('usuarios');
     Route::resource('empleados', EmpleadosController::class)->names('empleados');
+    Route::resource('servicios', ServiciosController::class)->names('servicios');
 
     Route::post('/eliminar-enlace', [ModulosController::class, 'eliminar_enlace'])->name('eliminar.enlace');
-
     Route::post('/activar-enlace', [ModulosController::class, 'activar_enlace'])->name('activar.enlace');
-
-
     Route::post('guardar-relacion-permisos/{id}', [RolesController::class, 'guardarRelacion'])->name('guardar_relacion_permisos');
-    Route::get('asignar-permisos/{id}', [
-        'as' => 'asignar_permisos',
-        'uses' => 'App\Http\Controllers\RolesController@relacionar',
-    ]);
-
+    Route::get('asignar-permisos/{id}', [RolesController::class, 'relacionar'])->name('asignar_permisos');
     Route::post('/desactivar-categoria', [CategoriasController::class, 'desactivar'])->name('desactivar-categoria');
-    
+    Route::post('/desactivar-servicio', [ServiciosController::class, 'desactivar'])->name('desactivar-servicio');
     Route::get('/user-photo/{id}', [UserDataController::class, 'getPhoto'])->name('get-photo-admin');
 });
 
@@ -119,3 +113,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/admin', function () {
+    return redirect()->route('admin.inicio');
+});

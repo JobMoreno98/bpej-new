@@ -106,9 +106,6 @@
     @endif
 @endsection
 
-@section('js')
-    @include('layouts.scripts')
-@endsection
 
 @section('footer')
     <h6 class="text-end">Favor de reportar cualquier falla</h6>

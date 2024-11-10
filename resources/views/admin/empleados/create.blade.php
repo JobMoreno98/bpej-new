@@ -1,15 +1,9 @@
 @extends('adminlte::page')
 @section('title', 'Crear Empleado')
 
-@section('css')
-    
-@endsection
-
 @section('content_header')
     <h2 class="text-center">Crear Empleado</h2>
 @endsection
-
-
 
 @section('content')
     <div class="container">

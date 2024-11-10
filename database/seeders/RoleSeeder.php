@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        
+
         Permission::create(['guard_name' => 'admin', 'name' => 'MODULOS#ver']);
         Permission::create(['guard_name' => 'admin', 'name' => 'MODULOS#crear']);
         Permission::create(['guard_name' => 'admin', 'name' => 'MODULOS#editar']);
@@ -29,29 +29,39 @@ class RoleSeeder extends Seeder
         Permission::create(['guard_name' => 'admin', 'name' => 'USUARIOS#ver']);
         Permission::create(['guard_name' => 'admin', 'name' => 'USUARIOS#crear']);
         Permission::create(['guard_name' => 'admin', 'name' => 'USUARIOS#editar']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'USUARIOS#update']);
         //ROLES
         Permission::create(['guard_name' => 'admin', 'name' => 'ROLES#ver']);
         Permission::create(['guard_name' => 'admin', 'name' => 'ROLES#crear']);
-        Permission::create(['guard_name' => 'admin', 'name' => 'ROLES#edit']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'ROLES#editar']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'ROLES#update']);
         //PERMISOS
         Permission::create(['guard_name' => 'admin', 'name' => 'PERMISOS#ver']);
         Permission::create(['guard_name' => 'admin', 'name' => 'PERMISOS#crear']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'PERMISOS#delete']);
 
         Permission::create(['guard_name' => 'admin', 'name' => 'ESTADISTICAS#ver']);
-        
+
+
+        //SERVICIOS
         Permission::create(['guard_name' => 'admin', 'name' => 'SERVICIOS#ver']);
-        
+        Permission::create(['guard_name' => 'admin', 'name' => 'SERVICIOS#editar']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'SERVICIOS#crear']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'SERVICIOS#update']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'SERVICIOS#delete']);
+
         // Categorias
         Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#ver']);
         Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#crear']);
         Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#delete']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#update']);
 
         //Empleados
         Permission::create(['guard_name' => 'admin', 'name' => 'EMPLEADOS#ver']);
         Permission::create(['guard_name' => 'admin', 'name' => 'EMPLEADOS#crear']);
         Permission::create(['guard_name' => 'admin', 'name' => 'EMPLEADOS#editar']);
         Permission::create(['guard_name' => 'admin', 'name' => 'EMPLEADOS#update']);
-        
+
         Permission::create(['guard_name' => 'web', 'name' => 'DATOS#ver']);
         Permission::create(['guard_name' => 'web', 'name' => 'uCATEGORIAS#ver']);
 
@@ -66,7 +76,7 @@ class RoleSeeder extends Seeder
 
         $role = Role::create(['guard_name' => 'admin', 'name' => 'admin']);
 
-        $role->givePermissionTo(Permission::where('guard_name', 'admin')->whereNot('name','like','MODULOS%')->get());
+        $role->givePermissionTo(Permission::where('guard_name', 'admin')->whereNot('name', 'like', 'MODULOS%')->whereNot('name', 'like','%delete%')->get());
 
         //usuario general
 
@@ -89,5 +99,12 @@ class RoleSeeder extends Seeder
         ]);
 
         $user->assignRole('admin');
+
+        $user = User::create([
+            'name' => 'Job Moreno',
+            'email' => 'job@gmail.com',
+            'password' => Hash::make('password'),
+            'email_verified_at' => now()
+        ]);
     }
 }

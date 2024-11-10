@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => env('APP_NAME','PAGE NAME'),
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo' => env('APP_NAME', 'PAGE NAME'),
+    'logo_img' => 'img/logo.svg',
+    'logo_img_class' => 'brand-image rounded elevation-1',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    'logo_img_alt' => 'bpej Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -113,7 +113,7 @@ return [
         'enabled' => false,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'public/img/logo.svg',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -265,7 +265,7 @@ return [
     'password_email_url' => 'password/email',
     'profile_url' => true,
     'disable_darkmode_routes' => false,
-    
+
 
     /*
     |--------------------------------------------------------------------------

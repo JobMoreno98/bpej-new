@@ -109,5 +109,5 @@
 @endsection
 
 @section('js')
-    @include('layouts.scripts')
+
 @endsection

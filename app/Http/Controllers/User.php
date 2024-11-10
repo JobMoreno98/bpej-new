@@ -171,7 +171,7 @@ class User extends Controller
             'identificacion' => $usuario->identificacion,
             'documento' =>  $usuario->documento,
         ]);
-        toast('Exito, se actualizo el usurio de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
+        toast('Exito, se actualizo el usuario de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
         return redirect()->route('usuarios.edit', $usuario->id);
     }
     public function edit($id)

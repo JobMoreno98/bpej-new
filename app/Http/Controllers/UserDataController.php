@@ -144,11 +144,9 @@ class UserDataController extends Controller
     }
     public function getPhoto($id)
     {
-
         $user = User::findOrFail($id);
-
         $this->authorize('photo',  $user);
-
         return Storage::disk('files')->get( $user->profile_photo_path);
     }
+    
 }
