@@ -106,5 +106,6 @@ class RoleSeeder extends Seeder
             'password' => Hash::make('password'),
             'email_verified_at' => now()
         ]);
+        $user->assignRole('general');
     }
 }
