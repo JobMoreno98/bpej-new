@@ -191,8 +191,8 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
-    'classes_brand_text' => '',
+    'classes_brand' => 'd-flex flex-column',
+    'classes_brand_text' => 'text-wrap text-center ',
     'classes_content_wrapper' => 'pt-5',
     'classes_content_header' => '',
     'classes_content' => '',

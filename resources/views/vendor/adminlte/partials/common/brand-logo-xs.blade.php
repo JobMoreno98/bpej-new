@@ -12,7 +12,7 @@
     @if($layoutHelper->isLayoutTopnavEnabled())
         class="navbar-brand {{ config('adminlte.classes_brand') }}"
     @else
-        class="brand-link {{ config('adminlte.classes_brand') }}"
+        class="brand-link  {{ config('adminlte.classes_brand') }}"
     @endif>
 
     {{-- Small brand logo --}}
@@ -22,8 +22,8 @@
          style="opacity:.8">
 
     {{-- Brand text --}}
-    <span class="brand-text font-weight-light {{ config('adminlte.classes_brand_text') }}">
+    <p class="brand-text font-weight-light  {{ config('adminlte.classes_brand_text') }}">
         {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
-    </span>
+    </p>
 
 </a>
