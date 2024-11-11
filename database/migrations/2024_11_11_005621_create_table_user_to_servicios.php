@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categorias', function (Blueprint $table) {
+        Schema::create('table_user_to_servicios', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('descripcion')->nullable();
-            $table->string('photo');
-            $table->boolean('active')->default(true);
+            $table->foreignId('users_id')->nullable();
+            $table->foreignId('servicios_id')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categorias');
+        Schema::dropIfExists('table_user_to_servicios');
     }
 };

@@ -26,9 +26,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin', config('jetstream.auth_session')]], function () {
     Route::get('/login', [AdminController::class, 'loginForm'])->name('admin.inicio');

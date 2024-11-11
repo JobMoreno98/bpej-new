@@ -18,6 +18,7 @@ return new class extends Migration
             $table->time('hora_inicio', precision: 0);
             $table->time('hora_fin', precision: 0);
             $table->string('descripcion');
+            $table->string('photo');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

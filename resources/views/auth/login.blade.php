@@ -6,9 +6,9 @@
     <section class="py-md-5 py-xl-8 w-100" data-bs-theme="secondary">
         <div class="container d-flex h-100 align-items-center">
             <div class="row gy-4 align-items-center justify-content-center m-1 p-2 p-md-5 rounded ">
-                <div class="col-12 col-md-8 col-xl-5 m-0 border rounded-4 border-dark p-3">
+                <div class="col-12 col-md-8 col-xl-5 m-0 border rounded-4 border-dark p-1 p-md-3">
                     <div>
-                        <img class="img-fluid rounded " loading="lazy" src="{{ asset('img/portada-web.jpg') }}" width="100%"
+                        <img class="img-fluid rounded rounded-4" loading="lazy" src="{{ asset('img/portada-web.jpg') }}" width="100%"
                             height="250" alt="BootstrapBrain Logo" style="aspect-ratio: 16 / 5;object-fit: cover;">
                     </div>
                     <div class="card border-0 rounded-4" style="border:#7c2422 solid 2px;">
