@@ -50,7 +50,7 @@ Route::prefix('admin')->middleware([
     Route::resource('categorias', CategoriasController::class);
     Route::resource('usuarios', User::class)->names('usuarios');
     Route::resource('empleados', EmpleadosController::class)->names('empleados');
-    Route::resource('servicios', ServiciosController::class)->names('servicios');
+    Route::resource('servicios', ServiciosController::class)->names('servicios')->except('show');
 
     Route::post('/eliminar-enlace', [ModulosController::class, 'eliminar_enlace'])->name('eliminar.enlace');
     Route::post('/activar-enlace', [ModulosController::class, 'activar_enlace'])->name('activar.enlace');
@@ -89,6 +89,7 @@ Route::middleware([
 
 
 Route::get('/servicios', [ServiciosController::class, 'inicio'])->name('servicios.inicio');
+Route::get('/servicios/{servicio}', [ServiciosController::class, 'show'])->name('servicios.show');
 Route::get('/categorias', [CategoriasController::class, 'inicio'])->name('categorias.inicio');
 
 Route::post('/add-category', [CategoriasController::class, 'addUser'])->name('add-category');
