@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <div class="d-flex col-md-10  align-items-center">
+            <div class="d-flex col-md-10  flex-column flex-md-row align-items-center">
                 <div class="col-md-5 col-sm-12 m-1">
                     <label for="">Hora inicio</label>
                     <input type="time" class="form-control" value="{{ old('hora_inicio') }}" name="hora_inicio">

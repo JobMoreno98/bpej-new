@@ -91,7 +91,7 @@ Route::middleware([
 Route::get('/servicios', [ServiciosController::class, 'inicio'])->name('servicios.inicio');
 Route::get('/categorias', [CategoriasController::class, 'inicio'])->name('categorias.inicio');
 
-Route::post('/add-category', [CategoriasController::class, 'addUser'])->name('add-category')->middleware('auth');
+Route::post('/add-category', [CategoriasController::class, 'addUser'])->name('add-category');
 
 
 //Verificación de correo

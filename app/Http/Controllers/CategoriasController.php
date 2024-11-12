@@ -164,7 +164,7 @@ class CategoriasController extends Controller
         if (!Auth::check()) {
             return response()->json([
                 'success' => false,
-                'message' => 'No tienes permisos',
+                'message' => 'Debes de iniciar sesión primero',
             ]);
         }
         

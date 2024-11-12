@@ -25,7 +25,7 @@
 @endsection
 @section('content')
     <div class="container mt-3">
-        <h2 class="text-center">Servicios</h2>
+        <h2 class="text-center">Categorias Literarias</h2>
         <div class="card-list d-flex flex-wrap justify-content-center flex-md-row  flex-column">
             @foreach ($categorias as $item)
                 <div
@@ -68,44 +68,8 @@
 
 @section('js')
     @include('sweetalert::alert')
-    <script>
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            showCloseButton: true
-        });
-
-        var url = "{{ route('add-category') }}";
-
-        function addCategory(item) {
-            send = {
-                "id": item,
-                "_token": $("meta[name='csrf-token']").attr("content")
-            };
-            $.ajax({
-                url: url,
-                method: 'POST',
-                data: send
-            }).done(function(data) {
-                if (data.success === true) {
-                    console.log(data);
-                    let icon = document.getElementById('categoria-' + item).style;
-                    //console.log(icon);
-                    Toast.fire({
-                        type: 'success',
-                        title: data.message,
-                        icon: "success"
-                    });
-                } else {
-                    Toast.fire({
-                        type: 'danger',
-                        title: data.message
-                    });
-                }
-            });
-        }
+    <script> 
+    var url = "{{ route('add-category') }}";
     </script>
+    <script src="{{ asset('js/addCategory.js') }}"></script>
 @endsection
