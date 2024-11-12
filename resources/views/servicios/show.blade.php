@@ -6,7 +6,7 @@
         @php
             $url = isset($servicio->photo) ? asset('storage/' . $servicio->photo) : asset('img/image-default.jpg');
         @endphp
-        <div class="d-flex">
+        <div class="d-flex flex-column -flex-md-row">
             <div class="mx-2">
                 <a href="{{ $url }}" class="glightbox" data-width="600px">
                     <img src="{{ $url }}" alt="User Image" class="rounded-3" style="width:250px;">
