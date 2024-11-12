@@ -132,7 +132,7 @@
     <script src="{{ asset('js/slide.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
-
+    @include('sweetalert::alert')
     <script>
         const glightbox = GLightbox({
             selector: '.glightbox',

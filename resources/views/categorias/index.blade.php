@@ -67,8 +67,6 @@
 @endsection
 
 @section('js')
-    @include('sweetalert::alert')
-
     <script>
         var Toast = Swal.mixin({
             toast: true,
