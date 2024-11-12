@@ -59,4 +59,13 @@ class ServiciosPolicy
             ? Response::allow()
             : Response::deny(__("You don't can view this page"));
     }
+    public function home($user): Response
+    {
+        if ($user === null) {
+            return Response::deny(__("You don't can view this page"));
+        }
+        return auth()->user()->can('SERVICIOS#home')
+            ? Response::allow()
+            : Response::deny(__("You don't can view this page"));
+    }
 }

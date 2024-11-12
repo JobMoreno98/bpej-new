@@ -31,11 +31,12 @@
 
 .card-list .card-item .user-image {
     width: 150px;
-    height: 150px;
     border-radius: 50%;
     margin-bottom: 40px;
     border: 3px solid #000000;
     padding: 4px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
 .card-list .card-item .user-profession {
@@ -93,4 +94,8 @@
     .slider-wrapper .swiper-slide-button {
         display: none;
     }
+}
+
+.text-justify {
+    text-align: justify;
 }

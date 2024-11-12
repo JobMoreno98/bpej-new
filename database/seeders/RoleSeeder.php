@@ -49,12 +49,15 @@ class RoleSeeder extends Seeder
         Permission::create(['guard_name' => 'admin', 'name' => 'SERVICIOS#crear']);
         Permission::create(['guard_name' => 'admin', 'name' => 'SERVICIOS#update']);
         Permission::create(['guard_name' => 'admin', 'name' => 'SERVICIOS#delete']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'SERVICIOS#home']);
 
         // Categorias
         Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#ver']);
         Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#crear']);
         Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#delete']);
         Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#update']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#editar']);
+        Permission::create(['guard_name' => 'admin', 'name' => 'CATEGORIAS#home']);
 
         //Empleados
         Permission::create(['guard_name' => 'admin', 'name' => 'EMPLEADOS#ver']);
@@ -76,7 +79,8 @@ class RoleSeeder extends Seeder
 
         $role = Role::create(['guard_name' => 'admin', 'name' => 'admin']);
 
-        $role->givePermissionTo(Permission::where('guard_name', 'admin')->whereNot('name', 'like', 'MODULOS%')->whereNot('name', 'like','%delete%')->get());
+        $role->givePermissionTo(Permission::where('guard_name', 'admin')->whereNot('name', 'like', 'MODULOS%')
+        ->whereNot('name', 'like', 'ROLES%')->whereNot('name', 'like', 'PERMISOS%')->whereNot('name', 'like', '%delete%')->get());
 
         //usuario general
 

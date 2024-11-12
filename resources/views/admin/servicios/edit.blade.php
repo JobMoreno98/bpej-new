@@ -1,16 +1,24 @@
 @extends('adminlte::page')
-@section('title', 'Editar Servicio')
+@section('title', 'Editar Servicio - ' . $servicio->nombre)
 
 @section('content_header')
-    <h2 class="text-center">Editar Servicio</h2>
+    <h2 class="text-center">Editar Servicio - {{ $servicio->nombre }}</h2>
 @endsection
 
 @section('content')
     <div class="container ">
         <form action="{{ route('servicios.update', $servicio->id) }}"
-            class="d-flex justify-content-around align-items-center flex-nowrap flex-column" method="post">
+            class="d-flex justify-content-around align-items-center flex-nowrap flex-column" method="post"
+            enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            <div class="text-center">
+                <img id="output" src="{{ asset('storage/' . $servicio->photo) }}" class="rounded-circle"
+                    style="max-height: 150px;aspect-ratio: 1 / 1  ;object-fit: cover; " />
+            </div>
+            <div class="col-sm-5 my-1 ">
+                <input accept="image/jpeg" class="form-control" type="file" name="image" onchange="loadFile(event)">
+            </div>
             <div class="d-flex col-md-10 flex-column flex-md-row  align-items-center">
                 <div class="col-md-5 col-sm-12 m-1">
                     <label for="">Nombre</label>
@@ -42,4 +50,15 @@
             </div>
         </form>
     </div>
+@endsection
+@section('js')
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src)
+            }
+        };
+    </script>
 @endsection

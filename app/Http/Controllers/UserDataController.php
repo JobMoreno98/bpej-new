@@ -50,10 +50,10 @@ class UserDataController extends Controller
     {
 
         $usuario = User::find($user);
-        
+
         $this->authorize('update', $usuario);
 
-       
+
 
         $validator = Validator::make($request->all(), [
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
@@ -94,10 +94,11 @@ class UserDataController extends Controller
             $comprobante = str_replace(' ', '_', $comprobante);
             Storage::disk('files')->put("comprobante/" . $comprobante, \File::get($archivo));
 
-            $usuario->documento = $comprobante;
+            $usuario->documento = "comprobante/" .$comprobante;
         }
 
         if ($request->hasFile('identificacion')) {
+            Storage::disk('files')->delete($usuario->identificacion);
             $archivo = $request->file('identificacion');
             $extencion = $request->file('identificacion')->getClientOriginalExtension();
 
@@ -106,9 +107,9 @@ class UserDataController extends Controller
             $nombre_identificacion = str_replace(' ', '_', $nombre_identificacion);
             Storage::disk('files')->put("identificacion/" . $nombre_identificacion, \File::get($archivo));
 
-            $usuario->identificacion = $nombre_identificacion;
+            $usuario->identificacion = "identificacion/" .$nombre_identificacion;
         }
-        
+
         if ($request->hasFile('profile_photo_path')) {
             $archivo = $request->file('profile_photo_path');
             $extencion = $request->file('profile_photo_path')->getClientOriginalExtension();
@@ -118,7 +119,7 @@ class UserDataController extends Controller
             $nombre_photo = str_replace(' ', '_', $nombre_photo);
             Storage::disk('files')->put("/profile_images/crop/" . $nombre_photo, \File::get($archivo));
 
-            $usuario->profile_photo_path = "/profile_images/crop/" .$nombre_photo;
+            $usuario->profile_photo_path = "/profile_images/crop/" . $nombre_photo;
         }
 
 
@@ -146,7 +147,13 @@ class UserDataController extends Controller
     {
         $user = User::findOrFail($id);
         $this->authorize('photo',  $user);
-        return Storage::disk('files')->get( $user->profile_photo_path);
+        return Storage::disk('files')->get($user->profile_photo_path);
     }
-    
+
+    public function getFile($id, $type)
+    {
+        $user = User::findOrFail($id);
+        $this->authorize('file',  $user);
+        return response()->file(Storage::disk('files')->path($user->$type));
+    }
 }

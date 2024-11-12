@@ -119,7 +119,7 @@ class User extends Controller
             $comprobante = str_replace(' ', '_', $comprobante);
             Storage::disk('files')->put("comprobante/" . $comprobante, \File::get($archivo));
 
-            $usuario->documento = $comprobante;
+            $usuario->documento = "comprobante/" . $comprobante;
         }
 
         if ($request->hasFile('identificacion')) {
@@ -131,7 +131,7 @@ class User extends Controller
             $nombre_identificacion = str_replace(' ', '_', $nombre_identificacion);
             Storage::disk('files')->put("identificacion/" . $nombre_identificacion, \File::get($archivo));
 
-            $usuario->identificacion = $nombre_identificacion;
+            $usuario->identificacion = "identificacion/" . $nombre_identificacion;
         }
 
         if (isset($request->image)) {

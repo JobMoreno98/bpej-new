@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
@@ -145,25 +146,6 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        DB::beginTransaction();
-        try {
-            Role::destroy($id);
-            DB::commit();
-            $roles = Role::all();
-            return view('roles.index')
-                ->withSuccess("Rol Eliminado con éxito.")
-                ->with('roles', $roles);
-        } catch (Exception $e) {
-            Log::error($e);
-            DB::rollBack();
-            $roles = Role::all();
-            return view('roles.index')
-                ->withErrors("Error al eliminar el Rol.")
-                ->with('roles', $roles);
-        }
-    }
 
     public function relacionar($id)
     {
@@ -180,6 +162,7 @@ class RolesController extends Controller
         });
 
         $arreglo_permisos = collect(Arr::collapse($permisos));
+
         $permisosID = collect(Arr::collapse($permisosSi));
 
         $arr = $permisosID->map(function ($arreglo) {

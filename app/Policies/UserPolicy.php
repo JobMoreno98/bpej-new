@@ -132,4 +132,19 @@ class UserPolicy
             ? Response::allow()
             : Response::deny(__("You don't can view this page"));
     }
+    public function file($user, $model)
+    {
+
+        if ($user === null || $model === null) {
+            return  Response::deny(__("You don't can view this page"));
+        }
+
+        if ($user->id == $model->id) {
+            return Response::allow();
+        }
+
+        return auth()->user()->can('USUARIOS#update')
+            ? Response::allow()
+            : Response::deny(__("You don't can view this page"));
+    }
 }

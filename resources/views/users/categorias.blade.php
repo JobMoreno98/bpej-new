@@ -4,7 +4,7 @@
 
 
 @section('css')
-    
+
     <link rel="stylesheet" href="{{ asset('css/cards.css') }}">
 
 @endsection
@@ -22,7 +22,7 @@
                             <div class="card-header no-border">
                                 <h5 class="card-title">{{ $value->name }}</h5>
                             </div>
-                            
+
                             <div class="card-body pt-0">
                                 <div class="widget-49">
                                     <div class="widget-49-title-wrapper">
@@ -39,6 +39,7 @@
                                     </div>
                                     <div class="widget-49-meeting-action">
                                         <a href="#" class="btn btn-sm btn-flash-border-primary">
+                                            
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" role="switch"
                                                     name="categorias[]" value="{{ $value->id }}"
@@ -59,9 +60,4 @@
             </div>
         </form>
     </div>
-
-@endsection
-
-@section('js')
-    
 @endsection

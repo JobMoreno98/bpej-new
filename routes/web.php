@@ -58,7 +58,11 @@ Route::prefix('admin')->middleware([
     Route::get('asignar-permisos/{id}', [RolesController::class, 'relacionar'])->name('asignar_permisos');
     Route::post('/desactivar-categoria', [CategoriasController::class, 'desactivar'])->name('desactivar-categoria');
     Route::post('/desactivar-servicio', [ServiciosController::class, 'desactivar'])->name('desactivar-servicio');
+    Route::post('/home-servicio', [ServiciosController::class, 'home'])->name('home-servicio');
+    Route::post('/home-categoria', [CategoriasController::class, 'home'])->name('home-categoria');
+
     Route::get('/user-photo/{id}', [UserDataController::class, 'getPhoto'])->name('get-photo-admin');
+    Route::get('/user-file/{id}/{type}', [UserDataController::class, 'getFile'])->name('get-file-admin');
 });
 
 
@@ -84,14 +88,10 @@ Route::middleware([
 
 
 
-Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
+Route::get('/servicios', [ServiciosController::class, 'inicio'])->name('servicios.inicio');
+Route::get('/categorias', [CategoriasController::class, 'inicio'])->name('categorias.inicio');
 
-Route::get('/user/logout', function () {
-    Auth::logout();
-    return redirect()->route('login');
-})->name('user.logout');
-
-
+Route::post('/add-category', [CategoriasController::class, 'addUser'])->name('add-category')->middleware('auth');
 
 
 //Verificación de correo
@@ -115,3 +115,12 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/admin', function () {
     return redirect()->route('admin.inicio');
 });
+
+
+//Logout
+Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
+
+Route::get('/user/logout', function () {
+    Auth::logout();
+    return redirect()->route('login');
+})->name('user.logout');

@@ -28,6 +28,7 @@
                                             style="width:100%">
                                             <thead>
                                                 <tr>
+                                                    <th>ID</th>
                                                     <th>Nombre</th>
                                                     <th>Ubicación</th>
                                                     <th>Horario</th>
@@ -38,17 +39,25 @@
                                             <tbody>
                                                 @foreach ($servicios as $servicio)
                                                     <tr>
+                                                        <td>{{ $servicio->id }}</td>
                                                         <td>{{ $servicio->nombre }}</td>
                                                         <td>{{ $servicio->ubicacion }}</td>
                                                         <td>{{ $servicio->horario }}</td>
                                                         <td class="d-flex">
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input"
+                                                                    onclick="home({{ $servicio->id }})" type="checkbox"
+                                                                    role="switch" {{ $servicio->home ? 'checked' : '' }}>
+                                                                Inicio
+                                                            </div>
                                                             @can('SERVICIOS#delete')
-                                                                <div class="form-check form-switch">
+                                                                <div class="form-check form-switch mx-1">
                                                                     <input class="form-check-input"
                                                                         onclick="desactivate({{ $servicio->id }})"
                                                                         type="checkbox" role="switch"
                                                                         {{ $servicio->active ? 'checked' : '' }}>
                                                                 </div>
+                                                                Eliminar
                                                             @endcan
                                                         </td>
                                                         <td>
@@ -58,7 +67,7 @@
                                                                 <span class="material-symbols-outlined">
                                                                     edit
                                                                 </span>
-                                                                
+
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -79,7 +88,7 @@
 @endsection
 
 @section('js')
-    
+
     <script>
         function desactivate(element) {
             send = {
@@ -91,6 +100,36 @@
                 }
             });
             var url = "{{ route('desactivar-servicio') }}";
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: send
+            }).done(function(data) {
+                if (data.success === true) {
+                    Toast.fire({
+                        type: 'success',
+                        title: data.message,
+                        icon: "success"
+                    });
+                } else {
+                    Toast.fire({
+                        type: 'danger',
+                        title: data.message
+                    });
+                }
+            });
+        }
+
+        function home(element) {
+            send = {
+                "servicio": element,
+            };
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var url = "{{ route('home-servicio') }}";
             $.ajax({
                 url: url,
                 method: 'POST',

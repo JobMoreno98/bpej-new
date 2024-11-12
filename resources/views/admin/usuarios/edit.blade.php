@@ -1,8 +1,6 @@
 @extends('adminlte::page')
 @section('title', 'Editar usuario')
 
-
-
 @section('css')
 
     <link rel="stylesheet" href="{{ asset('css/imgareaselect.css') }}">
@@ -119,15 +117,32 @@
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Comporbante de Domicilio</label>
-                <input accept="image/jpeg,application/pdf" class="form-control" type="file"
-                    name="comprobante_domicilio" id="">
+                <div class="d-flex">
+                    <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="documento"
+                        id="">
+                    @if (isset($user->documento))
+                        @can('USUARIOS#update')
+                            <a href="{{ route('get-file-admin', ['id' => $user->id, 'type' => 'documento']) }}"
+                                class="btn btn-primary mx-1">Ver</a>
+                        @endcan
+                    @endif
+                </div>
+
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Identificación</label>
-                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_ine"
-                    id="">
+                <div class="d-flex">
+                    <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="identificacion"
+                        id="">
+                    @if (isset($user->identificacion))
+                        @can('USUARIOS#update')
+                            <a href="{{ route('get-file-admin', ['id' => $user->id, 'type' => 'identificacion']) }}"
+                                class="btn btn-primary mx-1">Ver</a>
+                        @endcan
+                    @endif
+                </div>
             </div>
-            <div class="text-center col-sm-12 col-md-3">
+            <div class="text-center col-sm-12 mt-1">
                 <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
             </div>
 

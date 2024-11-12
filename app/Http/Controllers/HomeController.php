@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function home()
     {
         $categorias = Categorias::inRandomOrder()->take(5)->get();
-        $servicios  = Servicios::inRandomOrder()->take(5)->get();
+        $servicios  = Servicios::inRandomOrder()->where('active', 1)->where('home', 1)->take(5)->get();
         return view('welcome', compact('categorias', 'servicios'));
     }
 }

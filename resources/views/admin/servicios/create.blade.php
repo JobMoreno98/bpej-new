@@ -8,9 +8,22 @@
 @section('content')
     <div class="container ">
         <form action="{{ route('servicios.store') }}"
-            class="d-flex justify-content-around align-items-center flex-nowrap flex-column" method="post">
+            class="d-flex justify-content-around align-items-center flex-nowrap flex-column" method="post"
+            enctype="multipart/form-data">
             @csrf
             @method('POST')
+            @php
+                if (isset($user->profile_photo_path)) {
+                    $img = route('get-photo', $user->id);
+                }
+            @endphp
+            <img id="output" src="{{ isset($img) ? $img : '' }}" class="rounded-circle"
+                style="max-height: 150px;aspect-ratio: 1 / 1  ;object-fit: cover; " />
+
+            <div class="col-sm-5 my-1 ">
+                <input accept="image/jpeg" class="form-control" type="file" name="image"
+                    onchange="loadFile(event)">
+            </div>
             <div class="d-flex col-md-10 flex-column flex-md-row  align-items-center">
                 <div class="col-md-5 col-sm-12 m-1">
                     <label for="">Nombre</label>
@@ -43,4 +56,15 @@
         </form>
     </div>
 
+@endsection
+@section('js')
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src)
+            }
+        };
+    </script>
 @endsection

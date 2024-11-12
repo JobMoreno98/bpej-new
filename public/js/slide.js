@@ -21,6 +21,7 @@ const swiper = new Swiper('.slider-wrapper', {
         0: {
             slidesPerView: 1
         }
-    
+
     }
 });
+

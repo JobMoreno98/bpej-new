@@ -37,10 +37,18 @@ class CategoriasPolicy
             : Response::deny(__("You don't can view this page"));
     }
 
+
+    public function edit($user): Response
+    {
+        return auth()->user()->can('CATEGORIAS#editar')
+            ? Response::allow()
+            : Response::deny(__("You don't can view this page"));
+    }
+
     /**
      * Determine whether the user can update the model.
      */
-    public function update($user, Categorias $categorias): Response
+    public function update($user): Response
     {
         return auth()->user()->can('CATEGORIAS#update')
             ? Response::allow()

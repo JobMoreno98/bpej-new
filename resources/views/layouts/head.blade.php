@@ -55,4 +55,8 @@
     .submenu-active .active {
         color: #000 !important;
     }
+
+    .mdc-data-table__cell {
+        border-bottom: none !important;
+    }
 </style>

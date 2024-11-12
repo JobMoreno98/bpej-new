@@ -18,8 +18,10 @@ return new class extends Migration
             $table->time('hora_inicio', precision: 0);
             $table->time('hora_fin', precision: 0);
             $table->string('descripcion');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->boolean('active')->default(true);
+            $table->boolean('home')->default(true);
+            $table->string('slug');
             $table->timestamps();
         });
     }
