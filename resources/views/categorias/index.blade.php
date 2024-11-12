@@ -68,7 +68,16 @@
 
 @section('js')
     @include('sweetalert::alert')
+
     <script>
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            showCloseButton: true
+        });
         var url = "{{ route('add-category') }}";
     </script>
     <script src="{{ asset('js/addCategory.js') }}"></script>
