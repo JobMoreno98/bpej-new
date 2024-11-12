@@ -39,25 +39,25 @@
                     <div class="w-100">
                         <div class="mt-2">
                             <h4 class="text-center border-bottom py-2 my-2 text-uppercase">{{ $item->name }}
+
+                                @php
+                                    $valor = Auth::check()
+                                        ? (isset($item->input)
+                                            ? "'FILL' 1"
+                                            : "'FILL' 0")
+                                        : "'FILL' 0";
+                                @endphp
+                                <button style="border: none" onclick="addCategory('{{ $item->id }}')">
+                                    <div id="categoria-{{ $item->id }}"
+                                        style="color:orange; font-variation-settings:{{ $valor }} , 'wght' 700, 'GRAD' 0, 'opsz' 48;">
+                                        <span class="material-symbols-outlined">
+                                            star
+                                        </span>
+                                    </div>
+                                </button>
+
                             </h4>
                             <p class="text-justify">{{ Str::limit($item->descripcion, 250) }}</p>
-                        </div>
-                        <div class="text-wrap">
-
-                            @php
-                                $valor = Auth::check() ? (isset($item->input) ? "'FILL' 1" : "'FILL' 0") : "'FILL' 0";
-                            @endphp
-                            <button style="border: none" onclick="addCategory('{{ $item->id }}')">
-                                <div id="categoria-{{ $item->id }}"
-                                    style="color:orange; font-variation-settings:{{ $valor }} , 'wght' 700, 'GRAD' 0, 'opsz' 48;">
-                                    <span class="material-symbols-outlined">
-                                        star
-                                    </span>
-                                </div>
-                            </button>
-
-
-
                         </div>
                     </div>
                 </div>
@@ -68,8 +68,8 @@
 
 @section('js')
     @include('sweetalert::alert')
-    <script> 
-    var url = "{{ route('add-category') }}";
+    <script>
+        var url = "{{ route('add-category') }}";
     </script>
     <script src="{{ asset('js/addCategory.js') }}"></script>
 @endsection

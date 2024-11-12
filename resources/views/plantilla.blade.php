@@ -23,7 +23,15 @@
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
     @yield('css')
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
+        #footer {
+            margin-top: auto;
+        }
     </style>
 </head>
 
@@ -124,7 +132,7 @@
     <script src="{{ asset('js/slide.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
-    
+
     <script>
         const glightbox = GLightbox({
             selector: '.glightbox',
