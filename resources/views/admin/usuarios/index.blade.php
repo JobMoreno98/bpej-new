@@ -4,7 +4,7 @@
 
 
 @section('css')
-    
+
     <style>
         .mdc-text-field__input {
             border: 1px grey solid;
@@ -30,44 +30,40 @@
                 </div>
             @endcan
             <section class="p-0 intro col-sm-12">
-                <div class="gradient-custom-1 h-100">
-                    <div class="mask d-flex align-items-center h-100">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-12 p-0">
-                                    <div class="table-responsive">
-                                        <table id="myTable" class="table mb-0 w-100 roundede mdl-data-table"
-                                            style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nombre</th>
-                                                    <th>Email</th>
-                                                    <th>Activo</th>
-                                                    <th>Accion</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($users as $usuario)
-                                                    <tr>
-                                                        <td>{{ $usuario->name }}</td>
-                                                        <td>{{ $usuario->email }}</td>
-                                                        <td>Activo</td>
-                                                        <td class="d-flex flex-row">
-                                                            <a href="{{ route('usuarios.edit', $usuario->id) }}"
-                                                                class="btn-sm btn m-1 btn-primary">
-                                                                Editar
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 p-0">
+                        <div class="table-responsive">
+                            <table id="myTable" class="table mb-0 w-100 roundede mdl-data-table" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Email</th>
+                                        <th>Tipo</th>
+                                        <th>Activo</th>
+                                        <th>Accion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($users as $usuario)
+                                        <tr>
+                                            <td>{{ $usuario->name }}</td>
+                                            <td>{{ $usuario->email }}</td>
+                                            <td>{{ Str::ucfirst($usuario->tipo) }}</td>
+                                            <td>Activo</td>
+                                            <td class="d-flex flex-row">
+                                                <a href="{{ route('usuarios.edit', $usuario->id) }}"
+                                                    class="btn-sm btn m-1 btn-primary">
+                                                    Editar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+
             </section>
         @else
             El periodo de Registro de Proyectos a terminado

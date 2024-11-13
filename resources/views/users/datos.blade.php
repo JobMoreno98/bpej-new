@@ -4,7 +4,7 @@
 
 
 @section('css')
-    
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -48,19 +48,22 @@
                 <label for="">Eres *</label>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="tipo" id="" id="yes"
-                        onclick="option(1)" id="inlineRadio1" value="adulto" checked>
+                        onclick="option(1)" id="inlineRadio1" value="adulto"
+                        {{ isset($user->tipo) ? ($user->tipo == 'adulto' ? 'checked' : '') : '' }}>
 
                     <label class="form-check-label" for="inlineRadio1">Adulto</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tipo" id="not" onclick="option(0)"
-                        id="inlineRadio2" value="menor">
+                    <input class="form-check-input" type="radio" name="tipo"
+                        {{ isset($user->tipo) ? ($user->tipo == 'menor' ? 'checked' : '') : '' }} id="not"
+                        onclick="option(0)" id="inlineRadio2" value="menor">
                     <label class="form-check-label" for="inlineRadio2">Menor</label>
                 </div>
             </div>
-            <div class="col-sm-12 my-1  d-none" id="tutor">
+            <div class="col-sm-12 my-1  {{ !isset($user->tutor) ? 'd-none' : '' }} " id="tutor">
                 <label for="">Tutor</label>
-                <input class="form-control" type="text" name="tutor">
+                <input class="form-control" type="text" name="tutor"
+                    value="{{ isset($user->tutor) ? $user->tutor : null }}">
             </div>
 
             <div class=" col-sm-12 my-1 my-1 ">
@@ -100,8 +103,8 @@
                 <input class="form-check-input" type="radio" name="terminos" id="terminos" required value="1">
                 <label class="form-check-label" for="terminos">Acepto terminos y condiciones *</label>
             </div>
-            <div class="text-center col-sm-12 col-md-3">
-                <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
+            <div class="text-center ">
+                <button type="submit" class="btn btn-success btn-sm col-sm-12 col-md-2 w-100"> Guardar</button>
             </div>
 
 
@@ -110,12 +113,19 @@
 @endsection
 
 @section('js')
-    
+
     <script>
         function option(x) {
-            var element = document.getElementById("tutor");
-            element.classList.toggle("d-none");
+            console.log(x)
+            if (x === 0) {
+                document.getElementById("tutor").classList.remove("d-none");
+            }
+            if (x === 1) {
+                document.getElementById("tutor").classList.add("d-none");
+            }
+
         }
+
         var loadFile = function(event) {
             var output = document.getElementById('output');
             output.src = URL.createObjectURL(event.target.files[0]);

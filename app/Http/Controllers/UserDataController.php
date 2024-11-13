@@ -51,27 +51,28 @@ class UserDataController extends Controller
 
         $usuario = User::find($user);
 
+        //dd($request->tipo);
         $this->authorize('update', $usuario);
-
-
 
         $validator = Validator::make($request->all(), [
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
-            'tutor' => 'exclude_if:tipo,adulto',
+            'tutor' => Rule::requiredIf($request->tipo == 'menor'),
             'email' => ['required', Rule::unique('users')->ignore($usuario->id)],
             'terminos' => 'required|in:1',
             'calle' => 'required',
             'municipio' => 'required',
             'estado' => 'required',
+            'tipo' => 'required',
             'codigo_postal' => 'required',
         ]);
 
         if (!isset($usuario->documento) || !isset($usuario->identificacion)) {
             $validator = Validator::make($request->all(), [
                 'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
-                'tutor' => 'exclude_if:tipo,adulto',
+                'tutor' => Rule::requiredIf($request->tipo == 'menor'),
                 'email' => ['required', Rule::unique('users')->ignore($usuario->id)],
                 'terminos' => 'required|in:1',
+                'tipo' => 'required',
                 'calle' => 'required',
                 'municipio' => 'required',
                 'estado' => 'required',
@@ -125,14 +126,12 @@ class UserDataController extends Controller
             $usuario->profile_photo_path = "/profile_images/crop/" . $nombre_photo;
         }
 
-
-
         if ($request->email != $usuario->email) {
             $usuario->email_verified_at = null;
             $usuario->update();
         }
+
         $usuario->update([
-            "tipo" => "adulto",
             "fecha_nacimiento" => $request->fecha_nacimiento,
             "calle" => $request->calle,
             "municipio" => $request->municipio,
@@ -141,10 +140,12 @@ class UserDataController extends Controller
             "terminos" => 1,
             'identificacion' => $usuario->identificacion,
             'documento' =>  $usuario->documento,
+            'tipo' => $request->tipo,
+            'tutor' => ($request->tipo == 'menor') ? $request->tutor : null
         ]);
 
         toast('Exito, se actualizarón tus datos de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
-        return redirect()->route('user.data', Auth::user()->id);
+        return redirect()->route('user.data', $usuario->id);
     }
     public function getPhoto($id)
     {

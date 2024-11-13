@@ -82,7 +82,7 @@ class ModulosSeeder extends Seeder
             'nombre' => 'MI INFORMACIÓN',
             'permiso' => 'USER_DATA',
             'icono' => 'category',
-            'color' => '#000'
+            'color' => '#ae8fdb'
         ]);
 
         EnlaceModulo::create([

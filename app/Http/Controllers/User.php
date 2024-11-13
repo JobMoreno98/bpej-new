@@ -80,13 +80,13 @@ class User extends Controller
     {
 
         $usuario = ModelsUser::find($user);
-        
-        
+
+
         $this->authorize('update',  [ModelsUser::class, $usuario]);
-        
+
         $validator = Validator::make($request->all(), [
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
-            'tutor' => 'exclude_if:tipo,adulto',
+            'tutor' => Rule::requiredIf($request->tipo == 'menor'),
             'email' => ['required', Rule::unique('users')->ignore($usuario->id)],
             'calle' => 'required',
             'municipio' => 'required',
@@ -97,7 +97,7 @@ class User extends Controller
         if (!isset($usuario->documento) || !isset($usuario->identificacion)) {
             $validator = Validator::make($request->all(), [
                 'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
-                'tutor' => 'exclude_if:tipo,adulto',
+                'tutor' => Rule::requiredIf($request->tipo == 'menor'),
                 'email' => ['required', Rule::unique('users')->ignore($usuario->id)],
                 'calle' => 'required',
                 'municipio' => 'required',
@@ -161,7 +161,6 @@ class User extends Controller
 
 
         $usuario->update([
-            "tipo" => "adulto",
             "fecha_nacimiento" => $request->fecha_nacimiento,
             "calle" => $request->calle,
             "municipio" => $request->municipio,
@@ -170,6 +169,8 @@ class User extends Controller
             "terminos" => 1,
             'identificacion' => $usuario->identificacion,
             'documento' =>  $usuario->documento,
+            'tipo' => $request->tipo,
+            'tutor' => ($request->tipo == 'menor') ? $request->tutor : null
         ]);
         toast('Exito, se actualizo el usuario de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
         return redirect()->route('usuarios.edit', $usuario->id);
@@ -178,7 +179,7 @@ class User extends Controller
     {
         $user = ModelsUser::find($id);
         $this->authorize('edit',  [ModelsUser::class, $user]);
-        
+
         return view('admin.usuarios.edit', compact('user'));
     }
 }

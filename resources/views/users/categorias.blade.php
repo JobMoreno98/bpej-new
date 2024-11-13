@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="widget-49-meeting-action">
                                         <a href="#" class="btn btn-sm btn-flash-border-primary">
-                                            
+
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" role="switch"
                                                     name="categorias[]" value="{{ $value->id }}"
@@ -55,8 +55,14 @@
                     </div>
                 @endforeach
             </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-success">Guardar</button>
+            @if ($categorias->isEmpty())
+                <div>
+                    <h3 class="text-center">Aun no añades ninguna categoria literaria a favoritos</h3>
+                </div>
+            @endif
+
+            <div class="text-center mt-2 ">
+                <button type="submit" class="btn btn-success colsm-12 col-md-1 w-100">Guardar</button>
             </div>
         </form>
     </div>

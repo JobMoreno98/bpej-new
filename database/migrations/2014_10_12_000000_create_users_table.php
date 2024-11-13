@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->enum('tipo', ['adulto', ',menor'])->default('adulto');
+            $table->enum('tipo', ['adulto', 'menor'])->default('adulto');
             $table->string('tutor')->nullable();
             $table->date('fecha_nacimiento')->nullable();
             $table->string('calle')->nullable();

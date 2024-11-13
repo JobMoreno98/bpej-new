@@ -28,9 +28,9 @@
             </div>
 
             <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                <div class="accordion-item ">
+                    <h2 class="accordion-header ">
+                        <button class="accordion-button collapsed border-secoundary border rounded-2" type="button" data-bs-toggle="collapse"
                             data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                             Fotografia
                         </button>
@@ -77,19 +77,22 @@
                 <label for="">Eres *</label>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="tipo" id="" id="yes"
-                        onclick="option(1)" id="inlineRadio1" value="adulto" checked>
+                        onclick="option(1)" id="inlineRadio1" value="adulto"
+                        {{ isset($user->tipo) ? ($user->tipo == 'adulto' ? 'checked' : '') : '' }}>
 
                     <label class="form-check-label" for="inlineRadio1">Adulto</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="tipo" id="not" onclick="option(0)"
-                        id="inlineRadio2" value="menor">
+                    <input class="form-check-input" type="radio" name="tipo"
+                        {{ isset($user->tipo) ? ($user->tipo == 'menor' ? 'checked' : '') : '' }} id="not"
+                        onclick="option(0)" id="inlineRadio2" value="menor">
                     <label class="form-check-label" for="inlineRadio2">Menor</label>
                 </div>
             </div>
-            <div class="col-sm-12 my-1  d-none" id="tutor">
+            <div class="col-sm-12 my-1  {{ !isset($user->tutor) ? 'd-none' : '' }}" id="tutor">
                 <label for="">Tutor</label>
-                <input class="form-control" type="text" name="tutor">
+                <input class="form-control" type="text" name="tutor"
+                    value="{{ isset($user->tutor) ? $user->tutor : null }}">
             </div>
 
             <div class=" col-sm-12 my-1 my-1 ">
@@ -122,7 +125,8 @@
                         id="">
                     @if (isset($user->documento))
                         @can('USUARIOS#update')
-                            <a href="{{ route('get-file-admin', ['id' => $user->id, 'type' => 'documento']) }}"
+                            <a target="_blank"
+                                href="{{ route('get-file-admin', ['id' => $user->id, 'type' => 'documento']) }}"
                                 class="btn btn-primary mx-1">Ver</a>
                         @endcan
                     @endif
@@ -136,7 +140,8 @@
                         id="">
                     @if (isset($user->identificacion))
                         @can('USUARIOS#update')
-                            <a href="{{ route('get-file-admin', ['id' => $user->id, 'type' => 'identificacion']) }}"
+                            <a target="_blank"
+                                href="{{ route('get-file-admin', ['id' => $user->id, 'type' => 'identificacion']) }}"
                                 class="btn btn-primary mx-1">Ver</a>
                         @endcan
                     @endif
@@ -151,53 +156,6 @@
     </div>
 @endsection
 @section('js')
-
     <script src="{{ asset('js/jquery.imgareaselect.js') }}"></script>
-    <script>
-        Webcam.set({
-            width: 350,
-            height: 250,
-            image_format: 'jpg',
-            jpeg_quality: 90,
-            flip_horiz: false
-        });
-
-        Webcam.attach('#my_camera');
-
-        function take_snapshot() {
-
-            Webcam.snap(function(data_uri) {
-
-                $(".image-tag").val(data_uri);
-
-                document.getElementById('results').innerHTML = '<img src="' + data_uri + '" id="previewimage"/>';
-                jQuery(function($) {
-                    var p = $("#previewimage");
-
-                    $("body").on("change", ".image", function() {
-                        var imageReader = new FileReader();
-                        imageReader.readAsDataURL(document.querySelector(".image").files[0]);
-
-                        imageReader.onload = function(oFREvent) {
-                            p.attr('src', oFREvent.target.result).fadeIn();
-                        };
-                    });
-
-                    $('#previewimage').imgAreaSelect({
-                        aspectRatio: '1:1',
-                        maxWidth: "250",
-                        onSelectEnd: function(img, selection) {
-                            $('input[name="x1"]').val(selection.x1);
-                            $('input[name="y1"]').val(selection.y1);
-                            $('input[name="w"]').val(selection.width);
-                            $('input[name="h"]').val(selection.height);
-                        }
-
-                    });
-
-                });
-            });
-
-        }
-    </script>
+    <script src="{{ asset('js/editUser.js') }}"></script>
 @endsection
