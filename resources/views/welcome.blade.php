@@ -19,7 +19,7 @@
         </div>
         <div class="container d-flex justify-content-around flex-column flex-md-row mt-4">
             @if (!$servicios->isEmpty())
-                <div class="col-ms-12 col-md-5 col-lg-4">
+                <div class="col-ms-12 col-md-5 col-lg-4 mt-3">
                     <h5 class="text-center">Servicios</h5>
                     <hr>
                     <div class="container swiper" style="height: 520px">
@@ -53,7 +53,7 @@
 
 
             @if (!$categorias->isEmpty())
-                <div class="col-ms-12 col-md-5 col-lg-4">
+                <div class="col-ms-12 col-md-5 col-lg-4 mt-3">
                     <h5 class="text-center">Categorias</h5>
                     <hr>
                     <div class="container swiper" style="height: 520px">

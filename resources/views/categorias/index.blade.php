@@ -30,7 +30,7 @@
             @foreach ($categorias as $item)
                 <div
                     class="border border-secondary rounded-3 
-                    p-2 col-sm-12 col-md-3 m-1 d-flex  align-items-center flex-column justify-content-center">
+                    p-2 col-sm-12 col-md-3 mx-2 my-1 d-flex  align-items-center flex-column justify-content-center">
                     @php
                         $url = isset($item->photo) ? asset('storage/' . $item->photo) : asset('img/image-default.jpg');
                     @endphp
@@ -39,10 +39,9 @@
                     <div class="w-100">
                         <div class="mt-2">
                             <h4 class="text-center border-bottom py-2 my-2 text-uppercase">{{ $item->name }}
-
                                 @php
                                     $valor = Auth::check()
-                                        ? (isset($item->input)
+                                        ? (count($item->user) > 0
                                             ? "'FILL' 1"
                                             : "'FILL' 0")
                                         : "'FILL' 0";
@@ -58,10 +57,14 @@
 
                             </h4>
                             <p class="text-justify">{{ Str::limit($item->descripcion, 250) }}</p>
+
                         </div>
                     </div>
                 </div>
             @endforeach
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+            {{ $categorias->links() }}
         </div>
     </div>
 @endsection

@@ -47,7 +47,8 @@ class CategoriasController extends Controller
         }
 
         toast('Exito, se regsitro la categoria de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
-        return view('admin.categorias.edit', compact('categoria'));
+        return redirect()->route('categorias.edit',$categoria->id);
+        //return view('admin.categorias.edit', compact('categoria'));
     }
 
     public function create()
@@ -64,6 +65,7 @@ class CategoriasController extends Controller
         if (!isset($categoria->name)) {
             abort(404);
         }
+
         return view('admin.categorias.edit', compact('categoria'));
     }
 
@@ -141,24 +143,15 @@ class CategoriasController extends Controller
     public function inicio()
     {
         if (Auth::check()) {
-            $consulta = Categorias::where('active', true)->get();
-
-            $categoriasUser = Auth::user()->categorias;
-
-            $arr = $categoriasUser->map(function ($arreglo) {
-                $arreglo->input = 'checked';
-                return $arreglo;
-            });
-
-            $arreglo_permisos = collect($arr);
-
-            $categorias = $consulta->merge($arreglo_permisos);
+            $categorias = Categorias::with('user')->where('active', true)->paginate(6);
 
             return view('categorias.index', compact('categorias'));
         }
-        $categorias = Categorias::where('active', 1)->paginate(5);
+
+        $categorias = Categorias::where('active', 1)->paginate(6);
         return view('categorias.index', compact('categorias'));
     }
+
     public function addUser(Request $request)
     {
         if (!Auth::check()) {

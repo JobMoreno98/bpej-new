@@ -55,7 +55,7 @@ class EventServiceProvider extends ServiceProvider
                     'text' => $page[0]->modulo_nombre,
                     'icon' => $page[0]->modulo_icono,
                     'submenu' => $submenu->toArray(),
-                    'classes' => 'd-flex align-items-center menu-header',
+                    'classes' => 'd-flex align-items-center menu-header m-0',
 
                 ];
                 return $menu;

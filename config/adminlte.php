@@ -191,7 +191,7 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => 'd-flex flex-column',
+    'classes_brand' => 'd-flex flex-column max-heigth',
     'classes_brand_text' => 'text-wrap text-center ',
     'classes_content_wrapper' => 'pt-5',
     'classes_content_header' => '',
