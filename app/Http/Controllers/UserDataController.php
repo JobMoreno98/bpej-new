@@ -94,11 +94,14 @@ class UserDataController extends Controller
             $comprobante = str_replace(' ', '_', $comprobante);
             Storage::disk('files')->put("comprobante/" . $comprobante, \File::get($archivo));
 
-            $usuario->documento = "comprobante/" .$comprobante;
+            $usuario->documento = "comprobante/" . $comprobante;
         }
 
         if ($request->hasFile('identificacion')) {
-            Storage::disk('files')->delete($usuario->identificacion);
+            if (isset($usuario->identificacion)) {
+                Storage::disk('files')->delete($usuario->identificacion);
+            }
+
             $archivo = $request->file('identificacion');
             $extencion = $request->file('identificacion')->getClientOriginalExtension();
 
@@ -107,7 +110,7 @@ class UserDataController extends Controller
             $nombre_identificacion = str_replace(' ', '_', $nombre_identificacion);
             Storage::disk('files')->put("identificacion/" . $nombre_identificacion, \File::get($archivo));
 
-            $usuario->identificacion = "identificacion/" .$nombre_identificacion;
+            $usuario->identificacion = "identificacion/" . $nombre_identificacion;
         }
 
         if ($request->hasFile('profile_photo_path')) {
