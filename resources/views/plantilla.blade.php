@@ -85,28 +85,26 @@
         <footer class="mt-5 footer pt-3 text-white" style="background:#7c2422;">
             <div class="container footer-top">
                 <div class="row">
-                    <div class="col-sm-12 footer-about d-flex flex-column flex-md-row flex-wrap"
-                        style="align-items: center !important;">
+                    <div class="col-sm-12 footer-about d-flex align-items-center flex-column flex-md-row flex-wrap">
                         <div
                             class="mx-md-2 px-md-2 col-sm-12 col-md-5  m-auto border-sm-bottom border-white py-2 my-2  py-md-0 my-md-0">
-                            <img src="{{ asset('img/udg_pie_logo.svg') }}" alt="" class="d-block">
-                            <a href="{{ route('home') }}" class="fs-3 text-decoration-none text-white logo m-auto">
-                                <span class="sitename text-uppercase text-center text-sm-center">Biblioteca Pública del
-                                    Estado de Jalisco "Juan José
-                                    Arreola"</span>
+                            <img src="{{ asset('img/udg_pie_logo.svg') }}" alt="" class="mx-auto  d-block">
+                            <a href="{{ route('home') }}" class="fs-5 text-decoration-none text-white logo m-auto">
+                                <span class=" sitename  d-block  text-center text-sm-center">{{ env('APP_NAME', 'LARAVEL') }}</span>
                             </a>
                         </div>
 
                         <div
                             class="d-flex col-sm-12 col-md-6  flex-column flex-md-row  align-items-start align-items-md-center ">
                             <div class="mx-md-1 col-sm-12  h-100">
-                                <h4>{{ __('Address') }}</h4>
-                                <p>Periférico Norte Manuel Gómez Morín no. 1695, Colonia Belenes C.P. 45100
+                                <h6 class="m-0">{{ __('Address') }}</h6>
+                                <p class="m-0">Periférico Norte Manuel Gómez Morín no. 1695, Colonia Belenes C.P.
+                                    45100
                                     Zapopan, Jalisco, México.</p>
 
-                                <h4>{{ __('Contact') }}</h4>
-                                <p>
-                                    <strong>{{ __('Phone') }}:</strong>
+                                <h6 class="m-0">{{ __('Contact') }}</h6>
+                                <p class="m-0">
+                                    {{ __('Phone') }}:
                                     <span>33 3836 4530</span>
                                 </p>
                             </div>
