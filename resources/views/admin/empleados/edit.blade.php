@@ -36,7 +36,7 @@
                     <option disabled selected>Elegir un Rol</option>
                     @foreach ($roles as $item)
                         <option value="{{ $item->name }}"
-                            {{ $empleado->role->first()->id == $item->id ? 'selected' : '' }}>
+                            {{ $empleado->rol->first()->id == $item->id ? 'selected' : '' }}>
                             {{ $item->name }}</option>
                     @endforeach
                 </select>

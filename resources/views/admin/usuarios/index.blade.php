@@ -40,7 +40,9 @@
                                         <th>Email</th>
                                         <th>Tipo</th>
                                         <th>Activo</th>
-                                        <th>Accion</th>
+                                        @can('USUARIOS#update')
+                                            <th>Accion</th>
+                                        @endcan
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,12 +52,18 @@
                                             <td>{{ $usuario->email }}</td>
                                             <td>{{ Str::ucfirst($usuario->tipo) }}</td>
                                             <td>Activo</td>
-                                            <td class="d-flex flex-row">
-                                                <a href="{{ route('usuarios.edit', $usuario->id) }}"
-                                                    class="btn-sm btn m-1 btn-primary">
-                                                    Editar
-                                                </a>
-                                            </td>
+                                            @can('USUARIOS#update')
+                                                <td class="d-flex flex-row">
+                                                    <a href="{{ route('usuarios.edit', $usuario->id) }}"
+                                                        class=" text-decoration-none border-0 text-green  d-flex aling-items-center mx-1"
+                                                        style="font-size: 12pt">
+                                                        <span class="material-symbols-outlined">
+                                                            edit
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            @endcan
+
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -67,7 +67,6 @@
                                                                 <span class="material-symbols-outlined">
                                                                     edit
                                                                 </span>
-
                                                             </a>
                                                         </td>
                                                     </tr>

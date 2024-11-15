@@ -19,7 +19,10 @@ class EmpleadosController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Admin::class);
-        $empleados = Admin::all();
+        Role::whereNotIn('name', ['Super Admmin'])->get();
+        $empleados = Admin::whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'Super Admin');
+        })->get();
 
         return view('admin.empleados.index', compact('empleados'));
     }
@@ -30,7 +33,7 @@ class EmpleadosController extends Controller
     public function create()
     {
         $this->authorize('create', Admin::class);
-        $roles = Role::where('guard_name', '=', 'admin')->get();
+        $roles = Role::whereNotIn('name', ['Super Admin'])->where('guard_name','=','admin')->get();
         return view('admin.empleados.create', compact('roles'));
     }
 
@@ -75,7 +78,7 @@ class EmpleadosController extends Controller
     {
         $this->authorize('edit', Admin::class);
         $empleado = Admin::find($id);
-        $roles = Role::where('guard_name', '=', 'admin')->get();
+        $roles = Role::whereNotIn('name', ['Super Admin'])->where('guard_name','=','admin')->get();
         return view('admin.empleados.edit', compact('empleado', 'roles'));
     }
 
@@ -98,7 +101,7 @@ class EmpleadosController extends Controller
 
         $empleado = Admin::find($id);
         if (isset($request->password)) {
-            $validator = Validator::make($request->all(), [
+            $validator = Validator::make($request->all(), [k
                 'password' => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()],
             ]);
             if ($validator->fails()) {

@@ -64,8 +64,11 @@
                                                         </td>
                                                         <td class="d-flex flex-row">
                                                             <a href="{{ route('categorias.edit', $item->id) }}"
-                                                                class="btn-sm btn m-1 btn-primary">
-                                                                Editar
+                                                                class=" text-decoration-none border-0 text-green  d-flex aling-items-center mx-1"
+                                                                style="font-size: 12pt">
+                                                                <span class="material-symbols-outlined">
+                                                                    edit
+                                                                </span>
                                                             </a>
                                                         </td>
                                                     </tr>

@@ -72,7 +72,7 @@ class Admin extends Authenticatable
     public function adminlte_image(){
         return asset('storage/fotos_perfil/' . $this->foto);
     }
-    public function role(): BelongsToMany
+    public function rol(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'model_has_roles' ,'model_id', 'role_id');
     }

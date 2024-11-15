@@ -46,7 +46,8 @@
                                             : "'FILL' 0")
                                         : "'FILL' 0";
                                 @endphp
-                                <button style="border: none" onclick="addCategory('{{ $item->id }}')">
+                                <button style="border: none;    background: transparent;"
+                                    onclick="addCategory('{{ $item->id }}')">
                                     <div id="categoria-{{ $item->id }}"
                                         style="color:orange; font-variation-settings:{{ $valor }} , 'wght' 700, 'GRAD' 0, 'opsz' 48;">
                                         <span class="material-symbols-outlined">

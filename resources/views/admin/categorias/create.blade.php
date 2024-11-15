@@ -7,7 +7,6 @@
 
 @section('content')
     <div class="container">
-
         <h4 class="text-center">Añadir categoria</h4>
         <form method="POST" class="d-flex flex-column align-items-center justify-content-center"
             action="{{ route('categorias.store') }}" enctype="multipart/form-data">

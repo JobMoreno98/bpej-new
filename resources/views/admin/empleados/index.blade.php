@@ -1,10 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Empleados')
-
-
-
 @section('css')
-    
+
     <style>
         .mdc-text-field__input {
             border: 1px grey solid;
@@ -43,7 +40,9 @@
                                                     <th>Nombre</th>
                                                     <th>Email</th>
                                                     <th>Rol</th>
-                                                    <th>Accion</th>
+                                                    @can('EMPLEADOS#editar')
+                                                        <th>Accion</th>
+                                                    @endcan
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -51,19 +50,18 @@
                                                     <tr>
                                                         <td>{{ $empleado->name }}</td>
                                                         <td>{{ $empleado->email }}</td>
-                                                        <td>{{ $empleado->getRoleNames() }}</td>
-                                                        <td class="d-flex">
-                                                            @can('EMPLEADOS#editar')
+                                                        <td>{{ Str::ucfirst($empleado->getRoleNames()[0]) }}</td>
+                                                        @can('EMPLEADOS#editar')
+                                                            <td class="d-flex">
                                                                 <a href="{{ route('empleados.edit', $empleado->id) }}"
                                                                     class=" text-decoration-none border-0 text-green  d-flex aling-items-center mx-1"
                                                                     style="font-size: 12pt">
                                                                     <span class="material-symbols-outlined">
                                                                         edit
-                                                                    </span>
-                                                                    Editar
+                                                                    </span>                                                                    
                                                                 </a>
-                                                            @endcan
-                                                        </td>
+                                                            </td>
+                                                        @endcan
                                                     </tr>
                                                 @endforeach
                                             </tbody>

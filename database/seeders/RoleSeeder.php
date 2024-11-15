@@ -66,7 +66,7 @@ class RoleSeeder extends Seeder
         Permission::create(['guard_name' => 'admin', 'name' => 'EMPLEADOS#update']);
 
         Permission::create(['guard_name' => 'web', 'name' => 'DATOS#ver']);
-        Permission::create(['guard_name' => 'web', 'name' => 'uCATEGORIAS#ver']);
+        //Permission::create(['guard_name' => 'web', 'name' => 'uCATEGORIAS#ver']);
 
 
         //super admin
@@ -110,6 +110,7 @@ class RoleSeeder extends Seeder
             'password' => Hash::make('password'),
             'email_verified_at' => now()
         ]);
+
         $user->assignRole('general');
     }
 }

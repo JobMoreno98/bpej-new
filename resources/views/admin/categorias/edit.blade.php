@@ -19,11 +19,11 @@
             <div class="col-sm-5 my-1 ">
                 <input accept="image/jpeg" class="form-control" type="file" name="image" onchange="loadFile(event)">
             </div>
-            <div class="col-md-10 col-sm-12 m-1">
+            <div class="col-md-10 col-sm-12 m-1 col-lg-8">
                 <label for="">Nombre</label>
                 <input type="text" name="name" required value="{{ $categoria->name }}" class="form-control">
             </div>
-            <div class="col-md-10 col-sm-12 m-1">
+            <div class="col-md-10 col-sm-12 m-1 col-lg-8">
                 <label for="">Descripción</label>
                 <textarea name="descripcion" id="" class="form-control" required>{{ $categoria->descripcion }}</textarea>
             </div>
