@@ -3,7 +3,7 @@
 @section('title', __('Sign in'))
 
 @section('content')
-{{--
+
     <section class="py-md-5 py-xl-8 w-100" data-bs-theme="secondary">
         <div class="container d-flex h-100 align-items-center">
             <div class="row gy-4 align-items-center justify-content-center m-1 p-2 p-md-5 rounded ">
@@ -83,6 +83,6 @@
         </div>
     </section>
 
---}}
+
 
 @endsection
