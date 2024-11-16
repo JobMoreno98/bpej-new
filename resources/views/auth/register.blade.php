@@ -100,9 +100,9 @@
     <section class=" py-2 py-md-5 py-xl-8 w-100" data-bs-theme="secondary">
         <div class="container-fluid d-flex h-100 align-items-center justify-content-center ">
             <div class="col-sm-12 d-flex  align-items-center justify-content-center m-1 p-1 p-md-5 rounded ">
-                <div class="col-12 col-md-8 m-0 border rounded-4 border-dark p-1 p-md-3">
+                <div class="col-12 col-md-4 m-0 border rounded-4 border-dark p-1 p-md-3">
                     <div class="card border-0 rounded-4" style="border:#7c2422 solid 2px;">
-                        <div class="card-body">
+                        <div class="card-body p-0">
                             <div class="p-0 mb-2">
                                 <img class="img-fluid rounded rounded-4" loading="lazy"
                                     src="{{ asset('img/portada-web.jpg') }}" width="100%" height="250"
@@ -118,14 +118,13 @@
                                 </div>
                             @endif
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="mb-4">
-                                        <h3>{{ __('Register') }}</h3>
-                                    </div>
+
+                            <div class="col-12">
+                                <div class="mb-4">
+                                    <h3 class="text-center">{{ __('Register') }}</h3>
                                 </div>
                             </div>
-                            <form method="POST" action="{{ route('register-user') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('register-user') }}" class="px-2" enctype="multipart/form-data">
                                 @method('POST')
                                 @csrf
                                 <div class="col-sm-12 my-1 ">

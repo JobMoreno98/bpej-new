@@ -151,8 +151,9 @@ class UserDataController extends Controller
 
         $usuario->update();
         event(new Registered($usuario));
+        return view('revisarCorreo');
         //toast('Exito, se actualizarón tus datos de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
-        return redirect()->route('verification.notice');
+        //return redirect()->route('verification.notice');
        // return redirect()->route('user.data', $usuario->id);
     }
     public function getPhoto($id)
