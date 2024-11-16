@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorias;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -46,26 +47,29 @@ class UserDataController extends Controller
 
         return view('admin.usuarios.edit')->with('usuario', $usuario);
     }
-    public function update_user(Request $request, $user)
+    public function update_user(Request $request)
     {
 
-        $usuario = User::find($user);
+        //$usuario = User::find($user);
 
         //dd($request->tipo);
-        $this->authorize('update', $usuario);
+        //$this->authorize('update', $usuario);
 
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
             'tutor' => Rule::requiredIf($request->tipo == 'menor'),
-            'email' => ['required', Rule::unique('users')->ignore($usuario->id)],
+            'name' =>'required',
+            'email' => ['required', Rule::unique('users')],
             'terminos' => 'required|in:1',
             'calle' => 'required',
             'municipio' => 'required',
             'estado' => 'required',
             'tipo' => 'required',
             'codigo_postal' => 'required',
+            'documento' => ['required', 'mimes:jpg,pdf'],
+            'identificacion' => ['required', 'mimes:jpg,pdf'],
         ]);
-
+        /*
         if (!isset($usuario->documento) || !isset($usuario->identificacion)) {
             $validator = Validator::make($request->all(), [
                 'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
@@ -86,6 +90,21 @@ class UserDataController extends Controller
             return redirect()->back();
         }
 
+            */
+
+
+        $usuario = User::create([
+            'name' => $request->name,
+            'email'=> $request->email,
+            "fecha_nacimiento" => $request->fecha_nacimiento,
+            "calle" => $request->calle,
+            "municipio" => $request->municipio,
+            "codigo_postal" => $request->codigo_postal,
+            "estado" => $request->estado,
+            "terminos" => 1,
+            'tipo' => $request->tipo,
+            'tutor' => ($request->tipo == 'menor') ? $request->tutor : null
+        ]);
 
         if ($request->hasFile('documento')) {
             $archivo = $request->file('documento');
@@ -128,24 +147,13 @@ class UserDataController extends Controller
 
         if ($request->email != $usuario->email) {
             $usuario->email_verified_at = null;
-            $usuario->update();
         }
 
-        $usuario->update([
-            "fecha_nacimiento" => $request->fecha_nacimiento,
-            "calle" => $request->calle,
-            "municipio" => $request->municipio,
-            "codigo_postal" => $request->codigo_postal,
-            "estado" => $request->estado,
-            "terminos" => 1,
-            'identificacion' => $usuario->identificacion,
-            'documento' =>  $usuario->documento,
-            'tipo' => $request->tipo,
-            'tutor' => ($request->tipo == 'menor') ? $request->tutor : null
-        ]);
-
-        toast('Exito, se actualizarón tus datos de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
-        return redirect()->route('user.data', $usuario->id);
+        $usuario->update();
+        event(new Registered($usuario));
+        //toast('Exito, se actualizarón tus datos de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
+        return redirect()->route('verification.notice');
+       // return redirect()->route('user.data', $usuario->id);
     }
     public function getPhoto($id)
     {

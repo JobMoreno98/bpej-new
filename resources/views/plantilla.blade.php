@@ -45,6 +45,7 @@
                     {{ env('APP_NAME', 'LARAVEL') }}
                 </p>
 
+                {{--
                 @if (Route::has('login'))
                     <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                         @auth
@@ -61,9 +62,13 @@
                         @endauth
                     </div>
                 @endif
+                --}}
+                <a href="{{ route('register') }}"
+                class="ml-4 font-semibold text-decoration-none text-white btn btn-sm">{{ __('Register') }}</a>
             </a>
         </div>
     </nav>
+    {{--
     <div class="w-100 text-white" style="background:#ca580d">
         <ul class="nav justify-content-center">
             <li class="nav-item">
@@ -77,7 +82,7 @@
             </li>
         </ul>
     </div>
-
+--}}
     @yield('content')
 
 
@@ -90,7 +95,8 @@
                             class="mx-md-2 px-md-2 col-sm-12 col-md-5  m-auto border-sm-bottom border-white py-2 my-2  py-md-0 my-md-0">
                             <img src="{{ asset('img/udg_pie_logo.svg') }}" alt="" class="mx-auto  d-block">
                             <a href="{{ route('home') }}" class="fs-5 text-decoration-none text-white logo m-auto">
-                                <span class=" sitename  d-block  text-center text-sm-center">{{ env('APP_NAME', 'LARAVEL') }}</span>
+                                <span
+                                    class=" sitename  d-block  text-center text-sm-center">{{ env('APP_NAME', 'LARAVEL') }}</span>
                             </a>
                         </div>
 
@@ -124,13 +130,14 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
+    {{--
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script src="{{ asset('js/slide.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
     <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
+
     <script>
         const glightbox = GLightbox({
             selector: '.glightbox',
@@ -149,6 +156,7 @@
             }
         });
     </script>
+--}}
     @yield('js')
 </body>
 

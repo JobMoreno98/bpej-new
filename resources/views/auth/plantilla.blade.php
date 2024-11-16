@@ -30,6 +30,19 @@
 
 <body>
     @yield('content')
+
+
+    <script>
+        function option(x) {
+            console.log(x)
+            if (x === 0) {
+                document.getElementById("tutor").classList.remove("d-none");
+            }
+            if (x === 1) {
+                document.getElementById("tutor").classList.add("d-none");
+            }
+        }
+    </script>
 </body>
 
 </html>

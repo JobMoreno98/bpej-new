@@ -101,7 +101,7 @@ class EmpleadosController extends Controller
 
         $empleado = Admin::find($id);
         if (isset($request->password)) {
-            $validator = Validator::make($request->all(), [k
+            $validator = Validator::make($request->all(), [
                 'password' => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()],
             ]);
             if ($validator->fails()) {

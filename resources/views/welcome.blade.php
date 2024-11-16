@@ -17,6 +17,7 @@
             Repellendus libero id laborum, ut excepturi quo non. Nisi, quod adipisci. Dignissimos, molestiae incidunt
             alias, nulla, at eveniet repellat delectus culpa quae voluptas quo. Laboriosam quis corporis illo earum eum!
         </div>
+        {{--
         <div class="container d-flex justify-content-around flex-column flex-md-row mt-4">
             @if (!$servicios->isEmpty())
                 <div class="col-ms-12 col-md-5 col-lg-4 mt-3">
@@ -51,7 +52,7 @@
                 </div>
             @endif
 
-
+            
             @if (!$categorias->isEmpty())
                 <div class="col-ms-12 col-md-5 col-lg-4 mt-3">
                     <h5 class="text-center">Categorias</h5>
@@ -82,8 +83,10 @@
                     </div>
                 </div>
             @endif
+    </div>
+    --}}
 
 
-        </div>
+
     </div>
 @endsection

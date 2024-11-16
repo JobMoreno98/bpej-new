@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\HomeController;
@@ -81,12 +82,12 @@ Route::middleware([
         ->name('usuario.edit')
         ->middleware('auth');
 
-    Route::put('/user-update/{id}', [UserDataController::class, 'update_user'])->name('update-user')->middleware(['auth']);
+
 
     Route::get('/user-photo/{id}', [UserDataController::class, 'getPhoto'])->name('get-photo');
 });
 
-
+Route::post('/register-user', [UserDataController::class, 'update_user'])->name('register-user');
 
 Route::get('/servicios', [ServiciosController::class, 'inicio'])->name('servicios.inicio');
 Route::get('/servicios/{servicio}', [ServiciosController::class, 'show'])->name('servicios.show');
@@ -96,13 +97,13 @@ Route::post('/add-category', [CategoriasController::class, 'addUser'])->name('ad
 
 
 //Verificación de correo
+/*
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-
     return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
@@ -112,6 +113,15 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+*/
+
+Route::controller(VerificationController::class)->group(function () {
+    Route::get('/email/verify', 'notice')->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', 'verify')->name('verification.verify');
+    Route::post('/email/resend', 'resend')->name('verification.resend');
+});
+
+
 
 Route::get('/admin', function () {
     return redirect()->route('admin.inicio');
@@ -121,7 +131,9 @@ Route::get('/admin', function () {
 //Logout
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 
+/*
 Route::get('/user/logout', function () {
     Auth::logout();
     return redirect()->route('login');
 })->name('user.logout');
+*/
