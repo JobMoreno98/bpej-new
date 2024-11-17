@@ -107,6 +107,10 @@ class UserDataController extends Controller
         ]);
 
         if ($request->hasFile('documento')) {
+            if (isset($usuario->documento)) {
+                Storage::disk('files')->delete($usuario->documento);
+            }
+
             $archivo = $request->file('documento');
             $extencion = $request->file('documento')->getClientOriginalExtension();
             $comprobante =  'documento_' . $usuario->name . "." . $extencion;

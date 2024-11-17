@@ -28,10 +28,16 @@ class User extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'fecha_nacimiento' => 'required|date',
-            'tutor' => 'exclude_if:tipo,adulto',
-            'comprobante_domicilio' => ['required', File::types(['jpg', 'pdf'])->max(12 * 1024)],
-            'comprobante_ine' => ['required', File::types(['jpg', 'pdf'])->max(12 * 1024)]
+            'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
+            'tutor' => Rule::requiredIf($request->tipo == 'menor'),
+            'documento' => ['required', 'mimes:jpg,pdf'],
+            'identificacion' => ['required', 'mimes:jpg,pdf'],
+            'calle' => 'required',
+            'municipio' => 'required',
+            'estado' => 'required',
+            'codigo_postal' => 'required',
+            'clave_bpej' => 'required',
+            'tipo' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -50,7 +56,6 @@ class User extends Controller
             'codigo_postal' => $request->codigo_postal,
             'estado' => $request->estado,
             'clave_bpej' => $request->clave_bpej,
-
         ]);
 
         if (isset($request->image)) {
@@ -92,6 +97,7 @@ class User extends Controller
             'municipio' => 'required',
             'estado' => 'required',
             'codigo_postal' => 'required',
+            'clave_bpej' => 'required'
         ]);
 
         if (!isset($usuario->documento) || !isset($usuario->identificacion)) {
@@ -111,7 +117,11 @@ class User extends Controller
             toast(implode("<br/>", $validator->messages()->all()), 'error')->persistent(true, false);
             return redirect()->back();
         }
+
         if ($request->hasFile('documento')) {
+            if (isset($usuario->documento)) {
+                Storage::disk('files')->delete($usuario->documento);
+            }
             $archivo = $request->file('documento');
             $extencion = $request->file('documento')->getClientOriginalExtension();
             $comprobante =  'documento_' . $usuario->name . "." . $extencion;
@@ -120,9 +130,14 @@ class User extends Controller
             Storage::disk('files')->put("comprobante/" . $comprobante, \File::get($archivo));
 
             $usuario->documento = "comprobante/" . $comprobante;
+            $usuario->update();
         }
 
         if ($request->hasFile('identificacion')) {
+            if (isset($usuario->identificacion)) {
+                Storage::disk('files')->delete($usuario->identificacion);
+            }
+
             $archivo = $request->file('identificacion');
             $extencion = $request->file('identificacion')->getClientOriginalExtension();
 
@@ -132,6 +147,7 @@ class User extends Controller
             Storage::disk('files')->put("identificacion/" . $nombre_identificacion, \File::get($archivo));
 
             $usuario->identificacion = "identificacion/" . $nombre_identificacion;
+            $usuario->update();
         }
 
         if (isset($request->image)) {
@@ -153,6 +169,7 @@ class User extends Controller
             Storage::disk('files')->delete($url);
 
             $usuario->profile_photo_path = "/profile_images/crop/" . $nombre_photo;
+            $usuario->update();
         }
         if ($request->email != $usuario->email) {
             $usuario->email_verified_at = null;
@@ -170,7 +187,9 @@ class User extends Controller
             'identificacion' => $usuario->identificacion,
             'documento' =>  $usuario->documento,
             'tipo' => $request->tipo,
-            'tutor' => ($request->tipo == 'menor') ? $request->tutor : null
+            'tutor' => ($request->tipo == 'menor') ? $request->tutor : null,
+            'clave_bpej' => $request->clave_bpej
+
         ]);
         toast('Exito, se actualizo el usuario de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
         return redirect()->route('usuarios.edit', $usuario->id);

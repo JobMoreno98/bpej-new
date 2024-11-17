@@ -75,12 +75,34 @@ class RoleSeeder extends Seeder
         $role->givePermissionTo(Permission::where('guard_name', 'admin')->get());
 
 
-        //usuario admin
+        //role y usuario admin
 
         $role = Role::create(['guard_name' => 'admin', 'name' => 'admin']);
 
-        $role->givePermissionTo(Permission::where('guard_name', 'admin')->whereNot('name', 'like', 'MODULOS%')
-        ->whereNot('name', 'like', 'ROLES%')->whereNot('name', 'like', 'PERMISOS%')->whereNot('name', 'like', '%delete%')->get());
+        $role->givePermissionTo(
+            Permission::where('guard_name', 'admin')
+                ->whereNot('name', 'like', 'MODULOS%')
+                ->whereNot('name', 'like', 'ROLES%')
+                ->whereNot('name', 'like', 'PERMISOS%')
+                ->whereNot('name', 'like', 'CATEGORIAS%')
+                ->whereNot('name', 'like', 'SERVICIOS%')
+                ->whereNot('name', 'like', '%delete%')->get()
+        );
+
+        //role y usuario admin
+
+        $role = Role::create(['guard_name' => 'admin', 'name' => 'editor']);
+
+        $role->givePermissionTo(
+            Permission::where('guard_name', 'admin')
+                ->whereNot('name', 'like', 'MODULOS%')
+                ->whereNot('name', 'like', 'ROLES%')
+                ->whereNot('name', 'like', 'PERMISOS%')
+                ->whereNot('name', 'like', 'CATEGORIAS%')
+                ->whereNot('name', 'like', 'SERVICIOS%')
+                ->whereNot('name', 'like', 'EMPLEADOS%')
+                ->whereNot('name', 'like', '%delete%')->get()
+        );
 
         //usuario general
 
@@ -104,6 +126,16 @@ class RoleSeeder extends Seeder
 
         $user->assignRole('admin');
 
+
+        $user = Admin::create([
+            'name' => 'editor',
+            'email' => 'editor@gmail.com',
+            'password' => Hash::make('password')
+        ]);
+
+        $user->assignRole('editor');
+
+        /*
         $user = User::create([
             'name' => 'Job Moreno',
             'email' => 'job@gmail.com',
@@ -111,6 +143,7 @@ class RoleSeeder extends Seeder
             'email_verified_at' => now()
         ]);
 
-        $user->assignRole('general');
+        $user->assignRole('general')
+        */
     }
 }

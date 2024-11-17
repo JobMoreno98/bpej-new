@@ -119,6 +119,7 @@
                 <label for="">Estado</label>
                 <input class="form-control" type="text" name="estado" value="{{ $user->estado }}" id="">
             </div>
+
             <div class="col-sm-12 my-1 ">
                 <label for="">Comporbante de Domicilio</label>
                 <div class="d-flex">
@@ -147,6 +148,11 @@
                         @endcan
                     @endif
                 </div>
+            </div>
+            <div class="col-sm-12 my-1 ">
+                <label for="">Clave BPEJ</label>
+                <input class="form-control" type="text" name="clave_bpej" value="{{ $user->clave_bpej }}"
+                    id="">
             </div>
             <div class="text-center col-sm-12 mt-1">
                 <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
