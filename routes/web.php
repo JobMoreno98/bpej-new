@@ -133,9 +133,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 
-Route::get('/correo-verificado', function () {
-    return view('correo-verificado');
-})->name('verificado');
+Route::view('/correo-verificado','correo-verificado')->name('verificado');
 /*
 
 Route::controller(VerificationController::class)->group(function () {

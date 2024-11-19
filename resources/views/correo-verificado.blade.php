@@ -17,7 +17,7 @@
                             </div>
                             <div class="mt-4 flex items-center justify-between">
                                 <p class="text-center text-uppercase">Gracias por verificar tu correo</p>
-                                <p style="text-align: justify">Ya estas más cerca de poder tener tus libros favoritos en tu mismo hogar, ahora solo deberas de asistir con nosotros para proporcionarte tu credecial </p>
+                                <p style="text-align: justify">Ya estas más cerca de poder leer tus libros favoritos desde casa. <br> El siguiente paso es acudir a la Biblioteca por tu credencial </p>
                             </div>
                         </div>
                     </div>
