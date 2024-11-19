@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('estado')->nullable();
             $table->string('documento')->nullable();
             $table->string('identificacion')->nullable();
+            $table->string('telefono')->nullable();
             $table->boolean('terminos')->default(true);
             $table->string('clave_bpej')->nullable();
             $table->rememberToken();

@@ -25,7 +25,8 @@
                             </div>
 
                             <div class="mb-4 text-sm text-gray-600">
-                                {{ __('Before continuing, could you verify your email address by clicking on the link we just emailed to you? .') }}
+                                Antes de continuar, ¿podría verificar su dirección de correo electrónico haciendo clic en el
+                                enlace que le acabamos de enviar por correo electrónico?
                             </div>
 
                         </div>

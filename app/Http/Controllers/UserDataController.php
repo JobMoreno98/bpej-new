@@ -58,7 +58,7 @@ class UserDataController extends Controller
         $request->validate([
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
             'tutor' => Rule::requiredIf($request->tipo == 'menor'),
-            'name' =>'required',
+            'name' => 'required',
             'email' => ['required', Rule::unique('users')],
             'terminos' => 'required|in:1',
             'calle' => 'required',
@@ -68,6 +68,7 @@ class UserDataController extends Controller
             'codigo_postal' => 'required',
             'documento' => ['required', 'mimes:jpg,pdf'],
             'identificacion' => ['required', 'mimes:jpg,pdf'],
+            'telefono' => 'required|regex:/[0-9]{10}/|size:10'
         ]);
         /*
         if (!isset($usuario->documento) || !isset($usuario->identificacion)) {
@@ -95,7 +96,7 @@ class UserDataController extends Controller
 
         $usuario = User::create([
             'name' => $request->name,
-            'email'=> $request->email,
+            'email' => $request->email,
             "fecha_nacimiento" => $request->fecha_nacimiento,
             "calle" => $request->calle,
             "municipio" => $request->municipio,
@@ -103,6 +104,7 @@ class UserDataController extends Controller
             "estado" => $request->estado,
             "terminos" => 1,
             'tipo' => $request->tipo,
+            'telefono' => $request->telefono,
             'tutor' => ($request->tipo == 'menor') ? $request->tutor : null
         ]);
 
@@ -158,7 +160,7 @@ class UserDataController extends Controller
         return view('revisarCorreo');
         //toast('Exito, se actualizarón tus datos de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
         //return redirect()->route('verification.notice');
-       // return redirect()->route('user.data', $usuario->id);
+        // return redirect()->route('user.data', $usuario->id);
     }
     public function getPhoto($id)
     {

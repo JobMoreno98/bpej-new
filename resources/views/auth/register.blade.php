@@ -124,7 +124,8 @@
                                     <h3 class="text-center">{{ __('Register') }}</h3>
                                 </div>
                             </div>
-                            <form method="POST" action="{{ route('register-user') }}" class="px-2" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('register-user') }}" class="px-2"
+                                enctype="multipart/form-data">
                                 @method('POST')
                                 @csrf
                                 <div class="col-sm-12 my-1 ">
@@ -139,6 +140,11 @@
                                 <div class="col-sm-12 my-1 " id="email">
                                     <label for="">Correo</label>
                                     <input class="form-control" type="email" name="email" value="">
+                                </div>
+
+                                <div class="col-sm-12 my-1 " id="telefono">
+                                    <label for="">Teléfono</label>
+                                    <input class="form-control" type="text" name="telefono" value="">
                                 </div>
 
                                 <div class="d-flex align-items-center col-sm-12 my-1 justify-content-evenly">
@@ -199,22 +205,72 @@
                                     class="col-sm-12 my-1 form-check form-check-inline my-1 d-flex flex-wrap justify-content-center">
                                     <input class="form-check-input" type="radio" name="terminos" id="terminos"
                                         required value="1">
-                                    <label class="form-check-label" for="terminos">Acepto terminos y condiciones
+                                    <label class="form-check-label text-uppercase mx-1" for="terminos">Leí y acepto el aviso de privacidad
                                         *</label>
                                 </div>
+
                                 <div class="col-12">
                                     <div class="d-grid">
-                                        <button class="btn btn-primary btn my-2"
+                                        <button class="btn btn-primary btn my-2 text-uppercase "
                                             type="submit">{{ __('Register') }}</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+                    <hr>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary text-center" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            AVISO DE PRIVACIDAD
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">AVISO DE PRIVACIDAD</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="text-align:justify;">
+                                        La Universidad de Guadalajara (en adelante UdeG), con domicilio en Avenida Juárez
+                                        976, colonia Centro, código postal 44100, en Guadalajara, Jalisco, hace de su
+                                        conocimiento que se considerará como información confidencial aquella que se
+                                        encuentre contemplada en los artículos 3, fracciones IX y X de la LPDPPSOEJM; 21 de
+                                        la LTAIPEJM; Lineamientos Cuadragésimo Octavo y Cuadragésimo Noveno de los
+                                        Lineamientos de Clasificación; Lineamientos Décimo Sexto, Décimo Séptimo y
+                                        Quincuagésimo Octavo de los Lineamientos de Protección, así como aquellos datos de
+                                        una persona física identificada o identificable y la inherente a las personas
+                                        jurídicas, los cuales podrán ser sometidos a tratamiento y serán única y
+                                        exclusivamente utilizados para los fines que fueron proporcionados, de acuerdo con
+                                        las finalidades y atribuciones establecidas en los artículos 1, 5 y 6 de la Ley
+                                        Orgánica, así como 2 y 3 del Estatuto General, ambas legislaciones de la UdeG, de
+                                        igual forma, para la prestación de los servicios que la misma ofrece conforme a las
+                                        facultades y prerrogativas de la entidad universitaria correspondiente y estarán a
+                                        resguardo y protección de la misma.
+
+                                        Usted puede consultar nuestro Aviso de Privacidad integral en la siguiente página
+                                        web: <a target="_blank"
+                                            href="http://www.transparencia.udg.mx/aviso-confidencialidad-integral">ver</a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
+
         </div>
+
     </section>
+
 @endsection
 
 @section('js')
