@@ -33,7 +33,7 @@
                         <button class="accordion-button collapsed border-secoundary border rounded-2" type="button"
                             data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                             aria-controls="flush-collapseOne">
-                            Fotografia
+                            Fotografía
                         </button>
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -102,7 +102,7 @@
                     id="">
             </div>
             <div class="col-sm-12 my-1 ">
-                <label for="">Calle</label>
+                <label for="">Calle y número</label>
                 <input class="form-control" type="text" name="calle" value="{{ $user->calle }}" id="">
             </div>
             <div class="col-sm-12 my-1 ">
@@ -111,7 +111,7 @@
                     id="">
             </div>
             <div class=" col-sm-12 my-1 ">
-                <label for="">Codigo Postal</label>
+                <label for="">Código Postal</label>
                 <input class="form-control" type="text" name="codigo_postal" value="{{ $user->codigo_postal }}"
                     id="">
             </div>
@@ -121,7 +121,7 @@
             </div>
 
             <div class="col-sm-12 my-1 ">
-                <label for="">Comporbante de Domicilio</label>
+                <label for="">Comprobante de Domicilio</label>
                 <div class="d-flex">
                     <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="documento"
                         id="">

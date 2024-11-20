@@ -172,7 +172,7 @@
                                         id="">
                                 </div>
                                 <div class="col-sm-12 my-1 ">
-                                    <label for="">Calle</label>
+                                    <label for="">Calle y número</label>
                                     <input class="form-control" type="text" name="calle" value="" id="">
 
                                 </div>
@@ -182,7 +182,7 @@
                                         id="">
                                 </div>
                                 <div class=" col-sm-12 my-1 ">
-                                    <label for="">Codigo Postal</label>
+                                    <label for="">Código Postal</label>
                                     <input class="form-control" type="text" name="codigo_postal" value=""
                                         id="">
                                 </div>
@@ -192,7 +192,7 @@
                                         id="">
                                 </div>
                                 <div class="col-sm-12 my-1 ">
-                                    <label for="">Comporbante de Domicilio</label>
+                                    <label for="">Comprobante de Domicilio</label>
                                     <input accept="image/jpeg,application/pdf" class="form-control" type="file"
                                         name="documento" id="">
                                 </div>

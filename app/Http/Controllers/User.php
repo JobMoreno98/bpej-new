@@ -85,8 +85,6 @@ class User extends Controller
     {
 
         $usuario = ModelsUser::find($user);
-
-
         $this->authorize('update',  [ModelsUser::class, $usuario]);
 
         $validator = Validator::make($request->all(), [
@@ -140,14 +138,13 @@ class User extends Controller
 
             $archivo = $request->file('identificacion');
             $extencion = $request->file('identificacion')->getClientOriginalExtension();
-
             $nombre_identificacion =  'identificacion_' .  $usuario->name . "." . $extencion;
             $nombre_identificacion = str_replace('/', '_', $nombre_identificacion);
             $nombre_identificacion = str_replace(' ', '_', $nombre_identificacion);
             Storage::disk('files')->put("identificacion/" . $nombre_identificacion, \File::get($archivo));
-
             $usuario->identificacion = "identificacion/" . $nombre_identificacion;
             $usuario->update();
+
         }
 
         if (isset($request->image)) {
@@ -184,8 +181,6 @@ class User extends Controller
             "codigo_postal" => $request->codigo_postal,
             "estado" => $request->estado,
             "terminos" => 1,
-            'identificacion' => $usuario->identificacion,
-            'documento' =>  $usuario->documento,
             'tipo' => $request->tipo,
             'tutor' => ($request->tipo == 'menor') ? $request->tutor : null,
             'clave_bpej' => $request->clave_bpej
