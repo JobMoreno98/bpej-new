@@ -52,8 +52,9 @@
                                             <td>{{ $usuario->name }}</td>
                                             <td>{{ $usuario->email }}</td>
                                             <td>{{ Str::ucfirst($usuario->tipo) }}</td>
-                                            <td>{{ $usuario->clave_bpej }}</td>
-                                            <td>{{ $usuario->clave_rfid }}</td>
+                                            <td class="text-start">{{ $usuario->clave_bpej }}</td>
+                                            <td>{{ isset($usuario->clave_rfid) ? $usuario->clave_rfid : 'No capturado' }}
+                                            </td>
                                             @can('USUARIOS#update')
                                                 <td class="d-flex flex-row">
                                                     <a href="{{ route('usuarios.edit', $usuario->id) }}"

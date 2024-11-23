@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
+use Maestroerror\HeicToJpg;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserDataController extends Controller
@@ -54,7 +55,6 @@ class UserDataController extends Controller
 
         //dd($request->tipo);
         //$this->authorize('update', $usuario);
-
         $request->validate([
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
             'tutor' => Rule::requiredIf($request->tipo == 'menor'),
@@ -83,8 +83,8 @@ class UserDataController extends Controller
                 'municipio' => 'required',
                 'estado' => 'required',
                 'codigo_postal' => 'required',
-                'documento' => ['required', 'mimes:jpg,pdf'],
-                'identificacion' => ['required', 'mimes:jpg,pdf'],
+                'documento' => ['required', 'mimes:jpg,jpeg,heic,pdf'],
+                'identificacion' => ['required', 'mimes:jpg,jpeg,heic,pdf'],
             ]);
         }
         if ($validator->fails()) {
@@ -115,13 +115,18 @@ class UserDataController extends Controller
                 Storage::disk('files')->delete($usuario->documento);
             }
 
+
             $archivo = $request->file('documento');
             $extencion = $request->file('documento')->getClientOriginalExtension();
-            $comprobante =  'documento_' . $usuario->name . "." . $extencion;
+            $comprobante =  'documento_' . $usuario->name . ".jpg";
             $comprobante = str_replace('/', '_', $comprobante);
             $comprobante = str_replace(' ', '_', $comprobante);
-            Storage::disk('files')->put("comprobante/" . $comprobante, \File::get($archivo));
+            if ($extencion == 'HEIC') {
+                HeicToJpg::convert($archivo)->saveAs("../storage/app/private/comprobante/" .  $usuario->name);
+            } else {
 
+                Storage::disk('files')->put("comprobante/" . $comprobante, \File::get($archivo));
+            }
             $usuario->documento = "comprobante/" . $comprobante;
         }
 
@@ -129,14 +134,16 @@ class UserDataController extends Controller
             if (isset($usuario->identificacion)) {
                 Storage::disk('files')->delete($usuario->identificacion);
             }
-
             $archivo = $request->file('identificacion');
             $extencion = $request->file('identificacion')->getClientOriginalExtension();
-
-            $nombre_identificacion =  'identificacion_' .  $usuario->name . "." . $extencion;
+            $nombre_identificacion =  'identificacion_' .  $usuario->name . ".jpg";
             $nombre_identificacion = str_replace('/', '_', $nombre_identificacion);
             $nombre_identificacion = str_replace(' ', '_', $nombre_identificacion);
-            Storage::disk('files')->put("identificacion/" . $nombre_identificacion, \File::get($archivo));
+            if ($extencion == 'HEIC') {
+                HeicToJpg::convert($archivo)->saveAs("../storage/app/private/identificacion/" .  $usuario->name);
+            } else {
+                Storage::disk('files')->put("identificacion/" . $nombre_identificacion, \File::get($archivo));
+            }
 
             $usuario->identificacion = "identificacion/" . $nombre_identificacion;
         }
