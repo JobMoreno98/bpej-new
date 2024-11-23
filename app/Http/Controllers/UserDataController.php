@@ -159,11 +159,11 @@ class UserDataController extends Controller
 
             $usuario->profile_photo_path = "/profile_images/crop/" . $nombre_photo;
         }
-
+        /*
         if ($request->email != $usuario->email) {
             $usuario->email_verified_at = null;
         }
-
+*/
         $usuario->clave_bpej = "2012" . sprintf("%'.06d\n", $usuario->id);
         $usuario->update();
         event(new Registered($usuario));

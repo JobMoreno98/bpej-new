@@ -65,7 +65,7 @@ return [
 
     'logo' => env('APP_NAME', 'PAGE NAME'),
     'logo_img' => 'img/logo.svg',
-    'logo_img_class' => 'brand-image rounded elevation-1',
+    'logo_img_class' => 'brand-image rounded-4 elevation-0',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'bpej Logo',
@@ -156,7 +156,7 @@ return [
     'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
-    'layout_fixed_footer' => true,
+    'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
     /*
