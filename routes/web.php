@@ -90,6 +90,7 @@ Route::middleware([
 
 Route::post('/register-user', [UserDataController::class, 'update_user'])->name('register-user');
 
+/*
 Route::get('/servicios', [ServiciosController::class, 'inicio'])->name('servicios.inicio');
 Route::get('/servicios/{servicio}', [ServiciosController::class, 'show'])->name('servicios.show');
 Route::get('/categorias', [CategoriasController::class, 'inicio'])->name('categorias.inicio');
@@ -98,7 +99,7 @@ Route::post('/add-category', [CategoriasController::class, 'addUser'])->name('ad
 
 
 //Verificación de correo
-/*
+
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');

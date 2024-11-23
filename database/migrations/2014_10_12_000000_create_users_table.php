@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('tutor')->nullable();
             $table->date('fecha_nacimiento')->nullable();
             $table->string('calle')->nullable();
+            $table->string('colonia')->nullable();
             $table->string('municipio')->nullable();
             $table->string('codigo_postal')->nullable();
             $table->string('estado')->nullable();
@@ -30,6 +31,9 @@ return new class extends Migration
             $table->string('telefono')->nullable();
             $table->boolean('terminos')->default(true);
             $table->string('clave_bpej')->nullable();
+            $table->string('clave_rfid')->nullable();
+            $table->boolean('aleph')->default(false);
+            $table->date('fecha_impresion')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -134,7 +134,7 @@
                                         onchange="loadFile(event)">
                                 </div>
                                 <div class="col-sm-12 my-1  " id="nombre">
-                                    <label for="">Nombre</label>
+                                    <label for="">Nombre Completo (Favor de iniciar por apellidos)</label>
                                     <input class="form-control" type="text" name="name" value="">
                                 </div>
                                 <div class="col-sm-12 my-1 " id="email">
@@ -176,6 +176,14 @@
                                     <input class="form-control" type="text" name="calle" value="" id="">
 
                                 </div>
+
+                                <div class="col-sm-12 my-1 ">
+                                    <label for="">Colonia</label>
+                                    <input class="form-control" type="text" name="colonia" value=""
+                                        id="colonia">
+
+                                </div>
+
                                 <div class="col-sm-12 my-1 ">
                                     <label for="">Municipio</label>
                                     <input class="form-control" type="text" name="municipio" value=""
@@ -193,19 +201,20 @@
                                 </div>
                                 <div class="col-sm-12 my-1 ">
                                     <label for="">Comprobante de Domicilio</label>
-                                    <input accept="image/jpeg,application/pdf" class="form-control" type="file"
-                                        name="documento" id="">
+                                    <input accept="image/heic,image/jpg,image/jpeg,application/pdf" class="form-control"
+                                        type="file" name="documento" id="">
                                 </div>
                                 <div class="col-sm-12 my-1 ">
                                     <label for="">Identificación</label>
-                                    <input accept="image/jpeg,application/pdf" class="form-control" type="file"
-                                        name="identificacion" id="">
+                                    <input accept="image/heic,image/jpg,image/jpeg,application/pdf" class="form-control"
+                                        type="file" name="identificacion" id="">
                                 </div>
                                 <div
                                     class="col-sm-12 my-1 form-check form-check-inline my-1 d-flex flex-wrap justify-content-center">
                                     <input class="form-check-input" type="radio" name="terminos" id="terminos"
                                         required value="1">
-                                    <label class="form-check-label text-uppercase mx-1" for="terminos">Leí y acepto el aviso de privacidad
+                                    <label class="form-check-label text-uppercase mx-1" for="terminos">Leí y acepto el
+                                        aviso de privacidad
                                         *</label>
                                 </div>
 

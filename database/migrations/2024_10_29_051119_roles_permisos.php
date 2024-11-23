@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         \DB::statement("
-        CREATE VIEW roles_permisos 
+        CREATE OR REPLACE VIEW roles_permisos 
             AS
         SELECT
     `bpej`.`permissions`.`id` AS `permiso_id`,
@@ -45,6 +45,6 @@ FROM
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('roles_permisos');
     }
 };

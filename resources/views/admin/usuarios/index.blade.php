@@ -39,7 +39,8 @@
                                         <th>Nombre</th>
                                         <th>Email</th>
                                         <th>Tipo</th>
-                                        <th>Activo</th>
+                                        <th>Clave BPEJ</th>
+                                        <th>Clave RFID</th>
                                         @can('USUARIOS#update')
                                             <th>Accion</th>
                                         @endcan
@@ -51,7 +52,8 @@
                                             <td>{{ $usuario->name }}</td>
                                             <td>{{ $usuario->email }}</td>
                                             <td>{{ Str::ucfirst($usuario->tipo) }}</td>
-                                            <td>Activo</td>
+                                            <td>{{ $usuario->clave_bpej }}</td>
+                                            <td>{{ $usuario->clave_rfid }}</td>
                                             @can('USUARIOS#update')
                                                 <td class="d-flex flex-row">
                                                     <a href="{{ route('usuarios.edit', $usuario->id) }}"

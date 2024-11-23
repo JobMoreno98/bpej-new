@@ -106,6 +106,10 @@
                 <input class="form-control" type="text" name="calle" value="{{ $user->calle }}" id="">
             </div>
             <div class="col-sm-12 my-1 ">
+                <label for="">Colonia</label>
+                <input class="form-control" type="text" name="colonia" value="{{ $user->colonia }}" id="">
+            </div>
+            <div class="col-sm-12 my-1 ">
                 <label for="">Municipio</label>
                 <input class="form-control" type="text" name="municipio" value="{{ $user->municipio }}"
                     id="">
@@ -151,9 +155,35 @@
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Clave BPEJ</label>
-                <input class="form-control" type="text" name="clave_bpej" value="{{ $user->clave_bpej }}"
+                <input class="form-control-plaintext" type="text" name="clave_bpej" readonly
+                    value="{{ $user->clave_bpej }}" id="">
+            </div>
+            <div class="col-sm-12 my-1 ">
+                <label for="">Clave RFID</label>
+                <input class="{{ isset($user->clave_rfid) ? 'form-control-plaintext' : 'form-control' }} " type="text"
+                    name="clave_rfid" {{ isset($user->clave_rfid) ? 'readonly' : '' }} value="{{ $user->clave_rfid }}"
                     id="">
             </div>
+            <div class="d-flex flex-column flex-md-row  justify-content-center my-3 align-items-center">
+                <div class="form-check col-sm-12 col-md-5 col-lg-4 text-end">
+                    <input class="form-check-input" type="checkbox" name="aleph"
+                        {{ isset($user->clave_rfid) ? 'checked readonly' : '' }} id="aleph">
+                    <label class="form-check-label fw-bold" for="aleph">
+                        Registro Aleph
+                    </label>
+                </div>
+                <div class="col-sm-12 col-md-5 d-flex  align-items-center">
+                    <input type="checkbox" class="btn-check" id="btn-check-2-outlined" name="fecha_impresion"
+                        {{ isset($user->fecha_impresion) ? 'checked disabled' : '' }} autocomplete="off">
+                    <label class="btn btn-outline-success" for="btn-check-2-outlined">Credencial Impresa</label>
+                    @if (isset($user->fecha_impresion))
+                        <p class="mx-1">Fecha: {{ $user->fecha_impresion }}</p>
+                    @endif
+
+                </div>
+            </div>
+            foito
+            <img src="{{ Storage::disk('files')->get($user->profile_photo_path) }}" alt="">
             <div class="text-center col-sm-12 mt-1">
                 <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
             </div>
@@ -162,6 +192,7 @@
         </form>
     </div>
 @endsection
+
 @section('js')
     <script src="{{ asset('js/jquery.imgareaselect.js') }}"></script>
     <script src="{{ asset('js/editUser.js') }}"></script>

@@ -62,12 +62,13 @@ class UserDataController extends Controller
             'email' => ['required', Rule::unique('users')],
             'terminos' => 'required|in:1',
             'calle' => 'required',
+            'colonia' => 'required',
             'municipio' => 'required',
             'estado' => 'required',
             'tipo' => 'required',
             'codigo_postal' => 'required',
-            'documento' => ['required', 'mimes:jpg,pdf'],
-            'identificacion' => ['required', 'mimes:jpg,pdf'],
+            'documento' => ['required', 'mimes:jpg,jpeg,heic,pdf'],
+            'identificacion' => ['required', 'mimes:jpg,jpeg,heic,pdf'],
             'telefono' => 'required|regex:/[0-9]{10}/|size:10'
         ]);
         /*
@@ -105,7 +106,8 @@ class UserDataController extends Controller
             "terminos" => 1,
             'tipo' => $request->tipo,
             'telefono' => $request->telefono,
-            'tutor' => ($request->tipo == 'menor') ? $request->tutor : null
+            'tutor' => ($request->tipo == 'menor') ? $request->tutor : null,
+            'colonia' => $request->colonia,
         ]);
 
         if ($request->hasFile('documento')) {
@@ -155,6 +157,7 @@ class UserDataController extends Controller
             $usuario->email_verified_at = null;
         }
 
+        $usuario->clave_bpej = "2012" . sprintf("%'.06d\n", $usuario->id);
         $usuario->update();
         event(new Registered($usuario));
         return view('revisarCorreo');

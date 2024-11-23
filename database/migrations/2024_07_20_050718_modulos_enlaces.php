@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         \DB::statement("
-        CREATE VIEW modulos_enlace 
+        CREATE OR REPLACE VIEW modulos_enlace 
             AS
         SELECT
     `enlace_modulos`.`id` AS `enlace_id`,
@@ -48,6 +48,6 @@ ORDER BY
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('modulos_enlace');
     }
 };

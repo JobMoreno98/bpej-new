@@ -87,15 +87,18 @@ class User extends Controller
         $usuario = ModelsUser::find($user);
         $this->authorize('update',  [ModelsUser::class, $usuario]);
 
+
         $validator = Validator::make($request->all(), [
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
             'tutor' => Rule::requiredIf($request->tipo == 'menor'),
             'email' => ['required', Rule::unique('users')->ignore($usuario->id)],
             'calle' => 'required',
+            'colonia' => 'required',
             'municipio' => 'required',
             'estado' => 'required',
             'codigo_postal' => 'required',
-            'clave_bpej' => 'required'
+            'clave_rfid' => 'required',
+            'clave_bpej' => ['required', Rule::unique('users')->ignore($usuario->id)]
         ]);
 
         if (!isset($usuario->documento) || !isset($usuario->identificacion)) {
@@ -107,8 +110,9 @@ class User extends Controller
                 'municipio' => 'required',
                 'estado' => 'required',
                 'codigo_postal' => 'required',
-                'documento' => ['required', 'mimes:jpg,pdf'],
-                'identificacion' => ['required', 'mimes:jpg,pdf'],
+                'clave_rfid' => 'required',
+                'documento' => ['required', 'mimes:jpg,jpeg,heic,pdf'],
+                'identificacion' => ['required', 'mimes:jpg,jpeg,heic,pdf'],
             ]);
         }
         if ($validator->fails()) {
@@ -144,7 +148,6 @@ class User extends Controller
             Storage::disk('files')->put("identificacion/" . $nombre_identificacion, \File::get($archivo));
             $usuario->identificacion = "identificacion/" . $nombre_identificacion;
             $usuario->update();
-
         }
 
         if (isset($request->image)) {
@@ -183,8 +186,9 @@ class User extends Controller
             "terminos" => 1,
             'tipo' => $request->tipo,
             'tutor' => ($request->tipo == 'menor') ? $request->tutor : null,
-            'clave_bpej' => $request->clave_bpej
-
+            'aleph' => isset($request->aleph) ? 1 : 0,
+            'clave_rfid' => $request->clave_rfid,
+            'fecha_impresion' => isset($request->fecha_impresion) ? date('Y-m-d') : null
         ]);
         toast('Exito, se actualizo el usuario de forma correcta', 'success')->timerProgressBar()->autoClose(3000);
         return redirect()->route('usuarios.edit', $usuario->id);
