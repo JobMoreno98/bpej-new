@@ -36,7 +36,7 @@ class User extends Controller
             'colonia' => 'required',
             'municipio' => 'required',
             'estado' => 'required',
-            'codigo_postal' => 'required',
+            'codigo_postal' => 'required|numeric',
             'tipo' => 'required',
             'clave_rfid' => 'required',
             'email' => ['required', Rule::unique('users')],
@@ -62,10 +62,8 @@ class User extends Controller
 
         if (isset($request->image)) {
             $data = $request->image;
-
             list($type, $data) = explode(';', $data);
             list(, $data)      = explode(',', $data);
-
             $data = base64_decode($data);
             $url = "/profile_images/temp/" . time() . '.jpg';
             Storage::disk('files')->put($url, $data);
@@ -74,6 +72,7 @@ class User extends Controller
             $filenametostore = date('Y') . "_" . $request->nombre . ".jpg";
             Storage::disk('files')->put("/profile_images/crop/" . $filenametostore, $img);
             Storage::disk('files')->delete($url);
+            $user->profile_photo_path = "/profile_images/crop/" . $filenametostore;
         }
 
         if ($request->hasFile('documento')) {
@@ -103,7 +102,7 @@ class User extends Controller
             $user->identificacion = "identificacion/" . $nombre_identificacion;
         }
 
-        $user->profile_photo_path = "/profile_images/crop/" . $filenametostore;
+        
         $user->clave_bpej = "2012" . sprintf("%'.06d\n", $user->id);
         $user->update();
 

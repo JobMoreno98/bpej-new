@@ -116,7 +116,7 @@
             </div>
             <div class=" col-sm-12 my-1 ">
                 <label for="">Código Postal</label>
-                <input class="form-control" type="text" name="codigo_postal" value="{{ $user->codigo_postal }}"
+                <input class="form-control" type="number" name="codigo_postal" value="{{ $user->codigo_postal }}"
                     id="">
             </div>
             <div class=" col-sm-12 my-1 ">
