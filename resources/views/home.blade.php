@@ -15,7 +15,7 @@
 @section('content')
     <div class="container d-flex flex-wrap align-items-center justify-content-start">
         @foreach ($modulos as $key => $value)
-            <div class="col-lg-4 col-sm-12  col-md-6  my-3" 
+            <div class="col-lg-4 col-sm-12  col-md-8 col-lg-6  my-3" 
             data-aos="zoom-in" 
             data-aos-duration="500">
                 <div class="card card-margin h-100">
