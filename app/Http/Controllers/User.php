@@ -30,24 +30,26 @@ class User extends Controller
         $validator = Validator::make($request->all(), [
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
             'tutor' => Rule::requiredIf($request->tipo == 'menor'),
-            'documento' => ['required', 'mimes:jpg,pdf'],
-            'identificacion' => ['required', 'mimes:jpg,pdf'],
+            'documento' => ['required', 'mimes:jpg,jpeg,pdf'],
+            'identificacion' => ['required', 'mimes:jpg,jpeg,pdf'],
             'calle' => 'required',
+            'colonia' => 'required',
             'municipio' => 'required',
             'estado' => 'required',
             'codigo_postal' => 'required',
-            'clave_bpej' => 'required',
-            'tipo' => 'required'
+            'tipo' => 'required',
+            'clave_rfid' => 'required',
+            'email' => ['required', Rule::unique('users')],
+            'name' => ['required', Rule::unique('users')]
         ]);
 
         if ($validator->fails()) {
             toast(implode("<br/>", $validator->messages()->all()), 'error')->persistent(true, false);
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
 
-
         $user = ModelsUser::create([
-            'name' => $request->nombre,
+            'name' => $request->name,
             'email' => $request->email,
             'tipo' => $request->tipo,
             'fecha_nacimiento' => $request->fecha_nacimiento,
@@ -55,7 +57,7 @@ class User extends Controller
             'municipio' => $request->municipio,
             'codigo_postal' => $request->codigo_postal,
             'estado' => $request->estado,
-            'clave_bpej' => $request->clave_bpej,
+            'clave_rfid' => $request->clave_rfid
         ]);
 
         if (isset($request->image)) {
@@ -74,11 +76,39 @@ class User extends Controller
             Storage::disk('files')->delete($url);
         }
 
+        if ($request->hasFile('documento')) {
+            if (isset($usuario->documento)) {
+                Storage::disk('files')->delete($usuario->documento);
+            }
+            $archivo = $request->file('documento');
+            $extencion = $request->file('documento')->getClientOriginalExtension();
+            $comprobante =  'documento_' . $user->name . "." . $extencion;
+            $comprobante = str_replace('/', '_', $comprobante);
+            $comprobante = str_replace(' ', '_', $comprobante);
+            Storage::disk('files')->put("comprobante/" . $comprobante, \File::get($archivo));
+            $user->documento = "comprobante/" . $comprobante;
+        }
+
+        if ($request->hasFile('identificacion')) {
+            if (isset($usuario->identificacion)) {
+                Storage::disk('files')->delete($usuario->identificacion);
+            }
+
+            $archivo = $request->file('identificacion');
+            $extencion = $request->file('identificacion')->getClientOriginalExtension();
+            $nombre_identificacion =  'identificacion_' .  $user->name . "." . $extencion;
+            $nombre_identificacion = str_replace('/', '_', $nombre_identificacion);
+            $nombre_identificacion = str_replace(' ', '_', $nombre_identificacion);
+            Storage::disk('files')->put("identificacion/" . $nombre_identificacion, \File::get($archivo));
+            $user->identificacion = "identificacion/" . $nombre_identificacion;
+        }
+
         $user->profile_photo_path = "/profile_images/crop/" . $filenametostore;
+        $user->clave_bpej = "2012" . sprintf("%'.06d\n", $user->id);
         $user->update();
 
         $user->assignRole('general');
-        return $request;
+        return redirect()->route('usuarios.edit', $user->id);
     }
 
     public function update(Request $request, $user)

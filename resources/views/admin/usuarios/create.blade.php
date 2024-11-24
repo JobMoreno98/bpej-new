@@ -3,7 +3,7 @@
 
 
 @section('css')
-    
+
     <link rel="stylesheet" href="{{ asset('css/imgareaselect.css') }}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -29,7 +29,6 @@
                         onClick="take_snapshot()">
 
                     <input type="hidden" name="image" class="image-tag">
-
                     <input type="hidden" name="x1" value="" />
                     <input type="hidden" name="y1" value="" />
                     <input type="hidden" name="w" value="" />
@@ -42,13 +41,13 @@
             <div class="d-md-none d-block">
                 <input type="file" accept="image/*" name="profile_image">
             </div>
-            <div class="col-sm-12 my-1  " id="nombre">
+            <div class="col-sm-12 my-1  " id="name">
                 <label for="">Nombre</label>
-                <input class="form-control" type="text" name="nombre">
+                <input class="form-control" type="text" name="name" value="{{ old('name') }}">
             </div>
             <div class="col-sm-12 my-1 " id="correo">
                 <label for="">Correo</label>
-                <input class="form-control" type="text" name="email">
+                <input class="form-control" type="text" name="email" value="{{ old('email') }}">
             </div>
             <div class="d-flex align-items-center col-sm-12 my-1 justify-content-evenly">
                 <label for="">Es *</label>
@@ -65,41 +64,64 @@
             </div>
             <div class="col-sm-12 my-1  d-none" id="tutor">
                 <label for="">Tutor</label>
-                <input class="form-control" type="text" name="tutor">
+                <input class="form-control" type="text" name="tutor" value="{{ old('tutor') }}">
             </div>
             <div class=" col-sm-12 my-1 my-1 ">
                 <label for="">Fecha de Nacimiento</label>
-                <input class="form-control" type="date" name="fecha_nacimiento" id="">
+                <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento"
+                    value="{{ old('fecha_nacimiento') }}">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Calle</label>
-                <input class="form-control" type="text" name="calle" id="">
+                <input class="form-control" type="text" name="calle" id="calle" value="{{ old('calle') }}">
+            </div>
+            <div class="col-sm-12 my-1 ">
+                <label for="">Colonia</label>
+                <input class="form-control" type="text" name="colonia" id="colonia" value="{{ old('colonia') }}">
+
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Municipio</label>
-                <input class="form-control" type="text" name="municipio" id="">
+                <input class="form-control" type="text" name="municipio" id=""
+                    value="{{ old('municipio') }}">
             </div>
             <div class=" col-sm-12 my-1 ">
                 <label for="">Codigo Postal</label>
-                <input class="form-control" type="text" name="codigo_postal" id="">
+                <input class="form-control" type="text" name="codigo_postal" id="codigo_postal"
+                    value="{{ old('codigo_postal') }}">
             </div>
             <div class=" col-sm-12 my-1 ">
-                <label for="">Estado</label>
-                <input class="form-control" type="text" name="estado" id="">
+                <label for="estado">Estado</label>
+                <input class="form-control" type="text" name="estado" id="estado" value="{{ old('estado') }}">
             </div>
             <div class="col-sm-12 my-1 ">
-                <label for="">Comporbante de Domicilio</label>
-                <input accept="image/jpeg,application/pdf" class="form-control" type="file"
-                    name="comprobante_domicilio" id="">
+                <label for="documento">Comporbante de Domicilio</label>
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="documento"
+                    id="documento">
             </div>
             <div class="col-sm-12 my-1 ">
-                <label for="">Identificación</label>
-                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="comprobante_ine" id="">
+                <label for="identificacion">Identificación</label>
+                <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="identificacion"
+                    id="identificacion">
             </div>
+
             <div class="col-sm-12 my-1 ">
-                <label for="">Clave BPEJ</label>
-                <input class="form-control" type="text" name="clave_bpej"
-                    id="">
+                <label for="clave_rfid">Clave RFID</label>
+                <input class="form-control" type="text" name="clave_rfid" id="clave_rfid"
+                    value="{{ old('clave_rfid') }}">
+            </div>
+            <div class="d-flex flex-column flex-md-row  justify-content-center my-3 align-items-center">
+                <div class="form-check col-sm-12 col-md-5 col-lg-4 text-end">
+                    <input class="form-check-input" type="checkbox" name="aleph" id="aleph">
+                    <label class="form-check-label fw-bold" for="aleph">
+                        Registro Aleph
+                    </label>
+                </div>
+                <div class="col-sm-12 col-md-5 d-flex  align-items-center">
+                    <input type="checkbox" class="btn-check" id="btn-check-2-outlined" name="fecha_impresion"
+                        autocomplete="off">
+                    <label class="btn btn-outline-success" for="btn-check-2-outlined">Credencial Impresa</label>
+                </div>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
