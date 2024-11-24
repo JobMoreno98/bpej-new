@@ -183,7 +183,7 @@
                 </div>
             </div>
             foito
-            <img src="{{ Storage::disk('files')->get($user->profile_photo_path) }}" alt="">
+            <img src="{{ route('get-file-admin', ['id' => $user->id, 'type' => 'identificacion']) }}" alt="">
             <div class="text-center col-sm-12 mt-1">
                 <button type="submit" class="btn btn-success btn-sm"> Guardar</button>
             </div>

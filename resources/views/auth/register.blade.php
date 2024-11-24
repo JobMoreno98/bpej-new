@@ -100,7 +100,7 @@
     <section class=" py-2 py-md-5 py-xl-8 w-100" data-bs-theme="secondary">
         <div class="container-fluid d-flex h-100 align-items-center justify-content-center ">
             <div class="col-sm-12 d-flex  align-items-center justify-content-center m-1 p-1 p-md-5 rounded ">
-                <div class="col-sm-12 col-md-8 col-lg-5 col-xl-4 m-0 border rounded-4 border-dark p-1 p-md-3">
+                <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 m-0 border rounded-4 border-dark p-1 p-md-3">
                     <div class="card border-0 rounded-4" style="border:#7c2422 solid 2px;">
                         <div class="card-body p-0">
                             <div class="p-0 mb-2">
