@@ -134,17 +134,19 @@
                                         onchange="loadFile(event)">
                                 </div>
                                 <div class="col-sm-12 my-1  " id="nombre">
-                                    <label for="">Nombre Completo (Favor de iniciar por apellidos)</label>
-                                    <input class="form-control" type="text" name="name" value="">
+                                    <label for="">Nombre Completo</label>
+                                    <input class="form-control" placeholder="Favor de iniciar por apellidos" type="text"
+                                        name="name" value="{{ old('name') }}">
                                 </div>
                                 <div class="col-sm-12 my-1 " id="email">
                                     <label for="">Correo</label>
-                                    <input class="form-control" type="email" name="email" value="">
+                                    <input class="form-control" type="email" name="email" value="{{ old('email') }}">
                                 </div>
 
                                 <div class="col-sm-12 my-1 " id="telefono">
                                     <label for="">Teléfono</label>
-                                    <input class="form-control" type="text" name="telefono" value="">
+                                    <input class="form-control" type="text" name="telefono"
+                                        value="{{ old('telefono') }}">
                                 </div>
 
                                 <div class="d-flex align-items-center col-sm-12 my-1 justify-content-evenly">
@@ -161,43 +163,45 @@
                                         <label class="form-check-label" for="inlineRadio2">Menor</label>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 my-1 d-none " id="tutor">
-                                    <label for="">Tutor</label>
-                                    <input class="form-control" type="text" name="tutor" value="">
+                                <div class="col-sm-12 my-1 d-none ">
+                                    <label for="tutor">Tutor</label>
+                                    <input class="form-control" type="text" id="tutor" name="tutor"
+                                        value="{{ old('tutor') }}">
                                 </div>
 
                                 <div class=" col-sm-12 my-1 my-1 ">
                                     <label for="">Fecha de Nacimiento</label>
-                                    <input class="form-control" type="date" name="fecha_nacimiento" value=""
-                                        id="">
+                                    <input class="form-control" type="date" name="fecha_nacimiento"
+                                        value="{{ old('fecha_nacimiento') }}" id="fecha_nacimiento">
                                 </div>
                                 <div class="col-sm-12 my-1 ">
-                                    <label for="">Calle y número</label>
-                                    <input class="form-control" type="text" name="calle" value="" id="">
-
-                                </div>
-
-                                <div class="col-sm-12 my-1 ">
-                                    <label for="">Colonia</label>
-                                    <input class="form-control" type="text" name="colonia" value=""
-                                        id="colonia">
+                                    <label for="calle">Calle y número</label>
+                                    <input class="form-control" type="text" name="calle" value="{{ old('calle') }}"
+                                        id="calle">
 
                                 </div>
 
                                 <div class="col-sm-12 my-1 ">
-                                    <label for="">Municipio</label>
-                                    <input class="form-control" type="text" name="municipio" value=""
-                                        id="">
+                                    <label for="colonia">Colonia</label>
+                                    <input class="form-control" type="text" name="colonia"
+                                        value="{{ old('colonia') }}" id="colonia">
+
+                                </div>
+
+                                <div class="col-sm-12 my-1 ">
+                                    <label for="municipio">Municipio</label>
+                                    <input class="form-control" type="text" name="municipio"
+                                        value="{{ old('municipio') }}" id="municipio">
                                 </div>
                                 <div class=" col-sm-12 my-1 ">
-                                    <label for="">Código Postal</label>
-                                    <input class="form-control" type="text" name="codigo_postal" value=""
-                                        id="">
+                                    <label for="codigo_postal">Código Postal</label>
+                                    <input class="form-control" type="text" name="codigo_postal"
+                                        value="{{ old('codigo_postal') }}" id="codigo_postal">
                                 </div>
                                 <div class=" col-sm-12 my-1 ">
-                                    <label for="">Estado</label>
-                                    <input class="form-control" type="text" name="estado" value=""
-                                        id="">
+                                    <label for="estado">Estado</label>
+                                    <input class="form-control" type="text" name="estado"
+                                        value="{{ old('estado') }}" id="estado">
                                 </div>
                                 <div class="col-sm-12 my-1 ">
                                     <label for="">Comprobante de Domicilio</label>
@@ -236,14 +240,14 @@
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-lg p-2">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">AVISO DE PRIVACIDAD</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body" style="text-align:justify;">
+                                    <div class="modal-body p-2" style="text-align:justify;">
                                         La Universidad de Guadalajara (en adelante UdeG), con domicilio en Avenida Juárez
                                         976, colonia Centro, código postal 44100, en Guadalajara, Jalisco, hace de su
                                         conocimiento que se considerará como información confidencial aquella que se
@@ -265,8 +269,8 @@
                                             href="http://www.transparencia.udg.mx/aviso-confidencialidad-integral">ver</a>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary btn my-2"
+                                            data-bs-dismiss="modal">Cerrar</button>
                                     </div>
                                 </div>
                             </div>

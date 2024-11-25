@@ -41,9 +41,11 @@
                                         <th>Tipo</th>
                                         <th>Clave BPEJ</th>
                                         <th>Clave RFID</th>
+                                        <th class="text-center">Veridicado</th>
                                         @can('USUARIOS#update')
                                             <th>Accion</th>
                                         @endcan
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,6 +56,13 @@
                                             <td>{{ Str::ucfirst($usuario->tipo) }}</td>
                                             <td class="text-start">{{ $usuario->clave_bpej }}</td>
                                             <td>{{ isset($usuario->clave_rfid) ? $usuario->clave_rfid : 'No capturado' }}
+                                            </td>
+                                            <td class="text-center">
+                                                <span
+                                                    class="material-symbols-outlined {{ isset($usuario->email_verified_at) ? 'text-success' : 'text-danger' }}">
+                                                    check_circle
+                                                </span>
+
                                             </td>
                                             @can('USUARIOS#update')
                                                 <td class="d-flex flex-row">
