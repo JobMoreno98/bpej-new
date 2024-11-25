@@ -95,7 +95,7 @@
                 </div>
             </section>
         @else
-            El periodo de Registro de Proyectos a terminado
+            Favor de Iniciar Sesión
         @endif
     </div>
     <script type="text/javascript" src="{{ asset('js/usuarios/main.js') }}"></script>

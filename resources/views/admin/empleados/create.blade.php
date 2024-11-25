@@ -12,11 +12,11 @@
             @csrf
             <div>
                 <label for="">{{ __('Name') }}</label>
-                <input class="form-control" type="text" name="name" value="">
+                <input class="form-control" type="text" name="name" value="{{ old('name') }}">
             </div>
             <div>
                 <label for="">{{ __('Email') }}</label>
-                <input class="form-control" type="email" name="email" value="">
+                <input class="form-control" type="email" name="email" value="{{ old('email') }}">
             </div>
             <div>
                 <label for="">{{ __('Role') }}</label>

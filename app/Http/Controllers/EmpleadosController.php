@@ -51,7 +51,7 @@ class EmpleadosController extends Controller
         ]);
         if ($validator->fails()) {
             toast(implode("<br/>", $validator->messages()->all()), 'error')->timerProgressBar()->persistent(true, false);
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
         $empleado = Admin::create([
             'name' => $request->name,

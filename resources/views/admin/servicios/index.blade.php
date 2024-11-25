@@ -81,7 +81,7 @@
                 </div>
             </section>
         @else
-            El periodo de Registro de Proyectos a terminado
+            Favor de Iniciar Sesión
         @endif
     </div>
 @endsection

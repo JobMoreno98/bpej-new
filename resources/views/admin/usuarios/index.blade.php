@@ -62,7 +62,6 @@
                                                     class="material-symbols-outlined {{ isset($usuario->email_verified_at) ? 'text-success' : 'text-danger' }}">
                                                     check_circle
                                                 </span>
-
                                             </td>
                                             @can('USUARIOS#update')
                                                 <td class="d-flex flex-row">
@@ -75,7 +74,6 @@
                                                     </a>
                                                 </td>
                                             @endcan
-
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -86,7 +84,7 @@
 
             </section>
         @else
-            El periodo de Registro de Proyectos a terminado
+            Favor de Iniciar Sesión
         @endif
     </div>
 @endsection
