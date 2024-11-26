@@ -1,21 +1,41 @@
 @extends('plantilla')
 @section('content')
     <div class="container-lg">
-        <div class="col-sm-12">
-            <video autoplay loop class="w-100" muted>
-                <source src="{{ asset('img/videos/loop_bpej_agua.mp4') }}" type="video/mp4">
-            </video>
+        <div class="col-sm-12 mt-md-2">
+            <a href="{{ route('register') }}" >
+                <video autoplay loop class="w-100" muted>
+                    <source src="{{ asset('img/videos/loop_slide_libros.mp4') }}" type="video/mp4">
+                </video>
+            </a>
         </div>
         <div style="text-align: justify">
-            <h5 class="text-center fw-bold">Acerca de</h5>
+            <h5 class="text-center fw-bold">¡Bienvenidos a la Biblioteca Pública del Estado de Jalisco!</h5>
             <hr>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, in sequi, accusantium dolore aperiam
-            deleniti voluptatibus illum quidem nobis similique non! Officia pariatur accusantium repudiandae, dolorem
-            molestias ab explicabo labore?
-            Esse, ab. Ratione sapiente soluta nobis totam natus, fuga voluptatum explicabo cumque ipsam culpa, enim,
-            possimus iste sint tempore aut. Laborum asperiores et ducimus aliquam dolores corrupti quae, libero maiores?
-            Repellendus libero id laborum, ut excepturi quo non. Nisi, quod adipisci. Dignissimos, molestiae incidunt
-            alias, nulla, at eveniet repellat delectus culpa quae voluptas quo. Laboriosam quis corporis illo earum eum!
+            <p>
+                Para poder acceder al préstamo externo de libros, el primer paso es registrarte para obtener tu credencial.
+                Solo necesitas ingresar a nuestra página de registro y completar los datos solicitados con una
+                identificación oficial (INE, pasaporte, cédula profesional expedida por la Secretaría de Educación Pública,
+                Cartilla del Servicio Militar Nacional y, en el caso de menores, CURP e identificación escolar) y
+                comprobante de domicilio (CFE, cable) no mayor a tres meses de antigüedad desde su fecha de expedición.
+            </p>
+            <p>
+                Pasos para registrarte:
+            <ol>
+                <li>Llena el formulario de inscripción con tus datos personales.</li>
+                <li>Realiza el proceso de validación para obtener tu credencial en nuestras instalaciones facilitando los
+                    documentos identificativos.</li>
+                <li>Una vez debidamente registrado, podrás acceder a todos nuestros servicios de préstamo de libros.</li>
+            </ol>
+            Recuerda que esta credencial te permitirá disfrutar de una amplia variedad de títulos de nuestra colección,
+            ¡así que no dudes en registrarte hoy mismo!
+            Si tienes alguna duda, no dudes en contactarnos. Estamos para ayudarte.
+            ¡Nos vemos pronto en la biblioteca!
+            </p>
+
+
+        </div>
+        <div class="text-center">
+            <a href="{{ route('register') }}" class="btn btn-primary btn my-2 " target="_blank">¡Regístrate aquí!</a>
         </div>
         {{--
         <div class="container d-flex justify-content-around flex-column flex-md-row mt-4">
