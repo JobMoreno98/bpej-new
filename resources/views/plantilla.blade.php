@@ -73,6 +73,9 @@
                 --}}
                 <a href="{{ route('register') }}"
                     class="ml-4 font-semibold text-decoration-none text-white btn btn-sm">{{ __('Register') }}</a>
+                <a href="{{ asset('documentos/Politicas de Prestamo Externo BPEJ.pdf') }}"
+                    class="ml-4 font-semibold text-decoration-none text-white btn btn-sm"
+                    target="_blank">Reglamento de préstamo</a>
             </a>
         </div>
     </nav>

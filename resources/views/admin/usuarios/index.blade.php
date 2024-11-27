@@ -41,7 +41,7 @@
                                         <th>Tipo</th>
                                         <th>Clave BPEJ</th>
                                         <th>Clave RFID</th>
-                                        <th class="text-center">Veridicado</th>
+                                        <th class="text-center">Verificado</th>
                                         @can('USUARIOS#update')
                                             <th>Accion</th>
                                         @endcan

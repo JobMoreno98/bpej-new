@@ -95,7 +95,7 @@
                 <input class="form-control" type="text" name="estado" id="estado" value="{{ old('estado') }}">
             </div>
             <div class="col-sm-12 my-1 ">
-                <label for="documento">Comporbante de Domicilio</label>
+                <label for="documento">Comprobante de Domicilio</label>
                 <input accept="image/jpeg,application/pdf" class="form-control" type="file" name="documento"
                     id="documento">
             </div>
