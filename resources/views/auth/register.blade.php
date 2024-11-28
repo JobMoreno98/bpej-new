@@ -163,9 +163,9 @@
                                         <label class="form-check-label" for="inlineRadio2">Menor</label>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 my-1 d-none ">
+                                <div class="col-sm-12 my-1 d-none " id="tutor" >
                                     <label for="tutor">Tutor</label>
-                                    <input class="form-control" type="text" id="tutor" name="tutor"
+                                    <input class="form-control" type="text" name="tutor"
                                         value="{{ old('tutor') }}">
                                 </div>
 

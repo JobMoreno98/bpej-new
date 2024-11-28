@@ -116,7 +116,6 @@
 
     <script>
         function option(x) {
-            console.log(x)
             if (x === 0) {
                 document.getElementById("tutor").classList.remove("d-none");
             }
