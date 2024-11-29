@@ -208,6 +208,7 @@ class User extends Controller
 
         $usuario->update([
             'name' => $request->name,
+            'email' => $request->email,
             "fecha_nacimiento" => $request->fecha_nacimiento,
             "calle" => $request->calle,
             "municipio" => $request->municipio,
