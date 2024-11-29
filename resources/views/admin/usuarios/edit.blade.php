@@ -67,7 +67,7 @@
 
             <div class="col-sm-12 my-1  " id="nombre">
                 <label for="">Nombre</label>
-                <input class="form-control" type="text" name="nombre" value="{{ $user->name }}">
+                <input class="form-control" type="text" name="name" value="{{ $user->name }}">
             </div>
             <div class="col-sm-12 my-1 " id="email">
                 <label for="">Correo</label>

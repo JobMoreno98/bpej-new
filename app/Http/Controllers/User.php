@@ -102,7 +102,7 @@ class User extends Controller
             $user->identificacion = "identificacion/" . $nombre_identificacion;
         }
 
-        
+
         $user->clave_bpej = "2012" . sprintf("%'.06d\n", $user->id);
         $user->update();
 
@@ -207,6 +207,7 @@ class User extends Controller
 
 
         $usuario->update([
+            'name' => $request->name,
             "fecha_nacimiento" => $request->fecha_nacimiento,
             "calle" => $request->calle,
             "municipio" => $request->municipio,
