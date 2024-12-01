@@ -72,7 +72,7 @@ class UserDataController extends Controller
             'profile_photo_path' => 'nullable|max:5120',
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
             'tutor' => Rule::requiredIf($request->tipo == 'menor'),
-            'curp' => [Rule::requiredIf($request->tipo == 'menor'), 'size:18'],
+            'curp' => [Rule::requiredIf($request->tipo == 'menor'), 'nullable','size:18'],
             'name' => 'required',
             'email' => ['required', Rule::unique('users')],
             'terminos' => 'required|in:1',
