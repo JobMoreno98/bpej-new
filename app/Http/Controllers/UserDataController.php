@@ -56,9 +56,9 @@ class UserDataController extends Controller
         //dd($request->tipo);
         //$this->authorize('update', $usuario);
         $message = [
-            'documento.size' => 'El tamaño de la identificacion debe ser menor a  5Mb',
-            'identificacion.size' => 'El tamaño de la identificacion debe ser menor a  5Mb',
-            'profile_photo_path.size' => 'El tamaño de la fotografia debe ser menor a 5Mb',
+            'documento.max' => 'El tamaño de la identificacion debe ser menor a  5Mb',
+            'identificacion.max' => 'El tamaño de la identificacion debe ser menor a  5Mb',
+            'profile_photo_path.max' => 'El tamaño de la fotografia debe ser menor a 5Mb',
             'profile_photo_path.uploaded' => 'El tamaño de la fotografia debe ser menor a 5Mb',
             'documento.uploaded' => 'El tamaño de la fotografia debe ser menor a 5Mb',
             'identificacion.uploaded' => 'El tamaño de la identificacion debe ser menor a  5Mb',
