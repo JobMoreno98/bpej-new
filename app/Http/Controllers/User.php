@@ -26,12 +26,19 @@ class User extends Controller
     }
     public function store(Request $request)
     {
+        $message = [
+            'documento.size' => 'El tamaño de la identificacion debe ser menor a  5Mb',
+            'identificacion.size' => 'El tamaño de la identificacion debe ser menor a  5Mb',
+            'profile_photo_path.size' => 'El tamaño de la fotografia debe ser menor a 5Mb'
+        ];
+
 
         $validator = Validator::make($request->all(), [
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
             'tutor' => Rule::requiredIf($request->tipo == 'menor'),
-            'documento' => ['required', 'mimes:jpg,jpeg,pdf'],
-            'identificacion' => ['required', 'mimes:jpg,jpeg,pdf'],
+            'documento' => ['required', 'file', 'mimes:jpg,jpeg,heic,pdf', 'max:5120'],
+            'identificacion' =>  ['required', 'file', 'mimes:jpg,jpeg,heic,pdf', 'max:5120'],
+            'curp' => [Rule::requiredIf($request->tipo == 'menor'), 'size:18'],
             'calle' => 'required',
             'colonia' => 'required',
             'municipio' => 'required',
@@ -41,7 +48,7 @@ class User extends Controller
             'clave_rfid' => 'required',
             'email' => ['required', Rule::unique('users')],
             'name' => ['required', Rule::unique('users')]
-        ]);
+        ], $message);
 
         if ($validator->fails()) {
             toast(implode("<br/>", $validator->messages()->all()), 'error')->persistent(true, false);
@@ -57,7 +64,9 @@ class User extends Controller
             'municipio' => $request->municipio,
             'codigo_postal' => $request->codigo_postal,
             'estado' => $request->estado,
-            'clave_rfid' => $request->clave_rfid
+            'clave_rfid' => $request->clave_rfid,
+            'curp' => ($request->tipo == 'menor') ? $request->curp : null,
+            'tutor' => ($request->tipo == 'tutor') ? $request->tutor : null,
         ]);
 
         if (isset($request->image)) {
@@ -120,6 +129,7 @@ class User extends Controller
         $validator = Validator::make($request->all(), [
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
             'tutor' => Rule::requiredIf($request->tipo == 'menor'),
+            'curp' => [Rule::requiredIf($request->tipo == 'menor'), 'size:18'],
             'email' => ['required', Rule::unique('users')->ignore($usuario->id)],
             'calle' => 'required',
             'colonia' => 'required',
@@ -135,6 +145,7 @@ class User extends Controller
                 'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
                 'tutor' => Rule::requiredIf($request->tipo == 'menor'),
                 'email' => ['required', Rule::unique('users')->ignore($usuario->id)],
+                'curp' => [Rule::requiredIf($request->tipo == 'menor'), 'size:18'],
                 'calle' => 'required',
                 'municipio' => 'required',
                 'estado' => 'required',
@@ -217,6 +228,7 @@ class User extends Controller
             "terminos" => 1,
             'tipo' => $request->tipo,
             'tutor' => ($request->tipo == 'menor') ? $request->tutor : null,
+            'curp' => ($request->tipo == 'menor') ? $request->curp : null,
             'aleph' => isset($request->aleph) ? 1 : 0,
             'clave_rfid' => $request->clave_rfid,
             'fecha_impresion' => isset($request->fecha_impresion) ? date('Y-m-d') : null

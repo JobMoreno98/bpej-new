@@ -15,32 +15,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ asset('css/slide.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/glightbox.css') }}">
+    <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
     @yield('css')
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        #footer {
-            margin-top: auto;
-        }
-
-        .btn-primary {
-            --bs-btn-bg: #7c2422 !important;
-            --bs-btn-border-color: #7c2422 !important;
-            transition: ease-in-out .3s;
-            --bs-btn-hover-bg: #990604 !important;
-            --bs-btn-hover-border-color: #990604 !important;
-        }
-    </style>
 </head>
 
 <body>
@@ -74,8 +51,8 @@
                 <a href="{{ route('register') }}"
                     class="ml-4 font-semibold text-decoration-none text-white btn btn-sm">{{ __('Register') }}</a>
                 <a href="{{ asset('documentos/Politicas de Prestamo Externo BPEJ.pdf') }}"
-                    class="ml-4 font-semibold text-decoration-none text-white btn btn-sm"
-                    target="_blank">Reglamento de préstamo</a>
+                    class="ml-4 font-semibold text-decoration-none text-white btn btn-sm" target="_blank">Reglamento de
+                    préstamo</a>
             </a>
         </div>
     </nav>
@@ -133,7 +110,6 @@
 
         </footer>
 
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -141,6 +117,10 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/aos.js') }}"></script>
+    <script>
+        AOS.init();
+    </script>
     {{--
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 

@@ -7,24 +7,8 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/logins/login-9/assets/css/login-9.css">
-    <style>
-        body {
-
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-        }
-
-        .btn-primary {
-            --bs-btn-bg: #7c2422 !important;
-            --bs-btn-border-color: #7c2422 !important;
-            transition: ease-in-out .3s;
-            --bs-btn-hover-bg: #990604 !important;
-            --bs-btn-hover-border-color: #990604 !important;
-        }
-    </style>
+    <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
 </head>
 
 <body>

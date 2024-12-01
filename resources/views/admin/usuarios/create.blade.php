@@ -63,8 +63,13 @@
                 </div>
             </div>
             <div class="col-sm-12 my-1  d-none" id="tutor">
-                <label for="">Tutor</label>
-                <input class="form-control" type="text" name="tutor" value="{{ old('tutor') }}">
+                <div> <label for="nameTutor">Tutor</label>
+                    <input class="form-control" type="text" id="nameTutor" name="tutor" value="{{ old('tutor') }}">
+                </div>
+                <div> <label for="curp">CURP</label>
+                    <input class="form-control" type="text" id="curp" name="curp" value="{{ old('curp') }}">
+                </div>
+
             </div>
             <div class=" col-sm-12 my-1 my-1 ">
                 <label for="">Fecha de Nacimiento</label>

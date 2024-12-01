@@ -163,10 +163,17 @@
                                         <label class="form-check-label" for="inlineRadio2">Menor</label>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 my-1 d-none " id="tutor" >
-                                    <label for="tutor">Tutor</label>
-                                    <input class="form-control" type="text" name="tutor"
-                                        value="{{ old('tutor') }}">
+                                <div class="col-sm-12 my-1 d-none " id="tutor">
+                                    <div> <label for="tutor">Tutor</label>
+                                        <input class="form-control" type="text" name="tutor"
+                                            value="{{ old('tutor') }}">
+                                    </div>
+                                    <div>
+                                        <label for="tutor">CURP</label>
+                                        <input class="form-control" type="text" name="curp"
+                                            value="{{ old('curp') }}" maxlength="18">
+                                    </div>
+
                                 </div>
 
                                 <div class=" col-sm-12 my-1 my-1 ">

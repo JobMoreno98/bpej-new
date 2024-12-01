@@ -91,15 +91,26 @@
                 </div>
             </div>
             <div class="col-sm-12 my-1  {{ !isset($user->tutor) ? 'd-none' : '' }}" id="tutor">
-                <label for="">Tutor</label>
-                <input class="form-control" type="text" name="tutor"
-                    value="{{ isset($user->tutor) ? $user->tutor : null }}">
+
+                <div>
+                    <label for="nameTutor">Tutor</label>
+                    <input class="form-control" type="text" id="nameTutor" name="tutor"
+                        value="{{ isset($user->tutor) ? $user->tutor : null }}">
+
+                </div>
+                <div>
+                    <label for="curp">CURP</label>
+                    <input class="form-control" id="curp" type="text" name="curp"
+                        value="{{ isset($user->curp) ? $user->curp : null }}" maxlength="18">
+
+
+                </div>
             </div>
 
             <div class=" col-sm-12 my-1 my-1 ">
                 <label for="">Fecha de Nacimiento</label>
-                <input class="form-control" type="date" name="fecha_nacimiento" value="{{ $user->fecha_nacimiento }}"
-                    id="">
+                <input class="form-control" type="date" name="fecha_nacimiento"
+                    value="{{ $user->fecha_nacimiento }}" id="">
             </div>
             <div class="col-sm-12 my-1 ">
                 <label for="">Calle y número</label>

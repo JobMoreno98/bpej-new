@@ -1,14 +1,14 @@
 @extends('plantilla')
 @section('content')
-    <div class="container-lg">
-        <div class="col-sm-12 mt-md-2">
+    <div class="container-lg"  >
+        <div class="col-sm-12 mt-md-2" data-aos="fade-up" data-aos-duration="1000">
             <a href="{{ route('register') }}" >
                 <video autoplay loop class="w-100" muted>
                     <source src="{{ asset('img/videos/loop_slide_libros.mp4') }}" type="video/mp4">
                 </video>
             </a>
         </div>
-        <div style="text-align: justify">
+        <div style="text-align: justify" data-aos="fade-up" data-aos-duration="1500" >
             <h5 class="text-center fw-bold">¡Bienvenidos a la Biblioteca Pública del Estado de Jalisco!</h5>
             <hr>
             <p>

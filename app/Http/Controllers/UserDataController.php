@@ -55,9 +55,21 @@ class UserDataController extends Controller
 
         //dd($request->tipo);
         //$this->authorize('update', $usuario);
+        $message = [
+            'documento.size' => 'El tamaño de la identificacion debe ser menor a  5Mb',
+            'identificacion.size' => 'El tamaño de la identificacion debe ser menor a  5Mb',
+            'profile_photo_path.size' => 'El tamaño de la fotografia debe ser menor a 5Mb',
+            'profile_photo_path.uploaded' => 'El tamaño de la fotografia debe ser menor a 5Mb',
+            'documento.uploaded' => 'El tamaño de la fotografia debe ser menor a 5Mb',
+            'identificacion.uploaded' => 'El tamaño de la identificacion debe ser menor a  5Mb',
+            'tipo.required' => 'Debes de especificar si eres mayor de edad o no'
+        ];
+
         $request->validate([
+            'profile_photo_path' => 'nullable|max:5120',
             'fecha_nacimiento' => 'required|date|before:' . date('Y-m-d'),
             'tutor' => Rule::requiredIf($request->tipo == 'menor'),
+            'curp' => [Rule::requiredIf($request->tipo == 'menor'), 'size:18'],
             'name' => 'required',
             'email' => ['required', Rule::unique('users')],
             'terminos' => 'required|in:1',
@@ -67,10 +79,10 @@ class UserDataController extends Controller
             'estado' => 'required',
             'tipo' => 'required',
             'codigo_postal' => 'required',
-            'documento' => ['required', 'mimes:jpg,jpeg,heic,pdf'],
-            'identificacion' => ['required', 'mimes:jpg,jpeg,heic,pdf'],
+            'documento' => ['required', 'file', 'mimes:jpg,jpeg,heic,pdf', 'max:5120'],
+            'identificacion' => ['required', 'file', 'mimes:jpg,jpeg,heic,pdf', 'max:5120'],
             'telefono' => 'required|regex:/[0-9]{10}/|size:10'
-        ]);
+        ], $message);
         /*
         if (!isset($usuario->documento) || !isset($usuario->identificacion)) {
             $validator = Validator::make($request->all(), [
@@ -107,6 +119,7 @@ class UserDataController extends Controller
             'tipo' => $request->tipo,
             'telefono' => $request->telefono,
             'tutor' => ($request->tipo == 'menor') ? $request->tutor : null,
+            'curp' => ($request->tipo == 'menor') ? $request->curp : null,
             'colonia' => $request->colonia,
         ]);
 
