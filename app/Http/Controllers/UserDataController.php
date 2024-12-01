@@ -58,11 +58,14 @@ class UserDataController extends Controller
         $message = [
             'documento.max' => 'El tamaño de la identificacion debe ser menor a  5Mb',
             'identificacion.max' => 'El tamaño de la identificacion debe ser menor a  5Mb',
+            'identificacion.required' => 'El campo identificación es obligatorio',
+            'telefono.required' => 'El campo teléfono es obligatorio',
             'profile_photo_path.max' => 'El tamaño de la fotografia debe ser menor a 5Mb',
             'profile_photo_path.uploaded' => 'El tamaño de la fotografia debe ser menor a 5Mb',
             'documento.uploaded' => 'El tamaño de la fotografia debe ser menor a 5Mb',
             'identificacion.uploaded' => 'El tamaño de la identificacion debe ser menor a  5Mb',
-            'tipo.required' => 'Debes de especificar si eres mayor de edad o no'
+            'tipo.required' => 'Debes de especificar si eres mayor de edad o no',
+            'codigo_postal.required' => 'El campo código postal es obligatorio'
         ];
 
         $request->validate([
