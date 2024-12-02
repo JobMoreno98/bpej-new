@@ -90,7 +90,6 @@
                     <label class="form-check-label" for="inlineRadio2">Menor</label>
                 </div>
             </div>
-            {{ !isset($user->tutor) }}
             <div class="col-sm-12 my-1  {{ !isset($user->tutor) ? 'd-none' : '' }}" id="tutor">
 
                 <div>
