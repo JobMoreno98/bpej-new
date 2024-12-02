@@ -66,7 +66,7 @@ class User extends Controller
             'estado' => $request->estado,
             'clave_rfid' => $request->clave_rfid,
             'curp' => ($request->tipo == 'menor') ? $request->curp : null,
-            'tutor' => ($request->tipo == 'tutor') ? $request->tutor : null,
+            'tutor' => ($request->tipo == 'menor') ? $request->tutor : null,
         ]);
 
         if (isset($request->image)) {

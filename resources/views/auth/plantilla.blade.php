@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/logins/login-9/assets/css/login-9.css">
     <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
+    @yield('css')
 </head>
 
 <body>

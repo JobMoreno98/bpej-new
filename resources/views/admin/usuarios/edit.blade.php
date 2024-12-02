@@ -90,6 +90,7 @@
                     <label class="form-check-label" for="inlineRadio2">Menor</label>
                 </div>
             </div>
+            {{ !isset($user->tutor) }}
             <div class="col-sm-12 my-1  {{ !isset($user->tutor) ? 'd-none' : '' }}" id="tutor">
 
                 <div>
@@ -178,7 +179,7 @@
             <div class="d-flex flex-column flex-md-row  justify-content-center my-3 align-items-center">
                 <div class="form-check col-sm-12 col-md-5 col-lg-4 text-end">
                     <input class="form-check-input" type="checkbox" name="aleph"
-                        {{ isset($user->clave_rfid) ? 'checked readonly' : '' }} id="aleph">
+                        {{ !isset($user->aleph) ? 'checked readonly' : '' }} id="aleph">
                     <label class="form-check-label fw-bold" for="aleph">
                         Registro Aleph
                     </label>

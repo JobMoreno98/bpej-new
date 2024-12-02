@@ -2,7 +2,13 @@
 
 @section('title', __('Sign in'))
 
-
+@section('css')
+    <style>
+        body {
+            justify-content: center;
+        }
+    </style>
+@endsection
 @section('content')
     <section class="bg-secondary-100 py-3 py-md-5 py-xl-8 w-100">
         <div class="container d-flex h-100 align-items-center">

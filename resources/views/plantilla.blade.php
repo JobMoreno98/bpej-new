@@ -48,11 +48,15 @@
                     </div>
                 @endif
                 --}}
-                <a href="{{ route('register') }}"
-                    class="ml-4 font-semibold text-decoration-none text-white btn btn-sm">{{ __('Register') }}</a>
-                <a href="{{ asset('documentos/Politicas de Prestamo Externo BPEJ.pdf') }}"
-                    class="ml-4 font-semibold text-decoration-none text-white btn btn-sm" target="_blank">Reglamento de
-                    préstamo</a>
+                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                    <a href="{{ route('register') }}"
+                        class="ml-4 font-semibold text-decoration-none text-white btn btn-sm">{{ __('Register') }}</a>
+                    <a href="{{ asset('documentos/Politicas de Prestamo Externo BPEJ.pdf') }}"
+                        class="ml-4 font-semibold text-decoration-none text-white btn btn-sm" target="_blank">Reglamento
+                        de
+                        préstamo</a>
+                </div>
+
             </a>
         </div>
     </nav>
