@@ -185,7 +185,7 @@
                 </div>
                 <div class="col-sm-12 col-md-5 d-flex  align-items-center">
                     <input type="checkbox" class="btn-check" id="btn-check-2-outlined" name="fecha_impresion"
-                        {{ isset($user->fecha_impresion) ? 'checked disabled' : '' }} autocomplete="off">
+                        {{ isset($user->fecha_impresion) ? 'checked' : '' }} autocomplete="off">
                     <label class="btn btn-outline-success" for="btn-check-2-outlined">Credencial Impresa</label>
                     @if (isset($user->fecha_impresion))
                         <p class="mx-1">Fecha: {{ $user->fecha_impresion }}</p>
