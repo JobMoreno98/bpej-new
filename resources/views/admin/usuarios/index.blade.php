@@ -1,8 +1,5 @@
 @extends('adminlte::page')
 @section('title', 'Usuarios')
-@section('css')
-
-@endsection
 
 @section('content_header')
     <h2 class="text-center">Usuarios</h2>
@@ -87,4 +84,76 @@
 
 @section('footer')
     <h5 class="text-end">En caso de inconsistencias, favor de reportarlas.</h5>
+@endsection
+
+@section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').dataTable().fnClearTable();
+            $('#myTable').dataTable().fnDestroy();
+
+            $('#myTable').DataTable({
+                "order": [
+                    [0, "asc"]
+                ],
+                columnDefs: [{
+                    targets: 7,
+                    render: DataTable.render.datetime('D MMM YYYY', 'MMM D, YY', 'en')
+                }],
+                layout: {
+                    topStart: {
+                        pageLength: {
+                            menu: [5, 10, 25, 50]
+                        }
+                    },
+                    topEnd: {
+                        search: {
+                            placeholder: 'Type search here'
+                        }
+                    },
+                    bottomEnd: {
+                        paging: {
+                            buttons: 3
+                        }
+                    }
+                },
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                responsive: true,
+                buttons: [
+                    'copy', 'excel',
+                    {
+                        extend: 'pdfHtml5',
+                        orientation: 'landscape',
+                        pageSize: 'LETTER',
+                    }
+
+                ]
+            });
+        });
+    </script>
+
 @endsection
