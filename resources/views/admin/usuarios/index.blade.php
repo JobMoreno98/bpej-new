@@ -90,8 +90,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#myTable').dataTable().fnClearTable();
-            $('#myTable').dataTable().fnDestroy();
+            $('#myTable').DataTable().destroy();
 
             $('#myTable').DataTable({
                 "order": [
@@ -99,7 +98,7 @@
                 ],
                 columnDefs: [{
                     targets: 7,
-                    render: DataTable.render.datetime('D MMM YYYY', 'MMM D, YY', 'en')
+                    "type": "date"
                 }],
                 layout: {
                     topStart: {
