@@ -91,10 +91,12 @@
     @include('layouts.head')
 </head>
 
-<body class="@yield('classes_body')" @yield('body_data')>
+<body class="@yield('classes_body')" @yield('body_data') >
 
     {{-- Body Content --}}
     @yield('body')
+
+    <div id="preloader"></div>
 
     {{-- Base Scripts (depends on Laravel asset bundling tool) --}}
     @if (config('adminlte.enabled_laravel_mix', false))
@@ -132,8 +134,8 @@
     @include('layouts.scripts')
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
-    
-    
+
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>

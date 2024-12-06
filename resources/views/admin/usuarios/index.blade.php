@@ -1,16 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Usuarios')
-
-
-
 @section('css')
 
-    <style>
-        .mdc-text-field__input {
-            border: 1px grey solid;
-            border-radius: 10px;
-        }
-    </style>
 @endsection
 
 @section('content_header')
@@ -36,21 +27,23 @@
                             <table id="myTable" class="table mb-0 w-100 roundede mdl-data-table" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Nombre</th>
                                         <th>Email</th>
                                         <th>Tipo</th>
                                         <th>Clave BPEJ</th>
                                         <th>Clave RFID</th>
                                         <th class="text-center">Verificado</th>
+                                        <th>Registrado</th>
                                         @can('USUARIOS#update')
                                             <th>Accion</th>
                                         @endcan
-
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $usuario)
                                         <tr>
+                                            <td>{{ $usuario->id }}</td>
                                             <td>{{ $usuario->name }}</td>
                                             <td>{{ $usuario->email }}</td>
                                             <td>{{ Str::ucfirst($usuario->tipo) }}</td>
@@ -62,6 +55,9 @@
                                                     class="material-symbols-outlined {{ isset($usuario->email_verified_at) ? 'text-success' : 'text-danger' }}">
                                                     check_circle
                                                 </span>
+                                            </td>
+                                            <td>
+                                                {{ $usuario->created_at->format('d-m-Y') }}
                                             </td>
                                             @can('USUARIOS#update')
                                                 <td class="d-flex flex-row">
